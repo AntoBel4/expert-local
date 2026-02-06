@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre diagnostic réputation Google est en préparation</title>
+    
+    <!-- Meta pour optimisation email -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    
+    <style>
+        /* Reset CSS optimisé pour email */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background-color: #F8FAFC;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        /* Header simplifié */
+        .header {
+            background: #0F172A;
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .success-icon {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 48px;
+            color: #10B981;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #0F172A;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .info-box {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #10B981;
+        }
+        
+        .info-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #0F172A;
+        }
+        
+        .info-box ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .info-box li {
+            margin-bottom: 8px;
+        }
+        
+        /* Stats simplifiées */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px 10px;
+            background-color: #F8FAFC;
+            border-radius: 6px;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #10B981;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #64748B;
+            line-height: 1.4;
+        }
+        
+        /* CTA optimisé */
+        .cta-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #10B981;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+        }
+        
+        /* Signature */
+        .signature {
+            margin: 30px 0;
+            padding-top: 20px;
+            border-top: 1px solid #E2E8F0;
+            text-align: center;
+        }
+        
+        .signature img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .signature h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #0F172A;
+        }
+        
+        .signature p {
+            color: #64748B;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #0F172A;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .footer h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .footer-info {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin: 15px 0;
+        }
+        
+        .copyright {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Mobile optimisation */
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .header, .content, .footer {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .email-container {
+                background-color: #0F172A;
+                color: #F8FAFC;
+            }
+            
+            .content {
+                background-color: #0F172A;
+            }
+            
+            h2, .info-box h3, .signature h3 {
+                color: #F8FAFC;
+            }
+            
+            .info-box {
+                background-color: #1E293B;
+                border-color: #334155;
+            }
+            
+            .stat-item {
+                background-color: #1E293B;
+                border-color: #334155;
+            }
+            
+            .signature {
+                border-color: #334155;
+            }
+        }
+        
+        /* Outlook fixes */
+        .outlook-fix {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            mso-hide: all;
+        }
+    </style>
+</head>
+<body>
+    <!--[if mso]>
+    <div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">
+        &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+    </div>
+    <![endif]-->
+    
+    <div class="email-container">
+        <!-- En-tête -->
+        <div class="header">
+            <h1>Votre diagnostic est en préparation</h1>
+            <p class="subtitle">Demande confirmée - Expert Local</p>
+        </div>
+        
+        <!-- Contenu principal -->
+        <div class="content">
+            <div class="success-icon">✓</div>
+            
+            <h2>Bonjour,</h2>
+            
+            <p>Nous avons bien reçu votre demande de diagnostic réputation Google. Votre analyse personnalisée est actuellement en cours de préparation par notre équipe.</p>
+            
+            <div class="info-box">
+                <h3>Prochaines étapes</h3>
+                <ul>
+                    <li>Votre demande est enregistrée</li>
+                    <li>Analyse de votre fiche Google en cours</li>
+                    <li>Comparaison avec vos concurrents locaux</li>
+                    <li>Envoi de votre diagnostic dans les 24h</li>
+                </ul>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">24h</span>
+                    <span class="stat-label">Délai de traitement maximum</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">87%</span>
+                    <span class="stat-label">Taux de réussite</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Commerces accompagnés</span>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>Astuce immédiate</h3>
+                <p>En attendant votre diagnostic complet, voici une action simple que vous pouvez mettre en place dès aujourd'hui :</p>
+                <p style="font-style: italic; margin-top: 10px; padding-left: 10px; border-left: 3px solid #10B981;">
+                    "Je vois que vous êtes satisfait du résultat ! Si vous avez 30 secondes, votre retour aiderait beaucoup nos futurs clients à nous trouver."
+                </p>
+            </div>
+            
+            <div class="cta-container">
+                <a href="https://expert-local.fr#offre" class="cta-button">
+                    Découvrir nos offres d'accompagnement
+                </a>
+            </div>
+            
+            <div class="signature">
+                <img src="https://expert-local.fr/photo-profil.jpg" alt="Antoine Estarellas" width="80" height="80">
+                <h3>Antoine Estarellas</h3>
+                <p>Conseiller numérique • Expert Google Local</p>
+                <p>Studio Estarellas</p>
+                <p style="font-size: 13px; color: #64748B; margin-top: 10px;">
+                    P.S. Vérifiez bien votre dossier "spam" ou "indésirables" si vous ne voyez pas notre diagnostic d'ici 24h.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <h3>Expert Local</h3>
+            <div class="footer-info">
+                La réputation Google des commerçants d'Eure-et-Loir<br><br>
+                Spécialiste Eure-et-Loir (28)<br>
+                contact@expert-local.fr<br>
+                expert-local.fr
+            </div>
+            
+            <div class="copyright">
+                © 2025-2026 Expert Local. Tous droits réservés.<br>
+                Vous recevez cet email suite à votre demande sur expert-local.fr
+            </div>
+        </div>
+    </div>
+    
+    <!-- Prévention des espaces vides en fin d'email -->
+    <div style="display: none; white-space: nowrap; font-size: 0; line-height: 0;">
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    </div>
+</body>
+</html>
