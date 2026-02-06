@@ -1,16 +1,15 @@
 <?php
-// generate-diagnostic.php - Version sécurisée
-header('Content-Type: application/json');
+// generate-diagnostic.php - Version corrigée (sans JSON)
 
 // --------------------------------------------------
 // 1. CHARGEMENT ENV
 // --------------------------------------------------
 $env = parse_ini_file(__DIR__ . '/.env');
 
-$admin_email       = $env['ADMIN_EMAIL'];
-$site_url          = $env['SITE_URL'];
-$no_reply_email    = $env['NO_REPLY_EMAIL'];
-$sender_name       = $env['SENDER_NAME'];
+$admin_email        = $env['ADMIN_EMAIL'];
+$site_url           = $env['SITE_URL'];
+$no_reply_email     = $env['NO_REPLY_EMAIL'];
+$sender_name        = $env['SENDER_NAME'];
 $default_department = $env['DEFAULT_DEPARTMENT'] ?? '28';
 
 // --------------------------------------------------
@@ -33,9 +32,60 @@ if (empty($business_name)) $errors[] = 'Nom du commerce requis';
 if (empty($activity_type)) $errors[] = 'Type de commerce requis';
 
 if (!empty($errors)) {
-    echo json_encode(['success' => false, 'message' => implode(', ', $errors)]);
+    // Redirection vers une page d'erreur simple
+    header("Location: erreur-formulaire.html");
     exit;
 }
+
+// --------------------------------------------------
+// 4. EMAIL ADMIN
+// --------------------------------------------------
+$admin_subject = "Nouvelle demande de diagnostic – $business_name";
+
+$admin_message = "
+<html><body>
+<h2>Nouvelle demande de diagnostic</h2>
+<p><strong>Prénom :</strong> $first_name</p>
+<p><strong>Email :</strong> $email</p>
+<p><strong>Commerce :</strong> $business_name</p>
+<p><strong>Type :</strong> $activity_type</p>
+<p><strong>Google :</strong> $google_link</p>
+<p><strong>Défi :</strong> $challenge</p>
+</body></html>
+";
+
+$headers_admin  = "From: $sender_name <$no_reply_email>\r\n";
+$headers_admin .= "Reply-To: $email\r\n";
+$headers_admin .= "MIME-Version: 1.0\r\n";
+$headers_admin .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+mail($admin_email, $admin_subject, $admin_message, $headers_admin);
+
+// --------------------------------------------------
+// 5. EMAIL CLIENT
+// --------------------------------------------------
+$client_subject = "Votre demande de diagnostic – Expert Local";
+
+$client_message = "
+<html><body>
+<h2>Merci $first_name !</h2>
+<p>Nous avons bien reçu votre demande de diagnostic pour <strong>$business_name</strong>.</p>
+<p>Nous revenons vers vous très vite.</p>
+</body></html>
+";
+
+$headers_client  = "From: $sender_name <$no_reply_email>\r\n";
+$headers_client .= "Reply-To: $no_reply_email\r\n";
+$headers_client .= "MIME-Version: 1.0\r\n";
+$headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+mail($email, $client_subject, $client_message, $headers_client);
+
+// --------------------------------------------------
+// 6. REDIRECTION FINALE
+// --------------------------------------------------
+header("Location: merci-diagnostic.html");
+exit;
 
 // --------------------------------------------------
 // 4. TRADUCTION TYPE D'ACTIVITÉ
