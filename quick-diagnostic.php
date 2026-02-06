@@ -1,4 +1,10 @@
 <?php
+
+require __DIR__ . '/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 header('Content-Type: application/json');
 
 // --------------------------------------------------
@@ -6,10 +12,14 @@ header('Content-Type: application/json');
 // --------------------------------------------------
 $env = parse_ini_file(__DIR__ . '/.env');
 
-$admin_email   = $env['ADMIN_EMAIL'];
-$site_url      = $env['SITE_URL'];
-$no_reply      = $env['NO_REPLY_EMAIL'];
-$sender_name   = $env['SENDER_NAME'];
+$adminEmail = $env['ADMIN_EMAIL'] ?? '';
+$noReply    = $env['NO_REPLY_EMAIL'] ?? '';
+$senderName = $env['SENDER_NAME'] ?? 'Expert Local';
+
+$smtpHost = $env['SMTP_HOST'] ?? '';
+$smtpPort = (int)($env['SMTP_PORT'] ?? 587);
+$smtpUser = $env['SMTP_USER'] ?? 'apikey';
+$smtpPass = $env['SMTP_PASS'] ?? '';
 
 // --------------------------------------------------
 // 2. ANTI-SPAM SIMPLE
@@ -25,19 +35,19 @@ foreach ($spam_words as $word) {
 // --------------------------------------------------
 // 3. RÉCUPÉRATION DES DONNÉES
 // --------------------------------------------------
-$email      = $_POST['email'] ?? '';
-$department = $_POST['department'] ?? '';
-$reviews    = $_POST['reviews'] ?? '';
+$email      = trim($_POST['email'] ?? '');
+$department = trim($_POST['department'] ?? '');
+$reviews    = trim($_POST['reviews'] ?? '');
 
 // --------------------------------------------------
 // 4. VALIDATION
 // --------------------------------------------------
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['success' => false, 'message' => 'Email invalide']);
     exit;
 }
 
-if (empty($department) || empty($reviews)) {
+if ($department === '' || $reviews === '') {
     echo json_encode(['success' => false, 'message' => 'Veuillez compléter toutes les étapes']);
     exit;
 }
@@ -45,16 +55,19 @@ if (empty($department) || empty($reviews)) {
 // --------------------------------------------------
 // 5. LIMITATION PAR IP (5 / heure)
 // --------------------------------------------------
-$ip = $_SERVER['REMOTE_ADDR'];
-$cache_file = 'cache/' . md5($ip) . '.json';
+$ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$cacheDir = __DIR__ . '/cache';
+$cacheFile = $cacheDir . '/' . md5($ip) . '.json';
 
-if (!file_exists('cache')) {
-    mkdir('cache', 0755, true);
+if (!is_dir($cacheDir)) {
+    mkdir($cacheDir, 0755, true);
 }
 
-if (file_exists($cache_file)) {
-    $cache_data = json_decode(file_get_contents($cache_file), true);
-    if (time() - $cache_data['timestamp'] < 3600 && $cache_data['count'] >= 5) {
+$cacheData = ['count' => 0, 'timestamp' => time()];
+
+if (file_exists($cacheFile)) {
+    $cacheData = json_decode(file_get_contents($cacheFile), true) ?? $cacheData;
+    if (time() - $cacheData['timestamp'] < 3600 && $cacheData['count'] >= 5) {
         echo json_encode(['success' => false, 'message' => 'Trop de demandes. Veuillez réessayer dans 1 heure.']);
         exit;
     }
@@ -70,9 +83,9 @@ $departments = [
 ];
 
 $reviews_text = [
-    '0-5' => '0-5 avis (Je commence)',
+    '0-5'  => '0-5 avis (Je commence)',
     '6-20' => '6-20 avis (Je veux progresser)',
-    '21+' => '21+ avis (Je veux dominer)'
+    '21+'  => '21+ avis (Je veux dominer)'
 ];
 
 $department_text = $departments[$department] ?? $department;
@@ -85,64 +98,92 @@ $unique_id = uniqid('DIA_', true);
 $date_complete = date('d/m/Y H:i:s');
 
 // --------------------------------------------------
-// 8. EMAIL CLIENT (HTML)
+// 8. EMAIL CLIENT (HTML) via SMTP Brevo
 // --------------------------------------------------
-$client_template = file_get_contents('email-client-confirmation.html');
+$client_template = file_get_contents(__DIR__ . '/email-client-confirmation.html');
 $client_template = str_replace('{PRENOM}', 'Cher client', $client_template);
 $client_template = str_replace('{DATE}', date('d/m/Y'), $client_template);
 
-$headers_client  = "From: $sender_name <$no_reply>\r\n";
-$headers_client .= "Reply-To: $no_reply\r\n";
-$headers_client .= "Return-Path: $no_reply\r\n";
-$headers_client .= "MIME-Version: 1.0\r\n";
-$headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
+try {
+    $mailClient = new PHPMailer(true);
+    $mailClient->CharSet = 'UTF-8';
 
-$subject_client = "Votre diagnostic Expert Local - En préparation";
+    $mailClient->isSMTP();
+    $mailClient->Host       = $smtpHost;
+    $mailClient->SMTPAuth   = true;
+    $mailClient->Username   = $smtpUser;
+    $mailClient->Password   = $smtpPass;
+    $mailClient->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailClient->Port       = $smtpPort;
 
-mail($email, $subject_client, $client_template, $headers_client);
+    $mailClient->setFrom($noReply, $senderName);
+    $mailClient->addAddress($email);
+    $mailClient->addReplyTo($noReply);
+
+    $mailClient->isHTML(true);
+    $mailClient->Subject = 'Votre diagnostic Expert Local - En préparation';
+    $mailClient->Body    = $client_template;
+
+    $mailClient->send();
+} catch (Exception $e) {
+    // On continue même si l'email client échoue
+}
 
 // --------------------------------------------------
-// 9. EMAIL ADMIN
+// 9. EMAIL ADMIN via SMTP Brevo
 // --------------------------------------------------
-$admin_template = file_get_contents('email-admin-diagnostic-rapide.html');
+$admin_template = file_get_contents(__DIR__ . '/email-admin-diagnostic-rapide.html');
 
 $priority = 'Moyenne';
 $potentiel_avis = '10-15';
 
-if ($reviews == '0-5') {
+if ($reviews === '0-5') {
     $priority = 'Élevée';
     $potentiel_avis = '15-20';
-} elseif ($reviews == '21+') {
+} elseif ($reviews === '21+') {
     $priority = 'Basse';
     $potentiel_avis = '5-10';
 }
 
-$admin_template = str_replace('{EMAIL}', htmlspecialchars($email), $admin_template);
-$admin_template = str_replace('{DEPARTEMENT}', htmlspecialchars($department_text), $admin_template);
-$admin_template = str_replace('{NB_AVIS}', htmlspecialchars($reviews), $admin_template);
-$admin_template = str_replace('{DATE_SOUMISSION}', date('H:i'), $admin_template);
-$admin_template = str_replace('{DATE_COMPLETE}', $date_complete, $admin_template);
-$admin_template = str_replace('{POTENTIEL_AVIS}', $potentiel_avis, $admin_template);
-$admin_template = str_replace('{PRIORITE}', $priority, $admin_template);
-$admin_template = str_replace('{ID_UNIQUE}', $unique_id, $admin_template);
+$admin_template = str_replace(
+    ['{EMAIL}', '{DEPARTEMENT}', '{NB_AVIS}', '{DATE_SOUMISSION}', '{DATE_COMPLETE}', '{POTENTIEL_AVIS}', '{PRIORITE}', '{ID_UNIQUE}'],
+    [htmlspecialchars($email), htmlspecialchars($department_text), htmlspecialchars($reviews_text_value), date('H:i'), $date_complete, $potentiel_avis, $priority, $unique_id],
+    $admin_template
+);
 
-$subject_admin = "Nouveau diagnostic rapide - $priority - $department_text";
+try {
+    $mailAdmin = new PHPMailer(true);
+    $mailAdmin->CharSet = 'UTF-8';
 
-$headers_admin  = "From: $sender_name <$no_reply>\r\n";
-$headers_admin .= "MIME-Version: 1.0\r\n";
-$headers_admin .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $mailAdmin->isSMTP();
+    $mailAdmin->Host       = $smtpHost;
+    $mailAdmin->SMTPAuth   = true;
+    $mailAdmin->Username   = $smtpUser;
+    $mailAdmin->Password   = $smtpPass;
+    $mailAdmin->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailAdmin->Port       = $smtpPort;
 
-mail($admin_email, $subject_admin, $admin_template, $headers_admin);
+    $mailAdmin->setFrom($noReply, $senderName);
+    $mailAdmin->addAddress($adminEmail);
+
+    $mailAdmin->isHTML(true);
+    $mailAdmin->Subject = "Nouveau diagnostic rapide - $priority - $department_text";
+    $mailAdmin->Body    = $admin_template;
+
+    $mailAdmin->send();
+} catch (Exception $e) {
+    // On continue
+}
 
 // --------------------------------------------------
 // 10. MISE À JOUR DU CACHE
 // --------------------------------------------------
-$cache_data = [
+$cacheData = [
     'timestamp' => time(),
-    'count' => isset($cache_data['count']) ? $cache_data['count'] + 1 : 1,
-    'ip' => $ip
+    'count'     => ($cacheData['count'] ?? 0) + 1,
+    'ip'        => $ip
 ];
-file_put_contents($cache_file, json_encode($cache_data));
+file_put_contents($cacheFile, json_encode($cacheData));
 
 // --------------------------------------------------
 // 11. SAUVEGARDE CSV (backup)
@@ -159,7 +200,7 @@ $csv_data = [
 ];
 
 $csv_line = '"' . implode('","', $csv_data) . '"' . PHP_EOL;
-@file_put_contents('contacts.csv', $csv_line, FILE_APPEND);
+@file_put_contents(__DIR__ . '/contacts.csv', $csv_line, FILE_APPEND);
 
 // --------------------------------------------------
 // 12. RÉPONSE JSON
