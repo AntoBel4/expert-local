@@ -10,12 +10,28 @@ use PHPMailer\PHPMailer\SMTP;
 // --------------------------------------------------
 // 1. CHARGEMENT ENV
 // --------------------------------------------------
-$env = parse_ini_file(__DIR__ . '/.env');
+$envPath = __DIR__ . '/.env';
+$env = [];
 
-$admin_email = $env['ADMIN_EMAIL'];
-$site_url = $env['SITE_URL'];
-$no_reply_email = $env['NO_REPLY_EMAIL'];
-$sender_name = $env['SENDER_NAME'];
+if (file_exists($envPath)) {
+    $env = @parse_ini_file($envPath);
+    if (!$env || empty($env['ADMIN_EMAIL'])) {
+        $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            if (strpos(trim($line), '#') === 0)
+                continue;
+            if (strpos($line, '=') !== false) {
+                list($name, $value) = explode('=', $line, 2);
+                $env[trim($name)] = trim(trim($value), '"\'');
+            }
+        }
+    }
+}
+
+$admin_email = $env['ADMIN_EMAIL'] ?? '';
+$site_url = $env['SITE_URL'] ?? '';
+$no_reply_email = $env['NO_REPLY_EMAIL'] ?? '';
+$sender_name = $env['SENDER_NAME'] ?? 'Expert Local';
 $default_department = $env['DEFAULT_DEPARTMENT'] ?? '28';
 
 $smtpHost = $env['SMTP_HOST'] ?? '';

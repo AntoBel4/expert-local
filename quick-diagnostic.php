@@ -19,16 +19,27 @@ function log_debug($message)
 log_debug("--- NOUVELLE SOUMISSION ---");
 
 // --------------------------------------------------
-// 1. CHARGEMENT DES VARIABLES D'ENVIRONNEMENT
+// 1. CHARGEMENT ROBUSTE DU .ENV
 // --------------------------------------------------
 $envPath = __DIR__ . '/.env';
-if (!file_exists($envPath)) {
-    log_debug("ERREUR CRITIQUE: Fichier .env introuvable.");
-    header('Location: erreur-formulaire.html');
-    exit;
-}
+$env = [];
 
-$env = parse_ini_file($envPath);
+if (file_exists($envPath)) {
+    $env = @parse_ini_file($envPath);
+    if (!$env || empty($env['ADMIN_EMAIL'])) {
+        $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            if (strpos(trim($line), '#') === 0)
+                continue;
+            if (strpos($line, '=') !== false) {
+                list($name, $value) = explode('=', $line, 2);
+                $env[trim($name)] = trim(trim($value), '"\'');
+            }
+        }
+    }
+} else {
+    log_debug("ERREUR CRITIQUE: Fichier .env introuvable.");
+}
 
 $adminEmail = $env['ADMIN_EMAIL'] ?? '';
 $noReply = $env['NO_REPLY_EMAIL'] ?? '';
