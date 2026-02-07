@@ -89,7 +89,7 @@
         }
 
         .upsell-header {
-            background: linear-gradient(90deg, #F59E0B, #D97706);
+            background: linear-gradient(90deg, #3B82F6, #2563EB);
             padding: 15px;
             text-align: center;
             font-weight: 700;
@@ -121,7 +121,7 @@
         }
 
         .upsell-text h3 span {
-            color: #F59E0B;
+            color: #3B82F6;
         }
 
         .upsell-list {
@@ -138,7 +138,7 @@
         }
 
         .upsell-list li:before {
-            content: "👑";
+            content: "🚀";
             position: absolute;
             left: 0;
             top: 2px;
@@ -149,15 +149,22 @@
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         .price-tag {
             font-size: 3rem;
             font-weight: 800;
-            color: #F59E0B;
+            color: #3B82F6;
             display: block;
             margin-bottom: 5px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #64748B;
+            font-size: 1.2rem;
+            margin-right: 10px;
         }
 
         .price-sub {
@@ -171,8 +178,8 @@
             display: block;
             width: 100%;
             padding: 18px;
-            background: #F59E0B;
-            color: #0F172A;
+            background: #3B82F6;
+            color: #FFF;
             text-decoration: none;
             font-weight: 800;
             border-radius: 12px;
@@ -184,9 +191,8 @@
 
         .upsell-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
-            background: #D97706;
-            color: white;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            background: #2563EB;
         }
 
         .timer-badge {
@@ -218,10 +224,10 @@
 
     <header class="merci-header">
         <div class="checkmark-circle">✓</div>
-        <h1 class="merci-title">Diagnostic en cours de génération...</h1>
+        <h1 class="merci-title">Diagnostic Envoyé !</h1>
         <p class="merci-subtitle">
             Merci ! Vos informations ont bien été reçues. <br>
-            Vous recevrez votre analyse complète par email sous <strong>24 heures</strong>.
+            Vous recevrez votre analyse complète par email sous 24 heures.
         </p>
     </header>
 
@@ -230,34 +236,40 @@
         <!-- UPSELL -->
         <div class="upsell-section">
             <div class="upsell-header">
-                💎 Offre Spéciale : Réservée aux nouveaux inscrits
+                🔥 Offre Flash : Réservée aux nouveaux inscrits
             </div>
 
             <div class="upsell-content">
                 <div class="upsell-text">
-                    <h3>Passez directement en <span>Mode VIP</span></h3>
+                    <h3>Passez immédiatement <br>au <span>Niveau Supérieur</span></h3>
                     <p style="color: #94A3B8; margin-bottom: 25px;">
-                        Ne perdez pas de temps à tout faire vous-même. Confiez-nous votre réputation Google à 100%.
+                        Ne perdez pas de temps. Obtenez dès maintenant notre "Kit Pro 2026" pour booster vos avis Google
+                        sans attendre.
                     </p>
                     <ul class="upsell-list">
-                        <li>Audit complet en priorité (livré sous 4h)</li>
-                        <li>Création de vos visuels et QR codes</li>
-                        <li>Gestion de vos réponses aux avis</li>
-                        <li>2 appels de coaching stratégique / mois</li>
-                        <li>Accès direct WhatsApp 7j/7</li>
+                        <li>Fiches QR Codes Premium (Design 2026)</li>
+                        <li>Scripts psychologiques de demande d'avis</li>
+                        <li>Guide stratégique "Les 5 Étoiles"</li>
+                        <li>Accès immédiat après paiement</li>
                     </ul>
                 </div>
 
                 <div class="upsell-price">
                     <span class="timer-badge">⏳ Expire dans 15:00</span>
-                    <span class="price-tag">497€</span>
-                    <span class="price-sub">HT / mois • Sans engagement</span>
-                    <a href="mailto:contact@expert-local.fr?subject=Accompagnement%20VIP%20(Fast-Track)"
+                    <div>
+                        <span class="old-price">197€</span>
+                        <span class="price-tag" style="display:inline-block;">47€</span>
+                    </div>
+                    <span class="price-sub">Paiement unique • Accès à vie</span>
+
+                    <!-- Lien de paiement (Stripe ou autre, ici mailto pour l'exemple ou lien vers page de vente) -->
+                    <a href="mailto:contact@expert-local.fr?subject=Commande%20Kit%20Pro%202026%20(47e)"
                         class="upsell-btn">
-                        Je veux l'Accompagnement VIP
+                        Profiter de l'offre à 47€
                     </a>
+
                     <p style="font-size: 0.8rem; color: #64748B; margin-top: 15px; margin-bottom: 0;">
-                        3 places restantes ce mois-ci
+                        Garantie Satisfait ou Remboursé 30 jours
                     </p>
                 </div>
             </div>

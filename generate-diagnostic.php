@@ -1,13 +1,11 @@
 <?php
-// generate-diagnostic.php - Version corrigée avec PHPMailer
+// generate-diagnostic.php - Version corrigée avec PHPMailer + Debug
 
-// --------------------------------------------------
-// 0. CHARGEMENT AUTOLOAD & CLASSES
-// --------------------------------------------------
 require __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 // --------------------------------------------------
 // 1. CHARGEMENT ENV
@@ -26,7 +24,15 @@ $smtpUser = $env['SMTP_USER'] ?? '';
 $smtpPass = $env['SMTP_PASS'] ?? '';
 
 // --------------------------------------------------
-// 2. RÉCUPÉRATION DES DONNÉES
+// 2. LOG FUNCTION
+// --------------------------------------------------
+function log_debug($message)
+{
+    file_put_contents(__DIR__ . '/log_email_debug.txt', date('[Y-m-d H:i:s] FULL: ') . $message . PHP_EOL, FILE_APPEND);
+}
+
+// --------------------------------------------------
+// 3. RÉCUPÉRATION DES DONNÉES
 // --------------------------------------------------
 $business_name = $_POST['business_name'] ?? '';
 $first_name = $_POST['first_name'] ?? '';
@@ -36,7 +42,7 @@ $google_link = $_POST['google_link'] ?? '';
 $challenge = $_POST['challenge'] ?? '';
 
 // --------------------------------------------------
-// 3. VALIDATION
+// 4. VALIDATION
 // --------------------------------------------------
 $errors = [];
 if (empty($first_name))
@@ -54,13 +60,17 @@ if (!empty($errors)) {
 }
 
 // --------------------------------------------------
-// 4. FONCTION D'ENVOI D'EMAIL (Helper local)
+// 5. FONCTION D'ENVOI D'EMAIL (Helper local)
 // --------------------------------------------------
 function sendEmail($to, $subject, $body, $smtpConfig, $fromEmail, $fromName, $replyTo = null)
 {
     $mail = new PHPMailer(true);
     try {
         $mail->CharSet = 'UTF-8';
+
+        // DEBUG
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        // $mail->Debugoutput = function($str, $level) { log_debug("SMTP: $str"); };
 
         if (!empty($smtpConfig['host'])) {
             $mail->isSMTP();
@@ -82,10 +92,14 @@ function sendEmail($to, $subject, $body, $smtpConfig, $fromEmail, $fromName, $re
         $mail->Subject = $subject;
         $mail->Body = $body;
 
-        $mail->send();
+        if (!$mail->send()) {
+            log_debug("ERREUR envoi à $to: " . $mail->ErrorInfo);
+            return false;
+        }
+        log_debug("SUCCES envoi à $to");
         return true;
     } catch (Exception $e) {
-        error_log("Email error: {$mail->ErrorInfo}");
+        log_debug("EXCEPTION envoi à $to: " . $e->getMessage());
         return false;
     }
 }
@@ -98,10 +112,13 @@ $smtpConfig = [
 ];
 
 // --------------------------------------------------
-// 5. EMAIL ADMIN
+// 6. ENVOIS
 // --------------------------------------------------
-$admin_subject = "Nouvelle demande de diagnostic – $business_name";
+log_debug("--- Nouvelle demande FULL ---");
+log_debug("Commerce: $business_name, Email: $email");
 
+// A. Notification Admin (Simple)
+$admin_subject = "Nouvelle demande de diagnostic – $business_name";
 $admin_message = "
 <html><body>
 <h2>Nouvelle demande de diagnostic</h2>
@@ -113,14 +130,10 @@ $admin_message = "
 <p><strong>Défi :</strong> $challenge</p>
 </body></html>
 ";
-
 sendEmail($admin_email, $admin_subject, $admin_message, $smtpConfig, $no_reply_email, $sender_name, $email);
 
-// --------------------------------------------------
-// 6. EMAIL CLIENT (Confirmation simple)
-// --------------------------------------------------
+// B. Confirmation Client (Simple)
 $client_subject = "Votre demande de diagnostic – Expert Local";
-
 $client_message = "
 <html><body>
 <h2>Merci $first_name !</h2>
@@ -128,11 +141,10 @@ $client_message = "
 <p>Nous revenons vers vous très vite.</p>
 </body></html>
 ";
-
 sendEmail($email, $client_subject, $client_message, $smtpConfig, $no_reply_email, $sender_name);
 
 // --------------------------------------------------
-// 7. TRADUCTION TYPE D'ACTIVITÉ
+// 7. PREPARATION DIAGNOSTIC COMPLET
 // --------------------------------------------------
 $activity_types = [
     'coiffure' => 'Coiffeur / Salon de beauté / Onglerie',
@@ -143,33 +155,22 @@ $activity_types = [
     'liberal' => 'Profession libérale',
     'autre' => 'Autre'
 ];
-
 $activity_text = $activity_types[$activity_type] ?? $activity_type;
 
-// --------------------------------------------------
-// 8. GÉNÉRATION D'ID
-// --------------------------------------------------
 $unique_id = uniqid('FULL_', true);
 $date_complete = date('d/m/Y H:i:s');
 
-// --------------------------------------------------
-// 9. EMAIL CLIENT (DIAGNOSTIC COMPLET)
-// --------------------------------------------------
+// C. Email Client (Détaillé)
 $client_template = file_get_contents('email-client-diagnostic-complet.html');
 $client_template = str_replace('{PRENOM}', htmlspecialchars($first_name), $client_template);
 $client_template = str_replace('{NOM_COMMERCE}', htmlspecialchars($business_name), $client_template);
 $client_template = str_replace('{DATE}', date('d/m/Y'), $client_template);
-
 $subject_client = "🔍 Votre diagnostic Expert Local pour " . $business_name;
-
 sendEmail($email, $subject_client, $client_template, $smtpConfig, $no_reply_email, $sender_name, $admin_email);
 
-// --------------------------------------------------
-// 10. EMAIL ADMIN (DIAGNOSTIC COMPLET)
-// --------------------------------------------------
+// D. Email Admin (Détaillé)
 $admin_template = file_get_contents('email-admin-diagnostic-complet.html');
 
-// Scoring
 $priority = 'Moyenne';
 $offre_recommandee = 'Pack PRO 2026';
 $prix_potentiel = '179';
@@ -211,11 +212,11 @@ $admin_template = str_replace('{DATE_PROPOSEE}', $date_proposee, $admin_template
 $admin_template = str_replace('{ID_UNIQUE}', $unique_id, $admin_template);
 
 $subject_admin = "🎯 NOUVEAU DIAGNOSTIC - " . $business_name . " - " . $priority;
-
 sendEmail($admin_email, $subject_admin, $admin_template, $smtpConfig, $no_reply_email, $sender_name);
 
+
 // --------------------------------------------------
-// 11. REDIRECTION FINALE
+// 8. REDIRECTION FINALE
 // --------------------------------------------------
 header("Location: merci-diagnostic.html");
 exit;
