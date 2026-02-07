@@ -27,9 +27,6 @@ if (file_exists($envPath)) {
     }
 }
 
-    }
-}
-
 // VALEURS PAR DÉFAUT (FALLBACK)
 $admin_email = $env['ADMIN_EMAIL'] ?? 'contact@expert-local.fr';
 $no_reply_email = $env['NO_REPLY_EMAIL'] ?? 'ne-pas-repondre@expert-local.fr';
