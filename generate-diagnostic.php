@@ -1,5 +1,13 @@
 <?php
-// generate-diagnostic.php - Version corrigée (sans JSON)
+// generate-diagnostic.php - Version corrigée avec PHPMailer
+
+// --------------------------------------------------
+// 0. CHARGEMENT AUTOLOAD & CLASSES
+// --------------------------------------------------
+require __DIR__ . '/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // --------------------------------------------------
 // 1. CHARGEMENT ENV
@@ -11,6 +19,11 @@ $site_url = $env['SITE_URL'];
 $no_reply_email = $env['NO_REPLY_EMAIL'];
 $sender_name = $env['SENDER_NAME'];
 $default_department = $env['DEFAULT_DEPARTMENT'] ?? '28';
+
+$smtpHost = $env['SMTP_HOST'] ?? '';
+$smtpPort = (int) ($env['SMTP_PORT'] ?? 587);
+$smtpUser = $env['SMTP_USER'] ?? '';
+$smtpPass = $env['SMTP_PASS'] ?? '';
 
 // --------------------------------------------------
 // 2. RÉCUPÉRATION DES DONNÉES
@@ -36,13 +49,56 @@ if (empty($activity_type))
     $errors[] = 'Type de commerce requis';
 
 if (!empty($errors)) {
-    // Redirection vers une page d'erreur simple
     header("Location: erreur-formulaire.html");
     exit;
 }
 
 // --------------------------------------------------
-// 4. EMAIL ADMIN
+// 4. FONCTION D'ENVOI D'EMAIL (Helper local)
+// --------------------------------------------------
+function sendEmail($to, $subject, $body, $smtpConfig, $fromEmail, $fromName, $replyTo = null)
+{
+    $mail = new PHPMailer(true);
+    try {
+        $mail->CharSet = 'UTF-8';
+
+        if (!empty($smtpConfig['host'])) {
+            $mail->isSMTP();
+            $mail->Host = $smtpConfig['host'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $smtpConfig['user'];
+            $mail->Password = $smtpConfig['pass'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $smtpConfig['port'];
+        }
+
+        $mail->setFrom($fromEmail, $fromName);
+        $mail->addAddress($to);
+        if ($replyTo) {
+            $mail->addReplyTo($replyTo);
+        }
+
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log("Email error: {$mail->ErrorInfo}");
+        return false;
+    }
+}
+
+$smtpConfig = [
+    'host' => $smtpHost,
+    'port' => $smtpPort,
+    'user' => $smtpUser,
+    'pass' => $smtpPass
+];
+
+// --------------------------------------------------
+// 5. EMAIL ADMIN
 // --------------------------------------------------
 $admin_subject = "Nouvelle demande de diagnostic – $business_name";
 
@@ -58,15 +114,10 @@ $admin_message = "
 </body></html>
 ";
 
-$headers_admin = "From: $sender_name <$no_reply_email>\r\n";
-$headers_admin .= "Reply-To: $email\r\n";
-$headers_admin .= "MIME-Version: 1.0\r\n";
-$headers_admin .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-mail($admin_email, $admin_subject, $admin_message, $headers_admin);
+sendEmail($admin_email, $admin_subject, $admin_message, $smtpConfig, $no_reply_email, $sender_name, $email);
 
 // --------------------------------------------------
-// 5. EMAIL CLIENT
+// 6. EMAIL CLIENT (Confirmation simple)
 // --------------------------------------------------
 $client_subject = "Votre demande de diagnostic – Expert Local";
 
@@ -78,20 +129,10 @@ $client_message = "
 </body></html>
 ";
 
-$headers_client = "From: $sender_name <$no_reply_email>\r\n";
-$headers_client .= "Reply-To: $no_reply_email\r\n";
-$headers_client .= "MIME-Version: 1.0\r\n";
-$headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-mail($email, $client_subject, $client_message, $headers_client);
+sendEmail($email, $client_subject, $client_message, $smtpConfig, $no_reply_email, $sender_name);
 
 // --------------------------------------------------
-// 6. REDIRECTION (Après envoi)
-// --------------------------------------------------
-// Ce bloc était mal placé (exit prématuré). Déplacé à la fin du script.
-
-// --------------------------------------------------
-// 4. TRADUCTION TYPE D'ACTIVITÉ
+// 7. TRADUCTION TYPE D'ACTIVITÉ
 // --------------------------------------------------
 $activity_types = [
     'coiffure' => 'Coiffeur / Salon de beauté / Onglerie',
@@ -106,30 +147,25 @@ $activity_types = [
 $activity_text = $activity_types[$activity_type] ?? $activity_type;
 
 // --------------------------------------------------
-// 5. GÉNÉRATION D'ID
+// 8. GÉNÉRATION D'ID
 // --------------------------------------------------
 $unique_id = uniqid('FULL_', true);
 $date_complete = date('d/m/Y H:i:s');
 
 // --------------------------------------------------
-// 6. EMAIL CLIENT
+// 9. EMAIL CLIENT (DIAGNOSTIC COMPLET)
 // --------------------------------------------------
 $client_template = file_get_contents('email-client-diagnostic-complet.html');
 $client_template = str_replace('{PRENOM}', htmlspecialchars($first_name), $client_template);
 $client_template = str_replace('{NOM_COMMERCE}', htmlspecialchars($business_name), $client_template);
 $client_template = str_replace('{DATE}', date('d/m/Y'), $client_template);
 
-$headers_client = "From: $sender_name <{$no_reply_email}>\r\n";
-$headers_client .= "Reply-To: {$admin_email}\r\n";
-$headers_client .= "MIME-Version: 1.0\r\n";
-$headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
-
 $subject_client = "🔍 Votre diagnostic Expert Local pour " . $business_name;
 
-mail($email, $subject_client, $client_template, $headers_client);
+sendEmail($email, $subject_client, $client_template, $smtpConfig, $no_reply_email, $sender_name, $admin_email);
 
 // --------------------------------------------------
-// 7. EMAIL ADMIN
+// 10. EMAIL ADMIN (DIAGNOSTIC COMPLET)
 // --------------------------------------------------
 $admin_template = file_get_contents('email-admin-diagnostic-complet.html');
 
@@ -176,14 +212,10 @@ $admin_template = str_replace('{ID_UNIQUE}', $unique_id, $admin_template);
 
 $subject_admin = "🎯 NOUVEAU DIAGNOSTIC - " . $business_name . " - " . $priority;
 
-$headers_admin = "From: Site Expert Local <{$no_reply_email}>\r\n";
-$headers_admin .= "MIME-Version: 1.0\r\n";
-$headers_admin .= "Content-Type: text/html; charset=UTF-8\r\n";
-
-mail($admin_email, $subject_admin, $admin_template, $headers_admin);
+sendEmail($admin_email, $subject_admin, $admin_template, $smtpConfig, $no_reply_email, $sender_name);
 
 // --------------------------------------------------
-// 8. REDIRECTION FINALE
+// 11. REDIRECTION FINALE
 // --------------------------------------------------
 header("Location: merci-diagnostic.html");
 exit;

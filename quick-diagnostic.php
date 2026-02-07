@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -30,7 +30,9 @@ $reviews = trim($_POST['reviews'] ?? '');
 $spam_words = ['http://', 'https://', '[url', 'viagra', 'casino', 'lottery'];
 foreach ($spam_words as $word) {
     if (stripos($email, $word) !== false) {
-        header('Location: erreur-formulaire.html');
+        // En JSON pour l'AJAX
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Spam détecté.']);
         exit;
     }
 }
@@ -39,12 +41,14 @@ foreach ($spam_words as $word) {
 // 3. VALIDATION
 // --------------------------------------------------
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    header('Location: erreur-formulaire.html');
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'message' => 'Email invalide.']);
     exit;
 }
 
 if ($department === '' || $reviews === '') {
-    header('Location: erreur-formulaire.html');
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'message' => 'Champs manquants.']);
     exit;
 }
 
@@ -64,7 +68,8 @@ $cacheData = ['count' => 0, 'timestamp' => time()];
 if (file_exists($cacheFile)) {
     $cacheData = json_decode(file_get_contents($cacheFile), true) ?? $cacheData;
     if (time() - $cacheData['timestamp'] < 3600 && $cacheData['count'] >= 5) {
-        header('Location: erreur-formulaire.html');
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Trop de demandes. Réessayez plus tard.']);
         exit;
     }
 }
@@ -137,11 +142,7 @@ try {
     $mailAdmin->send();
 
 } catch (Exception $e) {
-    // Log l'erreur mais ne bloque pas
     error_log("Email admin failed: " . $e->getMessage());
-    // Vous pouvez choisir de rediriger vers erreur ici si critique
-    // header('Location: erreur-formulaire.html');
-    // exit;
 }
 
 // --------------------------------------------------
@@ -173,7 +174,6 @@ try {
     $mailClient->send();
 
 } catch (Exception $e) {
-    // Log mais continue quand même
     error_log("Email client failed: " . $e->getMessage());
 }
 

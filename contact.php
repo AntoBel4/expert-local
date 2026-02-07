@@ -1,117 +1,137 @@
 <?php
+// contact.php - Version corrigée avec PHPMailer
+
+require __DIR__ . '/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // --------------------------------------------------
-// 1. CHARGEMENT DES VARIABLES D'ENVIRONNEMENT
+// 1. CHARGEMENT ENV
 // --------------------------------------------------
 $env = parse_ini_file(__DIR__ . '/.env');
 
-$adminEmail   = $env['ADMIN_EMAIL'];
-$noReplyEmail = $env['NO_REPLY_EMAIL'];
-$successUrl   = $env['CONTACT_SUCCESS_URL'];
-$senderName   = $env['SENDER_NAME'];
+$admin_email = $env['ADMIN_EMAIL'];
+$no_reply_email = $env['NO_REPLY_EMAIL'];
+$sender_name = $env['SENDER_NAME'];
+
+$smtpHost = $env['SMTP_HOST'] ?? '';
+$smtpPort = (int) ($env['SMTP_PORT'] ?? 587);
+$smtpUser = $env['SMTP_USER'] ?? '';
+$smtpPass = $env['SMTP_PASS'] ?? '';
 
 // --------------------------------------------------
-// 2. VALIDATION & ANTI-SPAM
+// 2. RÉCUPÉRATION DES DONNÉES
 // --------------------------------------------------
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: index.html");
-    exit;
+$name = $_POST['name'] ?? '';
+$email = $_POST['email'] ?? '';
+$message = $_POST['message'] ?? '';
+$honeypot = $_POST['firstname'] ?? ''; // Champ piège caché
+
+// --------------------------------------------------
+// 3. ANIT-SPAM
+// --------------------------------------------------
+if (!empty($honeypot)) {
+    // Si le champ caché est rempli, c'est un robot.
+    die('Erreur de validation.');
 }
 
-$name    = trim($_POST["name"] ?? "");
-$email   = trim($_POST["email"] ?? "");
-$message = trim($_POST["message"] ?? "");
-
-// Honeypot anti-bots
-if (!empty($_POST["website"] ?? "")) {
-    exit;
-}
-
-// Email valide ?
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    header("Location: $successUrl");
-    exit;
-}
-
-// Champs requis
-if ($name === "" || $email === "" || $message === "") {
+// --------------------------------------------------
+// 4. VALIDATION
+// --------------------------------------------------
+if ($name === "" || $email === "" || $message === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    // Redirection page erreur
     header("Location: erreur-formulaire.html");
     exit;
 }
 
 // --------------------------------------------------
-// 3. EMAIL ADMIN (texte)
+// 5. FONCTION D'ENVOI D'EMAIL (Helper local)
 // --------------------------------------------------
-$subjectAdmin = "📩 Nouveau message reçu via Expert Local";
+function sendContactEmail($to, $subject, $body, $smtpConfig, $fromEmail, $fromName, $replyTo = null)
+{
+    $mail = new PHPMailer(true);
+    try {
+        $mail->CharSet = 'UTF-8';
 
-$bodyAdmin = 
-"Nouvelle prise de contact :\n\n" .
-"👤 Nom : $name\n" .
-"📧 Email : $email\n\n" .
-"💬 Message :\n$message\n";
+        if (!empty($smtpConfig['host'])) {
+            $mail->isSMTP();
+            $mail->Host = $smtpConfig['host'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $smtpConfig['user'];
+            $mail->Password = $smtpConfig['pass'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = $smtpConfig['port'];
+        }
 
-$headersAdmin  = "From: $senderName <$noReplyEmail>\r\n";
-$headersAdmin .= "Reply-To: $email\r\n";
-$headersAdmin .= "Content-Type: text/plain; charset=UTF-8\r\n";
-$headersAdmin .= "Content-Transfer-Encoding: 8bit\r\n";
+        $mail->setFrom($fromEmail, $fromName);
+        $mail->addAddress($to);
+        if ($replyTo) {
+            $mail->addReplyTo($replyTo);
+        }
 
-mail($adminEmail, $subjectAdmin, $bodyAdmin, $headersAdmin);
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
 
-// --------------------------------------------------
-// 4. EMAIL HTML POUR LE PROSPECT
-// --------------------------------------------------
-$subjectUser = "Votre message a bien été reçu ✔";
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        error_log("Email error: {$mail->ErrorInfo}");
+        return false;
+    }
+}
 
-$messageHtml = <<<HTML
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Message bien reçu</title>
-</head>
-<body style="margin:0; padding:40px 0; background:#f2e9d8; font-family:Arial, sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td align="center">
-    <table width="600" cellpadding="0" cellspacing="0" style="background:white; padding:30px; border-radius:12px;">
-        <tr>
-            <td align="center" style="padding-bottom:20px;">
-                <h1 style="margin:0; font-size:26px; color:#2C3E50;">Votre message a bien été reçu</h1>
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size:16px; color:#2C3E50; line-height:1.6;">
-                Bonjour,<br><br>
-                Merci pour votre prise de contact via <strong>Expert Local</strong>.<br>
-                Je reviendrai vers vous très rapidement avec une réponse personnalisée.<br><br>
-                <br><br>
-                À très bientôt,<br>
-                L'équipe Expert Local
-            </td>
-        </tr>
-        <tr>
-            <td align="center" style="padding-top:30px; font-size:13px; color:#8a7e6d;">
-                © 2026 • Expert Local • Tous droits réservés
-            </td>
-        </tr>
-    </table>
-</td>
-</tr>
-</table>
-</body>
-</html>
-HTML;
-
-$headersUser  = "From: $senderName <$noReplyEmail>\r\n";
-$headersUser .= "Reply-To: $adminEmail\r\n";
-$headersUser .= "MIME-Version: 1.0\r\n";
-$headersUser .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headersUser .= "Content-Transfer-Encoding: 8bit\r\n";
-
-mail($email, $subjectUser, $messageHtml, $headersUser);
+$smtpConfig = [
+    'host' => $smtpHost,
+    'port' => $smtpPort,
+    'user' => $smtpUser,
+    'pass' => $smtpPass
+];
 
 // --------------------------------------------------
-// 5. REDIRECTION FINALE
+// 6. EMAIL ADMIN
 // --------------------------------------------------
-header("Location: $successUrl");
+$admin_subject = "Nouveau message contact - $name";
+$admin_body = "
+<html><body>
+<h2>Nouveau message de contact</h2>
+<p><strong>Nom :</strong> $name</p>
+<p><strong>Email :</strong> $email</p>
+<p><strong>Message :</strong><br>" . nl2br(htmlspecialchars($message)) . "</p>
+</body></html>
+";
+
+sendContactEmail($admin_email, $admin_subject, $admin_body, $smtpConfig, $no_reply_email, $sender_name, $email);
+
+// --------------------------------------------------
+// 7. EMAIL CLIENT (Confirmation réception)
+// --------------------------------------------------
+// On utilise contact-success.html s'il existe, sinon un message simple
+$client_body = "
+<html><body>
+<h2>Merci $name !</h2>
+<p>Nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais.</p>
+<hr>
+<p>Votre message :<br>" . nl2br(htmlspecialchars($message)) . "</p>
+</body></html>
+";
+
+$subject_client = "Confirmation de réception - Expert Local";
+
+sendContactEmail($email, $subject_client, $client_body, $smtpConfig, $no_reply_email, $sender_name);
+
+// --------------------------------------------------
+// 8. REDIRECTION SUCCÈS
+// --------------------------------------------------
+// Le client voulait une redirection vers contact-success.html ou similaire.
+// Pour l'instant on redirige vers l'accueil ou une page de succès dédiée si elle existe.
+// Comme contact-success.html existe dans la liste des fichiers, on l'utilise.
+
+if (file_exists(__DIR__ . '/contact-success.html')) {
+    header("Location: contact-success.html");
+} else {
+    // Fallback
+    header("Location: index.html");
+}
 exit;

@@ -11,7 +11,7 @@ cache/
 sources/
 
 # Dépendances PHP
-vendor/
+# vendor/ (Commenté pour inclusion sur GitHub)
 
 # Archives
 *.zip
