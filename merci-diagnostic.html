@@ -317,21 +317,19 @@
             text-decoration: none;
             font-size: 0.9rem;
         }
-
-        .btn-modal-refuse:hover {
-            text-decoration: underline;
-        }
     </style>
     <script>
-        function openDownsell() {
-            console.log("Ouverture Modal (Head)");
+        // Force global scope
+        window.openDownsell = function () {
+            console.log("CLICK DETECTED");
             const modal = document.getElementById('downsellModal');
             if (modal) {
                 modal.style.opacity = '1';
                 modal.style.visibility = 'visible';
                 modal.classList.add('active');
+                modal.style.zIndex = '99999'; // Force on top
             } else {
-                console.error("Modal introuvable");
+                alert("Erreur : Modal introuvable code 404-JS");
             }
         }
     </script>
@@ -393,8 +391,11 @@
         </div>
 
         <!-- BOUTON REFUS -->
-        <button id="refuseBtn" class="refuse-link" onclick="openDownsell()">Non merci, je ne veux pas développer mon
-            activité →</button>
+        <!-- Lien simple pour éviter tout conflit de formulaire -->
+        <a href="javascript:void(0)" onclick="window.openDownsell(); return false;" class="refuse-link"
+            style="display:block; text-align:center; padding:10px;">
+            Non merci, je ne veux pas développer mon activité →
+        </a>
 
     </div>
 
@@ -443,18 +444,6 @@
                 timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
                 if (time > 0) time--;
             }, 1000);
-        }
-
-        // MODAL LOGIC (Direct Function)
-        // La fonction est définie dans le <head> pour être accessible immédiatement
-
-        // Attachement manuel au cas où le onclick HTML ne suffirait pas
-        const refuseBtn = document.getElementById('refuseBtn');
-        if (refuseBtn) {
-            refuseBtn.onclick = function (e) {
-                e.preventDefault();
-                openDownsell();
-            };
         }
     </script>
 

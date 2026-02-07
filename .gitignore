@@ -1,27 +1,4 @@
-# Secrets
+vendor/
 .env
-
-# Données personnelles
-contacts.csv
-
-# Cache et données temporaires
-cache/
-
-# Fichiers internes non destinés au repo
-sources/
-
-# Dépendances PHP
-# vendor/ (Commenté pour inclusion sur GitHub)
-
-# Archives
-*.zip
-
-# Système
 .DS_Store
-Thumbs.db
-
-# Dossiers serveur inutiles
-cgi-bin/
-logs/
-backups/
-.well-known/
+*.log
