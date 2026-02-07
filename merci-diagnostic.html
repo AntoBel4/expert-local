@@ -417,36 +417,41 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // TIMER
-            let time = 15 * 60;
-            const timerElement = document.querySelector('.timer-badge');
+        // TIMER
+        let time = 15 * 60;
+        const timerElement = document.querySelector('.timer-badge');
 
-            if (timerElement) {
-                setInterval(() => {
-                    const minutes = Math.floor(time / 60);
-                    let seconds = time % 60;
-                    seconds = seconds < 10 ? '0' + seconds : seconds;
-                    timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
-                    if (time > 0) time--;
-                }, 1000);
-            }
+        if (timerElement) {
+            setInterval(() => {
+                const minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
+                if (time > 0) time--;
+            }, 1000);
+        }
 
-            // MODAL LOGIC
-            const refuseBtn = document.getElementById('refuseBtn');
+        // MODAL LOGIC (Direct Function)
+        function openDownsell() {
+            console.log("Ouverture Modal");
             const modal = document.getElementById('downsellModal');
-
-            if (refuseBtn && modal) {
-                console.log("✅ Bouton Refus et Modal trouvés");
-                refuseBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log("🖱️ Click Refus detecté");
-                    modal.classList.add('active');
-                });
+            if (modal) {
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+                modal.classList.add('active');
             } else {
-                console.error("❌ Bouton Refus ou Modal introuvable !");
+                console.error("Modal introuvable");
             }
-        });
+        }
+
+        // Attachement manuel au cas où le onclick HTML ne suffirait pas
+        const refuseBtn = document.getElementById('refuseBtn');
+        if (refuseBtn) {
+            refuseBtn.onclick = function (e) {
+                e.preventDefault();
+                openDownsell();
+            };
+        }
     </script>
 
 </body>
