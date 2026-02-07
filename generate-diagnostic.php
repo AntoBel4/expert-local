@@ -216,7 +216,7 @@ sendEmail($admin_email, $subject_admin, $admin_template, $smtpConfig, $no_reply_
 
 
 // --------------------------------------------------
-// 8. REDIRECTION FINALE
+// 8. REDIRECTION FINALE (STANDARDISATION OFFRE PRO)
 // --------------------------------------------------
-header("Location: merci-diagnostic.html");
+header("Location: merci-diagnostic.html?offer=pro");
 exit;

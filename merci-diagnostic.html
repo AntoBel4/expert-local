@@ -208,21 +208,118 @@
             margin-bottom: 15px;
         }
 
-        .return-link {
+        .refuse-link {
             text-align: center;
             display: block;
             color: #64748B;
-            text-decoration: none;
+            text-decoration: underline;
             transition: color 0.3s;
+            background: none;
+            border: none;
+            margin: 0 auto;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .return-link:hover {
+        .refuse-link:hover {
             color: #94A3B8;
         }
 
-        /* Dynamic Offers Display */
-        .offer-hidden {
-            display: none;
+        /* ========= DOWNSELL MODAL ========= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #1E293B;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: #CBD5E1;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            color: #10B981;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .modal-old-price {
+            text-decoration: line-through;
+            color: #64748B;
+            font-size: 1.1rem;
+        }
+
+        .btn-modal-accept {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #10B981;
+            color: #FFF;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-modal-accept:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-modal-refuse {
+            color: #64748B;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-modal-refuse:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -240,36 +337,38 @@
 
     <div class="container">
 
-        <!-- UPSELL -->
-        <div class="upsell-section" id="upsellSection">
+        <!-- UPSELL PRO (179€) PAR DÉFAUT -->
+        <div class="upsell-section">
             <div class="upsell-header">
                 🔥 Offre Flash : Réservée aux nouveaux inscrits
             </div>
 
             <div class="upsell-content">
                 <div class="upsell-text">
-                    <h3 id="offerTitle">Passez immédiatement <br>au <span>Niveau Supérieur</span></h3>
-                    <p style="color: #94A3B8; margin-bottom: 25px;" id="offerDesc">
-                        Ne perdez pas de temps. Obtenez dès maintenant notre solution pour booster vos avis Google.
+                    <h3>Pack PRO <br><span>Domination Locale</span></h3>
+                    <p style="color: #94A3B8; margin-bottom: 25px;">
+                        La solution complète pour automatiser votre récolte d'avis et passer devant vos concurrents.
                     </p>
-                    <ul class="upsell-list" id="offerFeatures">
-                        <!-- JS inserted -->
+                    <ul class="upsell-list">
+                        <li>Tout le contenu du Starter Kit</li>
+                        <li>Logiciel d'automatisation Email/SMS (1 mois offert)</li>
+                        <li>Formation Vidéo : SEO Local Avancé</li>
+                        <li>Support Prioritaire</li>
                     </ul>
                 </div>
 
                 <div class="upsell-price">
                     <span class="timer-badge">⏳ Expire dans 15:00</span>
                     <div>
-                        <span class="old-price" id="oldPrice">197€</span>
-                        <span class="price-tag" id="priceTag" style="display:inline-block;">49€</span>
+                        <span class="old-price">397€</span>
+                        <span class="price-tag" style="display:inline-block;">179€</span>
                     </div>
                     <span class="price-sub">Paiement unique • Accès à vie</span>
 
-                    <!-- Formulaire Stripe caché -->
                     <form action="creer-session-stripe.php" method="POST">
-                        <input type="hidden" name="offer_type" id="offerInput" value="starter">
-                        <button type="submit" class="upsell-btn" id="buyBtn">
-                            Profiter de l'offre
+                        <input type="hidden" name="offer_type" value="pro">
+                        <button type="submit" class="upsell-btn">
+                            Profiter de l'offre PRO
                         </button>
                     </form>
 
@@ -280,85 +379,46 @@
             </div>
         </div>
 
-        <a href="index.html" class="return-link">Non merci, je vais attendre mon diagnostic gratuit →</a>
+        <!-- BOUTON REFUS -->
+        <button id="refuseBtn" class="refuse-link">Non merci, je ne veux pas développer mon activité →</button>
 
     </div>
 
+    <!-- MODAL DOWNSELL (49€) -->
+    <div class="modal-overlay" id="downsellModal">
+        <div class="modal">
+            <h2>Attendez une seconde ! ✋</h2>
+            <p>
+                Si le Pack Pro est trop complet pour l'instant, ne partez pas les mains vides.<br>
+                Commencez petit avec notre <strong>Kit de Démarrage Essentiel</strong>.
+            </p>
+
+            <div style="margin: 20px 0;">
+                <span class="modal-old-price">97€</span><br>
+                <div class="modal-price">49€</div>
+                <span style="color:#94A3B8; font-size:0.9rem;">Offre unique de départ</span>
+            </div>
+
+            <ul style="text-align:left; color:#CBD5E1; margin: 0 auto 20px; display:inline-block; font-size:0.95rem;">
+                <li>✓ Fiches QR Codes Premium</li>
+                <li>✓ Scripts de demande d'avis</li>
+                <li>✓ Guide PDF "Les 5 Étoiles"</li>
+            </ul>
+
+            <form action="creer-session-stripe.php" method="POST">
+                <input type="hidden" name="offer_type" value="starter">
+                <button type="submit" class="btn-modal-accept">
+                    Oui, je veux le Kit Starter à 49€
+                </button>
+            </form>
+
+            <a href="index.html" class="btn-modal-refuse">Non merci, je retourne à l'accueil</a>
+        </div>
+    </div>
+
     <script>
-        // --------------------------------------------------
-        // OFFRES CONFIG
-        // --------------------------------------------------
-        const offers = {
-            'starter': { // 49€
-                title: "Kit de Démarrage <br><span>Google Avis</span>",
-                desc: "Parfait pour obtenir vos 50 premiers avis 5 étoiles rapidement.",
-                features: [
-                    "Fiches QR Codes Premium (Design 2026)",
-                    "Scripts psychologiques de demande d'avis",
-                    "Guide PDF : Les 5 Étoiles",
-                    "Accès immédiat"
-                ],
-                price: "49€",
-                oldPrice: "97€"
-            },
-            'pro': { // 179€
-                title: "Pack PRO <br><span>Domination Locale</span>",
-                desc: "La solution complète pour automatiser votre récolte d'avis et passer devant vos concurrents.",
-                features: [
-                    "Tout le contenu du Starter Kit",
-                    "Logiciel d'automatisation Email/SMS (1 mois offert)",
-                    "Formation Vidéo : SEO Local Avancé",
-                    "Support Prioritaire"
-                ],
-                price: "179€",
-                oldPrice: "397€"
-            },
-            'vip': { // 497€
-                title: "Accompagnement <br><span>VIP 2026</span>",
-                desc: "On s'occupe de tout pour vous. Audit, optimisation et mise en place clé en main.",
-                features: [
-                    "Audit complet de votre fiche par un expert",
-                    "Création de votre site web vitrine (si besoin)",
-                    "Coaching mensuel (3 mois)",
-                    "Ligne directe avec l'équipe"
-                ],
-                price: "497€",
-                oldPrice: "1997€"
-            }
-        };
-
-        // --------------------------------------------------
-        // GET URL PARAM
-        // --------------------------------------------------
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentOfferKey = urlParams.get('offer') || 'starter'; // Default to starter
-
-        // Load Offer Data
-        const offerData = offers[currentOfferKey] || offers['starter'];
-
-        // Update DOM
-        document.getElementById('offerTitle').innerHTML = offerData.title;
-        document.getElementById('offerDesc').textContent = offerData.desc;
-        document.getElementById('priceTag').textContent = offerData.price;
-        document.getElementById('oldPrice').textContent = offerData.oldPrice;
-        document.getElementById('offerInput').value = currentOfferKey;
-
-        // Features list
-        const featuresList = document.getElementById('offerFeatures');
-        featuresList.innerHTML = '';
-        offerData.features.forEach(feat => {
-            const li = document.createElement('li');
-            li.textContent = feat;
-            featuresList.appendChild(li);
-        });
-
-        // Button Text
-        document.getElementById('buyBtn').textContent = `Profiter de l'offre à ${offerData.price}`;
-
-        // --------------------------------------------------
         // TIMER
-        // --------------------------------------------------
-        let time = 15 * 60; // 15 minutes
+        let time = 15 * 60;
         const timerElement = document.querySelector('.timer-badge');
 
         setInterval(() => {
@@ -369,6 +429,19 @@
             if (time > 0) time--;
         }, 1000);
 
+        // MODAL LOGIC
+        const refuseBtn = document.getElementById('refuseBtn');
+        const modal = document.getElementById('downsellModal');
+
+        refuseBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+
+        // Fermer modal si clic dehors (optionnel, ici on force le choix)
+        // modal.addEventListener('click', (e) => {
+        //    if(e.target === modal) modal.classList.remove('active');
+        // });
     </script>
 
 </body>
