@@ -82,10 +82,9 @@ $headers_client .= "Content-Type: text/html; charset=UTF-8\r\n";
 mail($email, $client_subject, $client_message, $headers_client);
 
 // --------------------------------------------------
-// 6. REDIRECTION FINALE
+// 6. REDIRECTION (Après envoi)
 // --------------------------------------------------
-header("Location: merci-diagnostic.html");
-exit;
+// Ce bloc était mal placé (exit prématuré). Déplacé à la fin du script.
 
 // --------------------------------------------------
 // 4. TRADUCTION TYPE D'ACTIVITÉ

@@ -35,7 +35,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 // Champs requis
 if ($name === "" || $email === "" || $message === "") {
-    header("Location: $successUrl");
+    header("Location: erreur-formulaire.html");
     exit;
 }
 

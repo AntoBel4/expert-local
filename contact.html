@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Expert Local 2026</title>
+
+    <!-- CSS & Fonts (Same as index) -->
+    <link rel="stylesheet" href="style-2026.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+        }
+
+        .contact-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-header {
+            padding: 100px 20px 40px;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .contact-subtitle {
+            color: #94A3B8;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-wrapper {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #E2E8F0;
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #10B981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: #94A3B8;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="index.html" class="back-link">
+        <span>←</span> Retour à l'accueil
+    </a>
+
+    <div class="contact-page">
+        <header class="contact-header">
+            <h1 class="contact-title">Contactez Expert Local</h1>
+            <p class="contact-subtitle">Une question sur la méthode ? Besoin d'aide ? Envoyez-nous un message, nous
+                répondons en moins de 24h.</p>
+        </header>
+
+        <section class="contact-wrapper">
+            <div class="form-card">
+                <form action="contact.php" method="POST">
+
+                    <div class="form-group">
+                        <label for="name" class="form-label">Votre nom</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Jean Dupont" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Votre email professionnel</label>
+                        <input type="email" id="email" name="email" class="form-input"
+                            placeholder="jean@votrecommerce.fr" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Votre message</label>
+                        <textarea id="message" name="message" class="form-textarea"
+                            placeholder="Bonjour, je souhaiterais savoir..." required></textarea>
+                    </div>
+
+                    <!-- Honeypot -->
+                    <div style="display:none;">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Envoyer le message</span>
+                        <span>✈️</span>
+                    </button>
+
+                </form>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 40px; color: #64748B; font-size: 0.9rem;">
+            © 2026 Expert Local • Tous droits réservés
+        </footer>
+    </div>
+
+</body>
+
+</html>

@@ -1,28 +1,290 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <title>Merci ! - Expert Local</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Envoyé ! - Expert Local 2026</title>
+
+    <!-- CSS & Fonts -->
+    <link rel="stylesheet" href="style-2026.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <style>
-        body { 
-            font-family: sans-serif; 
-            text-align: center; 
-            padding: 50px; 
-            background: linear-gradient(135deg, #0F172A, #1E293B);
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .merci-header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+            color: #10B981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .merci-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .merci-subtitle {
+            font-size: 1.1rem;
+            color: #94A3B8;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .upsell-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .upsell-header {
+            background: linear-gradient(90deg, #F59E0B, #D97706);
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .upsell-content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .upsell-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .upsell-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #FFF;
+        }
+
+        .upsell-text h3 span {
+            color: #F59E0B;
+        }
+
+        .upsell-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+
+        .upsell-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: #CBD5E1;
+        }
+
+        .upsell-list li:before {
+            content: "👑";
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .upsell-price {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .price-tag {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #F59E0B;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .price-sub {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .upsell-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: #F59E0B;
+            color: #0F172A;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .upsell-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+            background: #D97706;
             color: white;
         }
-        .container { max-width: 600px; margin: 0 auto; }
-        h1 { color: #10B981; }
-        .checkmark { font-size: 80px; color: #10B981; }
+
+        .timer-badge {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.15);
+            color: #EF4444;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .return-link {
+            text-align: center;
+            display: block;
+            color: #64748B;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .return-link:hover {
+            color: #94A3B8;
+        }
     </style>
 </head>
+
 <body>
+
+    <header class="merci-header">
+        <div class="checkmark-circle">✓</div>
+        <h1 class="merci-title">Diagnostic en cours de génération...</h1>
+        <p class="merci-subtitle">
+            Merci ! Vos informations ont bien été reçues. <br>
+            Vous recevrez votre analyse complète par email sous <strong>24 heures</strong>.
+        </p>
+    </header>
+
     <div class="container">
-        <div class="checkmark">✅</div>
-        <h1>Diagnostic demandé avec succès !</h1>
-        <p>Nous vous enverrons votre analyse personnalisée dans les 24h à l'adresse email que vous avez fournie.</p>
-        <p>En attendant, vous pouvez :</p>
-        <p><a href="/" style="color: #10B981; text-decoration: none;">← Retour à l'accueil</a></p>
+
+        <!-- UPSELL -->
+        <div class="upsell-section">
+            <div class="upsell-header">
+                💎 Offre Spéciale : Réservée aux nouveaux inscrits
+            </div>
+
+            <div class="upsell-content">
+                <div class="upsell-text">
+                    <h3>Passez directement en <span>Mode VIP</span></h3>
+                    <p style="color: #94A3B8; margin-bottom: 25px;">
+                        Ne perdez pas de temps à tout faire vous-même. Confiez-nous votre réputation Google à 100%.
+                    </p>
+                    <ul class="upsell-list">
+                        <li>Audit complet en priorité (livré sous 4h)</li>
+                        <li>Création de vos visuels et QR codes</li>
+                        <li>Gestion de vos réponses aux avis</li>
+                        <li>2 appels de coaching stratégique / mois</li>
+                        <li>Accès direct WhatsApp 7j/7</li>
+                    </ul>
+                </div>
+
+                <div class="upsell-price">
+                    <span class="timer-badge">⏳ Expire dans 15:00</span>
+                    <span class="price-tag">497€</span>
+                    <span class="price-sub">HT / mois • Sans engagement</span>
+                    <a href="mailto:contact@expert-local.fr?subject=Accompagnement%20VIP%20(Fast-Track)"
+                        class="upsell-btn">
+                        Je veux l'Accompagnement VIP
+                    </a>
+                    <p style="font-size: 0.8rem; color: #64748B; margin-top: 15px; margin-bottom: 0;">
+                        3 places restantes ce mois-ci
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="return-link">Non merci, je vais attendre mon diagnostic gratuit →</a>
+
     </div>
+
+    <script>
+        // Simple countdown timer visual effect
+        let time = 15 * 60; // 15 minutes
+        const timerElement = document.querySelector('.timer-badge');
+
+        setInterval(() => {
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
+
+            if (time > 0) {
+                time--;
+            }
+        }, 1000);
+    </script>
+
 </body>
+
 </html>
