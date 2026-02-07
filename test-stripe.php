@@ -24,6 +24,9 @@ if (file_exists($envPath)) {
     }
 }
 
+    }
+}
+
 $stripeSecret = $env['STRIPE_SECRET_KEY'] ?? '';
 $stripePublishable = $env['STRIPE_PUBLISHABLE_KEY'] ?? '';
 

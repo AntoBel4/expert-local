@@ -41,14 +41,15 @@ if (file_exists($envPath)) {
     log_debug("ERREUR CRITIQUE: Fichier .env introuvable.");
 }
 
-$adminEmail = $env['ADMIN_EMAIL'] ?? '';
-$noReply = $env['NO_REPLY_EMAIL'] ?? '';
+// VALEURS PAR DÉFAUT (FALLBACK) SI .ENV VIDE
+$adminEmail = $env['ADMIN_EMAIL'] ?? 'contact@expert-local.fr';
+$noReply = $env['NO_REPLY_EMAIL'] ?? 'ne-pas-repondre@expert-local.fr';
 $senderName = $env['SENDER_NAME'] ?? 'Expert Local';
 
-$smtpHost = $env['SMTP_HOST'] ?? '';
+$smtpHost = $env['SMTP_HOST'] ?? 'smtp-relay.brevo.com';
 $smtpPort = (int) ($env['SMTP_PORT'] ?? 587);
-$smtpUser = $env['SMTP_USER'] ?? 'apikey';
-$smtpPass = $env['SMTP_PASS'] ?? '';
+$smtpUser = $env['SMTP_USER'] ?? 'apikey'; // Valeur par défaut Brevo
+$smtpPass = $env['SMTP_PASS'] ?? ''; // Pas de fallback pswd possible
 
 log_debug("Env chargé. Admin: $adminEmail, Host: $smtpHost");
 

@@ -28,15 +28,16 @@ if (file_exists($envPath)) {
     }
 }
 
-$admin_email = $env['ADMIN_EMAIL'] ?? '';
-$site_url = $env['SITE_URL'] ?? '';
-$no_reply_email = $env['NO_REPLY_EMAIL'] ?? '';
+// VALEURS PAR DÉFAUT (FALLBACK)
+$admin_email = $env['ADMIN_EMAIL'] ?? 'contact@expert-local.fr';
+$site_url = $env['SITE_URL'] ?? 'https://expert-local.fr';
+$no_reply_email = $env['NO_REPLY_EMAIL'] ?? 'ne-pas-repondre@expert-local.fr';
 $sender_name = $env['SENDER_NAME'] ?? 'Expert Local';
 $default_department = $env['DEFAULT_DEPARTMENT'] ?? '28';
 
-$smtpHost = $env['SMTP_HOST'] ?? '';
+$smtpHost = $env['SMTP_HOST'] ?? 'smtp-relay.brevo.com';
 $smtpPort = (int) ($env['SMTP_PORT'] ?? 587);
-$smtpUser = $env['SMTP_USER'] ?? '';
+$smtpUser = $env['SMTP_USER'] ?? 'apikey';
 $smtpPass = $env['SMTP_PASS'] ?? '';
 
 // --------------------------------------------------
