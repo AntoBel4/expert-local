@@ -417,31 +417,36 @@
     </div>
 
     <script>
-        // TIMER
-        let time = 15 * 60;
-        const timerElement = document.querySelector('.timer-badge');
+        document.addEventListener('DOMContentLoaded', function () {
+            // TIMER
+            let time = 15 * 60;
+            const timerElement = document.querySelector('.timer-badge');
 
-        setInterval(() => {
-            const minutes = Math.floor(time / 60);
-            let seconds = time % 60;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
-            if (time > 0) time--;
-        }, 1000);
+            if (timerElement) {
+                setInterval(() => {
+                    const minutes = Math.floor(time / 60);
+                    let seconds = time % 60;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+                    timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
+                    if (time > 0) time--;
+                }, 1000);
+            }
 
-        // MODAL LOGIC
-        const refuseBtn = document.getElementById('refuseBtn');
-        const modal = document.getElementById('downsellModal');
+            // MODAL LOGIC
+            const refuseBtn = document.getElementById('refuseBtn');
+            const modal = document.getElementById('downsellModal');
 
-        refuseBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.classList.add('active');
+            if (refuseBtn && modal) {
+                console.log("✅ Bouton Refus et Modal trouvés");
+                refuseBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log("🖱️ Click Refus detecté");
+                    modal.classList.add('active');
+                });
+            } else {
+                console.error("❌ Bouton Refus ou Modal introuvable !");
+            }
         });
-
-        // Fermer modal si clic dehors (optionnel, ici on force le choix)
-        // modal.addEventListener('click', (e) => {
-        //    if(e.target === modal) modal.classList.remove('active');
-        // });
     </script>
 
 </body>

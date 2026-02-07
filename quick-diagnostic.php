@@ -7,9 +7,28 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 // --------------------------------------------------
+// 0. CONFIG LOGS
+// --------------------------------------------------
+$logFile = __DIR__ . '/log_email_debug.txt';
+function log_debug($message)
+{
+    global $logFile;
+    file_put_contents($logFile, date('[Y-m-d H:i:s] ') . $message . PHP_EOL, FILE_APPEND);
+}
+
+log_debug("--- NOUVELLE SOUMISSION ---");
+
+// --------------------------------------------------
 // 1. CHARGEMENT DES VARIABLES D'ENVIRONNEMENT
 // --------------------------------------------------
-$env = parse_ini_file(__DIR__ . '/.env');
+$envPath = __DIR__ . '/.env';
+if (!file_exists($envPath)) {
+    log_debug("ERREUR CRITIQUE: Fichier .env introuvable.");
+    header('Location: erreur-formulaire.html');
+    exit;
+}
+
+$env = parse_ini_file($envPath);
 
 $adminEmail = $env['ADMIN_EMAIL'] ?? '';
 $noReply = $env['NO_REPLY_EMAIL'] ?? '';
@@ -20,6 +39,8 @@ $smtpPort = (int) ($env['SMTP_PORT'] ?? 587);
 $smtpUser = $env['SMTP_USER'] ?? 'apikey';
 $smtpPass = $env['SMTP_PASS'] ?? '';
 
+log_debug("Env chargé. Admin: $adminEmail, Host: $smtpHost");
+
 // --------------------------------------------------
 // 2. ANTI-SPAM SIMPLE
 // --------------------------------------------------
@@ -27,9 +48,12 @@ $email = trim($_POST['email'] ?? '');
 $department = trim($_POST['department'] ?? '');
 $reviews = trim($_POST['reviews'] ?? '');
 
+log_debug("Données reçues - Email: $email, Dept: $department, Reviews: $reviews");
+
 $spam_words = ['http://', 'https://', '[url', 'viagra', 'casino', 'lottery'];
 foreach ($spam_words as $word) {
     if (stripos($email, $word) !== false) {
+        log_debug("SPAM DETECTÉ: Mot interdit '$word'");
         header('Location: erreur-formulaire.html');
         exit;
     }
@@ -39,39 +63,22 @@ foreach ($spam_words as $word) {
 // 3. VALIDATION
 // --------------------------------------------------
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    // Debug: log invalid email
-    file_put_contents(__DIR__ . '/log_email_debug.txt', date('[Y-m-d H:i:s] ') . "INVALID EMAIL: $email" . PHP_EOL, FILE_APPEND);
+    log_debug("ERREUR VALIDATION: Email invalide ou vide");
     header('Location: erreur-formulaire.html');
     exit;
 }
 
 if ($department === '' || $reviews === '') {
-    // Debug: log missing fields
-    file_put_contents(__DIR__ . '/log_email_debug.txt', date('[Y-m-d H:i:s] ') . "MISSING FIELDS: Dept=$department, Reviews=$reviews" . PHP_EOL, FILE_APPEND);
+    log_debug("ERREUR VALIDATION: Champs manquants (Dept ou Reviews)");
     header('Location: erreur-formulaire.html');
     exit;
 }
 
 // --------------------------------------------------
-// 4. LIMITATION PAR IP
+// 4. LIMITATION PAR IP (DÉSACTIVÉ POUR DEBUG)
 // --------------------------------------------------
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-$cacheDir = __DIR__ . '/cache';
-$cacheFile = $cacheDir . '/' . md5($ip) . '.json';
-
-if (!is_dir($cacheDir)) {
-    mkdir($cacheDir, 0755, true);
-}
-
-$cacheData = ['count' => 0, 'timestamp' => time()];
-
-if (file_exists($cacheFile)) {
-    $cacheData = json_decode(file_get_contents($cacheFile), true) ?? $cacheData;
-    if (time() - $cacheData['timestamp'] < 3600 && $cacheData['count'] >= 5) {
-        header('Location: erreur-formulaire.html');
-        exit;
-    }
-}
+log_debug("IP Client: $ip");
 
 // --------------------------------------------------
 // 5. TRADUCTION DES VALEURS & OFFRE
@@ -94,35 +101,20 @@ $reviews_text_value = $reviews_text[$reviews] ?? $reviews;
 $unique_id = uniqid('DIA_', true);
 $date_complete = date('d/m/Y H:i:s');
 
-// DÉTERMINATION DE L'OFFRE
-$offer_redirect = 'starter'; // Default 49€
+// DÉTERMINATION DE L'OFFRE (LOGIQUE V3: TOUJOURS PRO)
 $priority = 'Moyenne';
 $potentiel_avis = '10-15';
 
 if ($reviews === '0-5') {
     $priority = 'Élevée';
     $potentiel_avis = '15-20';
-    $offer_redirect = 'starter'; // 49€
 } elseif ($reviews === '6-20') {
     $priority = 'Moyenne';
     $potentiel_avis = '10-15';
-    $offer_redirect = 'pro'; // 179€
 } elseif ($reviews === '21+') {
     $priority = 'Basse';
     $potentiel_avis = '5-10';
-    $offer_redirect = 'vip'; // 497€
 }
-
-// --------------------------------------------------
-// 7. FONCTION LOG (DEBUG)
-// --------------------------------------------------
-function log_debug($message)
-{
-    file_put_contents(__DIR__ . '/log_email_debug.txt', date('[Y-m-d H:i:s] ') . $message . PHP_EOL, FILE_APPEND);
-}
-
-log_debug("--- Nouvelle soumission Mini-Diagnostic ---");
-log_debug("Email: $email, Dept: $department, Offer: $offer_redirect");
 
 // --------------------------------------------------
 // 8. EMAIL ADMIN
@@ -155,13 +147,13 @@ try {
     $mailAdmin->Body = $admin_template;
 
     if (!$mailAdmin->send()) {
-        log_debug("ERREUR Envoi Admin: " . $mailAdmin->ErrorInfo);
+        log_debug("FATAL EMAIL ADMIN: " . $mailAdmin->ErrorInfo);
     } else {
-        log_debug("SUCCES Envoi Admin");
+        log_debug("SUCCES Email Admin envoye");
     }
 
 } catch (Exception $e) {
-    log_debug("EXCEPTION Envoi Admin: " . $e->getMessage());
+    log_debug("EXCEPTION Email Admin: " . $e->getMessage());
 }
 
 // --------------------------------------------------
@@ -191,25 +183,18 @@ try {
     $mailClient->Body = $client_template;
 
     if (!$mailClient->send()) {
-        log_debug("ERREUR Envoi Client: " . $mailClient->ErrorInfo);
+        log_debug("FATAL EMAIL CLIENT: " . $mailClient->ErrorInfo);
     } else {
-        log_debug("SUCCES Envoi Client");
+        log_debug("SUCCES Email Client envoye");
     }
 
 } catch (Exception $e) {
-    log_debug("EXCEPTION Envoi Client: " . $e->getMessage());
+    log_debug("EXCEPTION Email Client: " . $e->getMessage());
 }
 
 // --------------------------------------------------
 // 10. CSV & CACHE
 // --------------------------------------------------
-$cacheData = [
-    'timestamp' => time(),
-    'count' => ($cacheData['count'] ?? 0) + 1,
-    'ip' => $ip
-];
-file_put_contents($cacheFile, json_encode($cacheData));
-
 $csv_data = [
     date('Y-m-d H:i:s'),
     $unique_id,
@@ -233,7 +218,7 @@ if ($fp) {
 }
 
 // --------------------------------------------------
-// 11. REDIRECTION (AVEC PARAMETRE OFFRE)
+// 11. REDIRECTION (STANDARDISATION OFFRE PRO)
 // --------------------------------------------------
-header("Location: merci-diagnostic.html?offer=" . $offer_redirect);
+header("Location: merci-diagnostic.html?offer=pro");
 exit;
