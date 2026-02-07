@@ -21,12 +21,7 @@ if (file_exists($envPath)) {
                 $env[trim($name)] = trim(trim($value), '"\'');
             }
         }
-    }
-}
-
-    }
-}
-
+// VALEURS PAR DÉFAUT (FALLBACK)
 $stripeSecret = $env['STRIPE_SECRET_KEY'] ?? '';
 $stripePublishable = $env['STRIPE_PUBLISHABLE_KEY'] ?? '';
 
