@@ -11,20 +11,20 @@ use PHPMailer\PHPMailer\Exception;
 $env = parse_ini_file(__DIR__ . '/.env');
 
 $adminEmail = $env['ADMIN_EMAIL'] ?? '';
-$noReply    = $env['NO_REPLY_EMAIL'] ?? '';
+$noReply = $env['NO_REPLY_EMAIL'] ?? '';
 $senderName = $env['SENDER_NAME'] ?? 'Expert Local';
 
 $smtpHost = $env['SMTP_HOST'] ?? '';
-$smtpPort = (int)($env['SMTP_PORT'] ?? 587);
+$smtpPort = (int) ($env['SMTP_PORT'] ?? 587);
 $smtpUser = $env['SMTP_USER'] ?? 'apikey';
 $smtpPass = $env['SMTP_PASS'] ?? '';
 
 // --------------------------------------------------
 // 2. ANTI-SPAM SIMPLE
 // --------------------------------------------------
-$email      = trim($_POST['email'] ?? '');
+$email = trim($_POST['email'] ?? '');
 $department = trim($_POST['department'] ?? '');
-$reviews    = trim($_POST['reviews'] ?? '');
+$reviews = trim($_POST['reviews'] ?? '');
 
 // Spam words check
 $spam_words = ['http://', 'https://', '[url', 'viagra', 'casino', 'lottery'];
@@ -79,9 +79,9 @@ $departments = [
 ];
 
 $reviews_text = [
-    '0-5'  => '0-5 avis (Je commence)',
+    '0-5' => '0-5 avis (Je commence)',
     '6-20' => '6-20 avis (Je veux progresser)',
-    '21+'  => '21+ avis (Je veux dominer)'
+    '21+' => '21+ avis (Je veux dominer)'
 ];
 
 $department_text = $departments[$department] ?? $department;
@@ -120,22 +120,22 @@ try {
     $mailAdmin->CharSet = 'UTF-8';
 
     $mailAdmin->isSMTP();
-    $mailAdmin->Host       = $smtpHost;
-    $mailAdmin->SMTPAuth   = true;
-    $mailAdmin->Username   = $smtpUser;
-    $mailAdmin->Password   = $smtpPass;
+    $mailAdmin->Host = $smtpHost;
+    $mailAdmin->SMTPAuth = true;
+    $mailAdmin->Username = $smtpUser;
+    $mailAdmin->Password = $smtpPass;
     $mailAdmin->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mailAdmin->Port       = $smtpPort;
+    $mailAdmin->Port = $smtpPort;
 
     $mailAdmin->setFrom($noReply, $senderName);
     $mailAdmin->addAddress($adminEmail);
 
     $mailAdmin->isHTML(true);
     $mailAdmin->Subject = "Nouveau diagnostic rapide - $priority - $department_text";
-    $mailAdmin->Body    = $admin_template;
+    $mailAdmin->Body = $admin_template;
 
     $mailAdmin->send();
-    
+
 } catch (Exception $e) {
     // Log l'erreur mais ne bloque pas
     error_log("Email admin failed: " . $e->getMessage());
@@ -155,12 +155,12 @@ try {
     $mailClient->CharSet = 'UTF-8';
 
     $mailClient->isSMTP();
-    $mailClient->Host       = $smtpHost;
-    $mailClient->SMTPAuth   = true;
-    $mailClient->Username   = $smtpUser;
-    $mailClient->Password   = $smtpPass;
+    $mailClient->Host = $smtpHost;
+    $mailClient->SMTPAuth = true;
+    $mailClient->Username = $smtpUser;
+    $mailClient->Password = $smtpPass;
     $mailClient->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mailClient->Port       = $smtpPort;
+    $mailClient->Port = $smtpPort;
 
     $mailClient->setFrom($noReply, $senderName);
     $mailClient->addAddress($email);
@@ -168,10 +168,10 @@ try {
 
     $mailClient->isHTML(true);
     $mailClient->Subject = 'Votre diagnostic Expert Local - En préparation';
-    $mailClient->Body    = $client_template;
+    $mailClient->Body = $client_template;
 
     $mailClient->send();
-    
+
 } catch (Exception $e) {
     // Log mais continue quand même
     error_log("Email client failed: " . $e->getMessage());
@@ -182,8 +182,8 @@ try {
 // --------------------------------------------------
 $cacheData = [
     'timestamp' => time(),
-    'count'     => ($cacheData['count'] ?? 0) + 1,
-    'ip'        => $ip
+    'count' => ($cacheData['count'] ?? 0) + 1,
+    'ip' => $ip
 ];
 file_put_contents($cacheFile, json_encode($cacheData));
 
@@ -213,7 +213,11 @@ if ($fp) {
 }
 
 // --------------------------------------------------
-// 11. REDIRECTION FINALE
+// 11. RÉPONSE JSON
 // --------------------------------------------------
-header("Location: merci-diagnostic.html");
+header('Content-Type: application/json');
+echo json_encode([
+    'success' => true,
+    'message' => '✅ Demande envoyée ! Vérifiez votre email (pensez à vérifier vos spams).'
+]);
 exit;
