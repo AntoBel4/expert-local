@@ -1,61 +1,67 @@
 <?php
-// Charge l'autoloader Stripe
+
 require __DIR__ . '/vendor/autoload.php';
 
-// --------------------------------------------------
-// CHARGEMENT DES VARIABLES D'ENVIRONNEMENT
-// --------------------------------------------------
+// Charger l'environnement
 $env = parse_ini_file(__DIR__ . '/.env');
 
-// Clé secrète Stripe (mode test ou live selon ton .env)
-\Stripe\Stripe::setApiKey($env['STRIPE_SECRET_KEY']);
+// Clés Stripe depuis le .env
+$stripeSecret = $env['STRIPE_SECRET_KEY'] ?? '';
+$stripePublishable = $env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+$siteUrl = $env['SITE_URL'] ?? 'https://expert-local.fr'; // Fallback
 
-// --------------------------------------------------
-// VALIDATION DU FORMULAIRE
-// --------------------------------------------------
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    exit('Méthode non autorisée');
+if (empty($stripeSecret)) {
+    die("Erreur de configuration : Clé Stripe manquante.");
 }
 
-if (!isset($_POST['price_id'])) {
-    http_response_code(400);
-    exit('Paramètre manquant');
-}
+\Stripe\Stripe::setApiKey($stripeSecret);
 
-$price_id = $_POST['price_id'];
+// Récupérer l'offre choisie
+$offerType = $_POST['offer_type'] ?? 'starter';
 
-// --------------------------------------------------
-// PRIX AUTORISÉS (depuis .env)
-// --------------------------------------------------
-$allowed_prices = explode(',', $env['STRIPE_ALLOWED_PRICES_TEST']);
+// Définir les produits (Prix en centimes)
+$products = [
+    'starter' => [
+        'name' => 'Kit de Démarrage Google Avis',
+        'price' => 4900, // 49.00 EUR
+    ],
+    'pro' => [
+        'name' => 'Pack PRO Domination Locale',
+        'price' => 17900, // 179.00 EUR
+    ],
+    'vip' => [
+        'name' => 'Accompagnement VIP 2026',
+        'price' => 49700, // 497.00 EUR
+    ]
+];
 
-if (!in_array($price_id, $allowed_prices)) {
-    http_response_code(400);
-    exit('Prix non autorisé');
-}
+$product = $products[$offerType] ?? $products['starter'];
 
-// --------------------------------------------------
-// CRÉATION DE LA SESSION CHECKOUT STRIPE
-// --------------------------------------------------
 try {
-
     $session = \Stripe\Checkout\Session::create([
-        'mode' => 'payment',
         'payment_method_types' => ['card'],
-        'line_items' => [[
-            'price' => $price_id,
-            'quantity' => 1,
-        ]],
-        'success_url' => $env['STRIPE_SUCCESS_URL'],
-        'cancel_url' => $env['STRIPE_CANCEL_URL'],
+        'line_items' => [
+            [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'product_data' => [
+                        'name' => $product['name'],
+                    ],
+                    // ⚠️ IMPORTANT : Vérifiez la TVA, ici c'est montant TTC
+                    'unit_amount' => $product['price'],
+                ],
+                'quantity' => 1,
+            ]
+        ],
+        'mode' => 'payment',
+        'success_url' => $siteUrl . '/merci-commande.html?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url' => $siteUrl . '/merci-diagnostic.html?offer=' . $offerType,
     ]);
 
-    header('Location: ' . $session->url);
+    // Redirection vers Stripe
+    header("Location: " . $session->url);
     exit;
 
 } catch (Exception $e) {
-    error_log('Stripe Checkout Error: ' . $e->getMessage());
-    header('Location: ' . $env['STRIPE_CANCEL_URL']);
-    exit;
+    echo "Erreur lors de la création de la session Stripe : " . $e->getMessage();
 }

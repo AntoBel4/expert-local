@@ -187,6 +187,8 @@
             transition: transform 0.3s, box-shadow 0.3s;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            cursor: pointer;
+            border: none;
         }
 
         .upsell-btn:hover {
@@ -217,6 +219,11 @@
         .return-link:hover {
             color: #94A3B8;
         }
+
+        /* Dynamic Offers Display */
+        .offer-hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -234,39 +241,37 @@
     <div class="container">
 
         <!-- UPSELL -->
-        <div class="upsell-section">
+        <div class="upsell-section" id="upsellSection">
             <div class="upsell-header">
                 🔥 Offre Flash : Réservée aux nouveaux inscrits
             </div>
 
             <div class="upsell-content">
                 <div class="upsell-text">
-                    <h3>Passez immédiatement <br>au <span>Niveau Supérieur</span></h3>
-                    <p style="color: #94A3B8; margin-bottom: 25px;">
-                        Ne perdez pas de temps. Obtenez dès maintenant notre "Kit Pro 2026" pour booster vos avis Google
-                        sans attendre.
+                    <h3 id="offerTitle">Passez immédiatement <br>au <span>Niveau Supérieur</span></h3>
+                    <p style="color: #94A3B8; margin-bottom: 25px;" id="offerDesc">
+                        Ne perdez pas de temps. Obtenez dès maintenant notre solution pour booster vos avis Google.
                     </p>
-                    <ul class="upsell-list">
-                        <li>Fiches QR Codes Premium (Design 2026)</li>
-                        <li>Scripts psychologiques de demande d'avis</li>
-                        <li>Guide stratégique "Les 5 Étoiles"</li>
-                        <li>Accès immédiat après paiement</li>
+                    <ul class="upsell-list" id="offerFeatures">
+                        <!-- JS inserted -->
                     </ul>
                 </div>
 
                 <div class="upsell-price">
                     <span class="timer-badge">⏳ Expire dans 15:00</span>
                     <div>
-                        <span class="old-price">197€</span>
-                        <span class="price-tag" style="display:inline-block;">47€</span>
+                        <span class="old-price" id="oldPrice">197€</span>
+                        <span class="price-tag" id="priceTag" style="display:inline-block;">49€</span>
                     </div>
                     <span class="price-sub">Paiement unique • Accès à vie</span>
 
-                    <!-- Lien de paiement (Stripe ou autre, ici mailto pour l'exemple ou lien vers page de vente) -->
-                    <a href="mailto:contact@expert-local.fr?subject=Commande%20Kit%20Pro%202026%20(47e)"
-                        class="upsell-btn">
-                        Profiter de l'offre à 47€
-                    </a>
+                    <!-- Formulaire Stripe caché -->
+                    <form action="creer-session-stripe.php" method="POST">
+                        <input type="hidden" name="offer_type" id="offerInput" value="starter">
+                        <button type="submit" class="upsell-btn" id="buyBtn">
+                            Profiter de l'offre
+                        </button>
+                    </form>
 
                     <p style="font-size: 0.8rem; color: #64748B; margin-top: 15px; margin-bottom: 0;">
                         Garantie Satisfait ou Remboursé 30 jours
@@ -280,22 +285,90 @@
     </div>
 
     <script>
-        // Simple countdown timer visual effect
+        // --------------------------------------------------
+        // OFFRES CONFIG
+        // --------------------------------------------------
+        const offers = {
+            'starter': { // 49€
+                title: "Kit de Démarrage <br><span>Google Avis</span>",
+                desc: "Parfait pour obtenir vos 50 premiers avis 5 étoiles rapidement.",
+                features: [
+                    "Fiches QR Codes Premium (Design 2026)",
+                    "Scripts psychologiques de demande d'avis",
+                    "Guide PDF : Les 5 Étoiles",
+                    "Accès immédiat"
+                ],
+                price: "49€",
+                oldPrice: "97€"
+            },
+            'pro': { // 179€
+                title: "Pack PRO <br><span>Domination Locale</span>",
+                desc: "La solution complète pour automatiser votre récolte d'avis et passer devant vos concurrents.",
+                features: [
+                    "Tout le contenu du Starter Kit",
+                    "Logiciel d'automatisation Email/SMS (1 mois offert)",
+                    "Formation Vidéo : SEO Local Avancé",
+                    "Support Prioritaire"
+                ],
+                price: "179€",
+                oldPrice: "397€"
+            },
+            'vip': { // 497€
+                title: "Accompagnement <br><span>VIP 2026</span>",
+                desc: "On s'occupe de tout pour vous. Audit, optimisation et mise en place clé en main.",
+                features: [
+                    "Audit complet de votre fiche par un expert",
+                    "Création de votre site web vitrine (si besoin)",
+                    "Coaching mensuel (3 mois)",
+                    "Ligne directe avec l'équipe"
+                ],
+                price: "497€",
+                oldPrice: "1997€"
+            }
+        };
+
+        // --------------------------------------------------
+        // GET URL PARAM
+        // --------------------------------------------------
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentOfferKey = urlParams.get('offer') || 'starter'; // Default to starter
+
+        // Load Offer Data
+        const offerData = offers[currentOfferKey] || offers['starter'];
+
+        // Update DOM
+        document.getElementById('offerTitle').innerHTML = offerData.title;
+        document.getElementById('offerDesc').textContent = offerData.desc;
+        document.getElementById('priceTag').textContent = offerData.price;
+        document.getElementById('oldPrice').textContent = offerData.oldPrice;
+        document.getElementById('offerInput').value = currentOfferKey;
+
+        // Features list
+        const featuresList = document.getElementById('offerFeatures');
+        featuresList.innerHTML = '';
+        offerData.features.forEach(feat => {
+            const li = document.createElement('li');
+            li.textContent = feat;
+            featuresList.appendChild(li);
+        });
+
+        // Button Text
+        document.getElementById('buyBtn').textContent = `Profiter de l'offre à ${offerData.price}`;
+
+        // --------------------------------------------------
+        // TIMER
+        // --------------------------------------------------
         let time = 15 * 60; // 15 minutes
         const timerElement = document.querySelector('.timer-badge');
 
         setInterval(() => {
             const minutes = Math.floor(time / 60);
             let seconds = time % 60;
-
             seconds = seconds < 10 ? '0' + seconds : seconds;
-
             timerElement.textContent = `⏳ Expire dans ${minutes}:${seconds}`;
-
-            if (time > 0) {
-                time--;
-            }
+            if (time > 0) time--;
         }, 1000);
+
     </script>
 
 </body>
