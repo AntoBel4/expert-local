@@ -5,8 +5,6 @@ require __DIR__ . '/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-header('Content-Type: application/json');
-
 // --------------------------------------------------
 // 1. CHARGEMENT DES VARIABLES D'ENVIRONNEMENT
 // --------------------------------------------------
@@ -24,36 +22,34 @@ $smtpPass = $env['SMTP_PASS'] ?? '';
 // --------------------------------------------------
 // 2. ANTI-SPAM SIMPLE
 // --------------------------------------------------
+$email      = trim($_POST['email'] ?? '');
+$department = trim($_POST['department'] ?? '');
+$reviews    = trim($_POST['reviews'] ?? '');
+
+// Spam words check
 $spam_words = ['http://', 'https://', '[url', 'viagra', 'casino', 'lottery'];
 foreach ($spam_words as $word) {
-    if (stripos($_POST['email'] ?? '', $word) !== false) {
-        echo json_encode(['success' => false, 'message' => 'Email invalide']);
+    if (stripos($email, $word) !== false) {
+        header('Location: erreur-formulaire.html');
         exit;
     }
 }
 
 // --------------------------------------------------
-// 3. RÉCUPÉRATION DES DONNÉES
-// --------------------------------------------------
-$email      = trim($_POST['email'] ?? '');
-$department = trim($_POST['department'] ?? '');
-$reviews    = trim($_POST['reviews'] ?? '');
-
-// --------------------------------------------------
-// 4. VALIDATION
+// 3. VALIDATION
 // --------------------------------------------------
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['success' => false, 'message' => 'Email invalide']);
+    header('Location: erreur-formulaire.html');
     exit;
 }
 
 if ($department === '' || $reviews === '') {
-    echo json_encode(['success' => false, 'message' => 'Veuillez compléter toutes les étapes']);
+    header('Location: erreur-formulaire.html');
     exit;
 }
 
 // --------------------------------------------------
-// 5. LIMITATION PAR IP (5 / heure)
+// 4. LIMITATION PAR IP (5 / heure)
 // --------------------------------------------------
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $cacheDir = __DIR__ . '/cache';
@@ -68,13 +64,13 @@ $cacheData = ['count' => 0, 'timestamp' => time()];
 if (file_exists($cacheFile)) {
     $cacheData = json_decode(file_get_contents($cacheFile), true) ?? $cacheData;
     if (time() - $cacheData['timestamp'] < 3600 && $cacheData['count'] >= 5) {
-        echo json_encode(['success' => false, 'message' => 'Trop de demandes. Veuillez réessayer dans 1 heure.']);
+        header('Location: erreur-formulaire.html');
         exit;
     }
 }
 
 // --------------------------------------------------
-// 6. TRADUCTION DES VALEURS
+// 5. TRADUCTION DES VALEURS
 // --------------------------------------------------
 $departments = [
     '28' => 'Eure-et-Loir (28)',
@@ -92,45 +88,13 @@ $department_text = $departments[$department] ?? $department;
 $reviews_text_value = $reviews_text[$reviews] ?? $reviews;
 
 // --------------------------------------------------
-// 7. GÉNÉRATION D'ID UNIQUE
+// 6. GÉNÉRATION D'ID UNIQUE
 // --------------------------------------------------
 $unique_id = uniqid('DIA_', true);
 $date_complete = date('d/m/Y H:i:s');
 
 // --------------------------------------------------
-// 8. EMAIL CLIENT (HTML) via SMTP Brevo
-// --------------------------------------------------
-$client_template = file_get_contents(__DIR__ . '/email-client-confirmation.html');
-$client_template = str_replace('{PRENOM}', 'Cher client', $client_template);
-$client_template = str_replace('{DATE}', date('d/m/Y'), $client_template);
-
-try {
-    $mailClient = new PHPMailer(true);
-    $mailClient->CharSet = 'UTF-8';
-
-    $mailClient->isSMTP();
-    $mailClient->Host       = $smtpHost;
-    $mailClient->SMTPAuth   = true;
-    $mailClient->Username   = $smtpUser;
-    $mailClient->Password   = $smtpPass;
-    $mailClient->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mailClient->Port       = $smtpPort;
-
-    $mailClient->setFrom($noReply, $senderName);
-    $mailClient->addAddress($email);
-    $mailClient->addReplyTo($noReply);
-
-    $mailClient->isHTML(true);
-    $mailClient->Subject = 'Votre diagnostic Expert Local - En préparation';
-    $mailClient->Body    = $client_template;
-
-    $mailClient->send();
-} catch (Exception $e) {
-    // On continue même si l'email client échoue
-}
-
-// --------------------------------------------------
-// 9. EMAIL ADMIN via SMTP Brevo
+// 7. EMAIL ADMIN D'ABORD (PRIORITAIRE)
 // --------------------------------------------------
 $admin_template = file_get_contents(__DIR__ . '/email-admin-diagnostic-rapide.html');
 
@@ -171,12 +135,50 @@ try {
     $mailAdmin->Body    = $admin_template;
 
     $mailAdmin->send();
+    
 } catch (Exception $e) {
-    // On continue
+    // Log l'erreur mais ne bloque pas
+    error_log("Email admin failed: " . $e->getMessage());
+    // Vous pouvez choisir de rediriger vers erreur ici si critique
+    // header('Location: erreur-formulaire.html');
+    // exit;
 }
 
 // --------------------------------------------------
-// 10. MISE À JOUR DU CACHE
+// 8. EMAIL CLIENT (SEULEMENT SI ADMIN OK)
+// --------------------------------------------------
+$client_template = file_get_contents(__DIR__ . '/email-client-confirmation.html');
+$client_template = str_replace(['{PRENOM}', '{DATE}'], ['', date('d/m/Y')], $client_template);
+
+try {
+    $mailClient = new PHPMailer(true);
+    $mailClient->CharSet = 'UTF-8';
+
+    $mailClient->isSMTP();
+    $mailClient->Host       = $smtpHost;
+    $mailClient->SMTPAuth   = true;
+    $mailClient->Username   = $smtpUser;
+    $mailClient->Password   = $smtpPass;
+    $mailClient->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailClient->Port       = $smtpPort;
+
+    $mailClient->setFrom($noReply, $senderName);
+    $mailClient->addAddress($email);
+    $mailClient->addReplyTo($noReply);
+
+    $mailClient->isHTML(true);
+    $mailClient->Subject = 'Votre diagnostic Expert Local - En préparation';
+    $mailClient->Body    = $client_template;
+
+    $mailClient->send();
+    
+} catch (Exception $e) {
+    // Log mais continue quand même
+    error_log("Email client failed: " . $e->getMessage());
+}
+
+// --------------------------------------------------
+// 9. MISE À JOUR DU CACHE
 // --------------------------------------------------
 $cacheData = [
     'timestamp' => time(),
@@ -186,7 +188,7 @@ $cacheData = [
 file_put_contents($cacheFile, json_encode($cacheData));
 
 // --------------------------------------------------
-// 11. SAUVEGARDE CSV (backup)
+// 10. SAUVEGARDE CSV (avec lock pour éviter corruption)
 // --------------------------------------------------
 $csv_data = [
     date('Y-m-d H:i:s'),
@@ -200,12 +202,18 @@ $csv_data = [
 ];
 
 $csv_line = '"' . implode('","', $csv_data) . '"' . PHP_EOL;
-@file_put_contents(__DIR__ . '/contacts.csv', $csv_line, FILE_APPEND);
+
+$fp = @fopen(__DIR__ . '/contacts.csv', 'a');
+if ($fp) {
+    if (flock($fp, LOCK_EX)) {
+        fwrite($fp, $csv_line);
+        flock($fp, LOCK_UN);
+    }
+    fclose($fp);
+}
 
 // --------------------------------------------------
-// 12. RÉPONSE JSON
+// 11. REDIRECTION FINALE
 // --------------------------------------------------
-echo json_encode([
-    'success' => true,
-    'message' => '✅ Demande envoyée ! Vérifiez votre email (pensez à vérifier vos spams).'
-]);
+header("Location: merci-diagnostic.html");
+exit;
