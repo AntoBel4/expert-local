@@ -18,8 +18,12 @@ $envPath = __DIR__ . '/.env';
 $env = [];
 
 if (file_exists($envPath)) {
-    $env = @parse_ini_file($envPath);
-    if (!$env || empty($env['STRIPE_SECRET_KEY'])) {
+    $parsed = @parse_ini_file($envPath);
+    if ($parsed && is_array($parsed)) {
+        $env = $parsed;
+    }
+
+    if (empty($env['STRIPE_SECRET_KEY'])) {
         $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($lines as $line) {
             if (strpos(trim($line), '#') === 0)

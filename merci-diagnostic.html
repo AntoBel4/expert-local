@@ -322,6 +322,19 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+        function openDownsell() {
+            console.log("Ouverture Modal (Head)");
+            const modal = document.getElementById('downsellModal');
+            if (modal) {
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+                modal.classList.add('active');
+            } else {
+                console.error("Modal introuvable");
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -433,17 +446,7 @@
         }
 
         // MODAL LOGIC (Direct Function)
-        function openDownsell() {
-            console.log("Ouverture Modal");
-            const modal = document.getElementById('downsellModal');
-            if (modal) {
-                modal.style.opacity = '1';
-                modal.style.visibility = 'visible';
-                modal.classList.add('active');
-            } else {
-                console.error("Modal introuvable");
-            }
-        }
+        // La fonction est définie dans le <head> pour être accessible immédiatement
 
         // Attachement manuel au cas où le onclick HTML ne suffirait pas
         const refuseBtn = document.getElementById('refuseBtn');
