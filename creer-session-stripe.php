@@ -2,8 +2,28 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-// Charger l'environnement
-$env = parse_ini_file(__DIR__ . '/.env');
+// --------------------------------------------------
+// 1. CHARGEMENT ROBUSTE DU .ENV
+// --------------------------------------------------
+$envPath = __DIR__ . '/.env';
+$env = [];
+
+if (file_exists($envPath)) {
+    $env = @parse_ini_file($envPath);
+    if (!$env || empty($env['STRIPE_SECRET_KEY'])) {
+        $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            if (strpos(trim($line), '#') === 0)
+                continue;
+            if (strpos($line, '=') !== false) {
+                list($name, $value) = explode('=', $line, 2);
+                $env[trim($name)] = trim(trim($value), '"\'');
+            }
+        }
+    }
+} else {
+    die("Erreur critique : Fichier .env introuvable.");
+}
 
 // Clés Stripe depuis le .env
 $stripeSecret = $env['STRIPE_SECRET_KEY'] ?? '';
@@ -11,7 +31,7 @@ $stripePublishable = $env['STRIPE_PUBLISHABLE_KEY'] ?? '';
 $siteUrl = $env['SITE_URL'] ?? 'https://expert-local.fr'; // Fallback
 
 if (empty($stripeSecret)) {
-    die("Erreur de configuration : Clé Stripe manquante.");
+    die("Erreur de configuration : Clé Stripe manquante ou vide dans le .env");
 }
 
 \Stripe\Stripe::setApiKey($stripeSecret);
