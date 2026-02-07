@@ -391,11 +391,14 @@
         </div>
 
         <!-- BOUTON REFUS -->
-        <!-- Lien simple pour éviter tout conflit de formulaire -->
-        <a href="javascript:void(0)" onclick="window.openDownsell(); return false;" class="refuse-link"
-            style="display:block; text-align:center; padding:10px;">
+        <!-- BOUTON REFUS -->
+        <!-- Bouton explicite pour éviter les soucis de liem/href -->
+        <button type="button"
+            onclick="alert('Debug: Clic reçu !'); if(window.openDownsell) { window.openDownsell(); } else { alert('Erreur: Fonction JS manquante'); }"
+            class="refuse-link"
+            style="display:block; width:100%; border:none; background:transparent; font-family:inherit; cursor:pointer; padding:10px;">
             Non merci, je ne veux pas développer mon activité →
-        </a>
+        </button>
 
     </div>
 
