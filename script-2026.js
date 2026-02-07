@@ -88,78 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // =======================
-// FORMULAIRE RAPIDE - AJAX SUBMIT
+// FORMULAIRE RAPIDE - SOUMISSION CLASSIQUE (pas d'AJAX)
 // =======================
-document.addEventListener('DOMContentLoaded', function() {
-  const quickDiagnosticForm = document.getElementById('quickDiagnostic');
-  
-  if (quickDiagnosticForm) {
-    // Empêche la soumission normale
-    quickDiagnosticForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      console.log('📤 Soumission formulaire rapide interceptée');
-      
-      // Récupération des données
-      const formData = new FormData(this);
-      
-      // Afficher un loader
-      const submitBtn = this.querySelector('.btn-submit');
-      if (!submitBtn) return;
-      
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span class="btn-icon">⏳</span> Envoi en cours...';
-      submitBtn.disabled = true;
-      
-      // Envoi AJAX
-      fetch('quick-diagnostic.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erreur réseau');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          // Message de succès
-          const formStep = document.querySelector('.form-step[data-step="3"]');
-          if (formStep) {
-            formStep.innerHTML = `
-              <div class="success-message" style="text-align: center; padding: 40px 20px;">
-                <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
-                <h3 style="color: #10B981; margin-bottom: 15px;">Demande envoyée !</h3>
-                <p>${data.message}</p>
-                <div style="margin-top: 30px;">
-                  <a href="/" style="display: inline-block; padding: 12px 24px; background: #10B981; color: white; border-radius: 8px; text-decoration: none;">
-                    ← Retour à l'accueil
-                  </a>
-                </div>
-                <div class="trust-badges" style="margin-top: 30px;">
-                  <span class="badge">✓ Vérifiez votre email (inbox & spam)</span>
-                  <span class="badge">✓ Délai : 24h maximum</span>
-                  <span class="badge">✓ Zéro spam</span>
-                </div>
-              </div>
-            `;
-          }
-        } else {
-          alert('Erreur : ' + (data.message || 'Une erreur est survenue'));
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }
-      })
-      .catch(error => {
-        console.error('Erreur:', error);
-        alert('Une erreur est survenue. Veuillez réessayer.');
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      });
-    });
-  }
-});
-
+// Le formulaire se soumet normalement en POST vers quick-diagnostic.php
+// Pas besoin de code JavaScript ici
 // =======================
 // TABS AVANT/APRÈS
 // =======================
