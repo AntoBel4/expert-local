@@ -1,103 +1,13 @@
-# -------------------------------------------------------
-# Expert Local – Sécurité Premium + OG Compatibility
-# Version 2026 – Antoine Estarellas
-# -------------------------------------------------------
-
-# Empêcher la navigation dans les dossiers
-Options -Indexes
-
-# Activer le moteur de réécriture
+# Rewrite rules for Expert Local
+# Enable RewriteEngine
 RewriteEngine On
 
-# -------------------------------------------------------
-# 1. Protection générale (XSS, Clickjacking, MIME sniffing)
-# -------------------------------------------------------
+# Redirect .html URLs to non-.html (301 permanent redirect)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 
-# Interdit l’intégration dans un iframe
-Header always append X-Frame-Options "DENY"
-
-# Empêche Internet Explorer d’interpréter un fichier autrement que par son type déclaré
-Header set X-Content-Type-Options "nosniff"
-
-# Active XSS Protection (fallback vieux navigateurs)
-Header set X-XSS-Protection "1; mode=block"
-
-# Cache Policy
-Header set Cache-Control "public, max-age=31536000"
-
-# -------------------------------------------------------
-# 2. Content Security Policy Premium (CSP)
-# -------------------------------------------------------
-# Autorise uniquement ton site, MAIS permet à Facebook/Whatsapp/Twitter
-# d’accéder à l’image OG.
-
-Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://expert-local.fr https://www.facebook.com https://www.whatsapp.com https://www.messenger.com https://t.co https://cards-dev.twitter.com https://images.unsplash.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self';"
-
-# -------------------------------------------------------
-# 3. Referrer Policy – protection de la vie privée
-# -------------------------------------------------------
-Header always set Referrer-Policy "strict-origin-when-cross-origin"
-
-# -------------------------------------------------------
-# 4. Permissions Policy – bloque les API sensibles
-# -------------------------------------------------------
-Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
-
-# -------------------------------------------------------
-# 5. compression GZIP
-# -------------------------------------------------------
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/javascript application/json image/svg+xml
-</IfModule>
-
-# -------------------------------------------------------
-# 6. fichiers sensibles à protéger
-# -------------------------------------------------------
-<FilesMatch "(^\.|wp-config\.php|xmlrpc\.php|composer\.json|composer\.lock)">
-    Require all denied
-</FilesMatch>
-
-# -------------------------------------------------------
-# 7b. Protection fichiers de données et logs
-# -------------------------------------------------------
-<FilesMatch "\.(csv|log|sql|bak)$">
-    Require all denied
-</FilesMatch>
-
-# Protéger les scripts PHP sensibles
-<Files "test-email.php">
-    Require all denied
-</Files>
-
-# Autoriser uniquement l'accès depuis localhost (pour debug)
-<IfModule mod_authz_core.c>
-    <Files "test-email.php">
-        Require ip 127.0.0.1
-        Require ip ::1
-        # Ajoutez votre IP publique si besoin :
-        # Require ip 123.123.123.123
-    </Files>
-</IfModule>
-
-# -------------------------------------------------------
-# 7. Redirection HTTPS si besoin
-# -------------------------------------------------------
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# -------------------------------------------------------
-# 8. Protection fichiers CSV
-# -------------------------------------------------------
-<Files "contacts.csv">
-    Order Allow,Deny
-    Deny from all
-</Files>
-
-<Files "*.csv">
-    Order Allow,Deny
-    Deny from all
-</Files>
-
-# -------------------------------------------------------
-# FIN
-# -------------------------------------------------------
+# If the request file doesn't exist but .html exists, serve it
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ /$1.html [L]
