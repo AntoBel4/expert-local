@@ -1,0 +1,708 @@
+/* ================================================
+   PALETTE
+================================================ */
+:root {
+    --blue: #1A365D;
+    --blue-dark: #0F172A;
+    --gold: #F59E0B;
+    --gold-light: #FBBF24;
+    --gray-light: #F3F4F6;
+    --text: #1F2937;
+    --white: #FFFFFF;
+}
+
+/* ================================================
+   RESET
+================================================ */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ================================================
+   HERO SPLIT SCREEN
+================================================ */
+.hero {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    padding: 80px 20px;
+    color: var(--white);
+}
+
+.hero-inner {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-left {
+    flex: 1 1 480px;
+}
+
+.hero-left h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-highlight {
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 6px;
+    border-radius: 6px;
+}
+
+.hero-subtext {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    max-width: 520px;
+    line-height: 1.6;
+}
+
+.cta-main {
+    display: inline-block;
+    margin-top: 30px;
+    background: var(--gold);
+    color: var(--blue-dark);
+    padding: 16px 34px;
+    font-weight: 800;
+    border-radius: 10px;
+    text-align: center;
+    transition: background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.cta-main:hover {
+    background: var(--gold-light);
+}
+
+.hero-reassurance {
+    margin-top: 18px;
+    opacity: 0.85;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.hero-right {
+    flex: 1 1 420px;
+    text-align: center;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero-stars {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    background: rgba(0,0,0,0.6);
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+
+/* ================================================
+   PROBLEM SECTION
+================================================ */
+.problem-section {
+    padding: 80px 20px;
+    background: var(--gray-light);
+    text-align: center;
+}
+
+.underline-premium {
+    display: inline-block;
+    border-bottom: 4px solid var(--gold);
+    padding-bottom: 6px;
+    margin-bottom: 40px;
+}
+
+.problem-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.problem-card {
+    background: var(--white);
+    padding: 26px;
+    border-radius: 12px;
+    max-width: 320px;
+    box-shadow:
+      0 10px 25px -5px rgba(0,0,0,0.1),
+      0 8px 10px -6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.problem-icon {
+    width: 60px;          /* taille de l’icône */
+    height: auto;
+    margin-bottom: 12px;  /* espace entre l’icône et le titre */
+}
+
+.problem-card h3 {
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* ================================================
+   SOLUTION SECTION
+================================================ */
+.solution-section {
+    padding: 80px 20px;
+    text-align:center;
+}
+
+.solution-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content:center;
+}
+
+.solution-card {
+    background: var(--white);
+    padding: 26px;
+    border-radius: 12px;
+    max-width: 300px;
+    text-align:center;
+    box-shadow:
+      0 10px 25px -5px rgba(0,0,0,0.1),
+      0 8px 10px -6px rgba(0,0,0,0.1);
+}
+
+.solution-icon {
+    width: 70px;
+    margin-bottom: 18px;
+}
+
+/* ================================================
+   KIT SECTION
+================================================ */
+.kit-section {
+    padding: 90px 20px;
+}
+
+.kit-content {
+    max-width: 1200px;
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:50px;
+    align-items:center;
+}
+
+.kit-left {
+    flex:1 1 480px;
+}
+
+.kit-mockup {
+    width:100%;
+    border-radius:12px;
+}
+
+.kit-right {
+    flex:1 1 480px;
+}
+
+.kit-list {
+    margin:30px 0;
+    list-style:none;
+}
+.kit-list li {
+    font-size:1.1rem;
+    margin-bottom:8px;
+}
+
+.kit-price {
+    font-size:1.5rem;
+    margin-bottom:20px;
+}
+.line-through {
+    text-decoration: line-through;
+    color:gray;
+}
+
+/* ================================================
+   PACK PRO SECTION
+================================================ */
+.packpro-section {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    padding: 100px 20px;
+    color: var(--white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.packpro-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.packpro-card {
+    background: var(--blue-dark);
+    padding: 40px 30px;
+    border-radius: 16px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.packpro-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    width: 100%;
+}
+
+.packpro-card ul li {
+    margin-bottom: 10px;
+    padding-left: 24px;
+    position: relative;
+}
+
+.packpro-card ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.cta-secondary {
+    background: var(--gold);
+    padding: 14px 28px;
+    font-weight: 800;
+    border: none;
+    border-radius: 10px;
+    color: var(--blue-dark);
+    font-size: 1.05rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: background 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.cta-secondary:hover {
+    background: var(--gold-light);
+}
+
+.packpro-note {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-style: italic;
+    text-align: center;
+}
+
+
+/* ================================================
+   CONTACT SECTION
+================================================ */
+.contact {
+    padding: 80px 20px;
+    background: var(--white);
+    text-align: center;
+}
+
+.contact h2.underline-premium {
+    display: inline-block;
+    border-bottom: 4px solid var(--gold);
+    padding-bottom: 6px;
+    margin-bottom: 40px;
+    color: var(--blue);
+    font-weight: 800;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* ================================================
+   SECTION : MICRO PREUVE SOCIALE (AMÉLIORÉE)
+================================================ */
+
+/* Conteneur principal de la section */
+.microproof-section {
+    padding: 80px 20px; /* Un peu plus d'espace vertical */
+    background-color: #F9FAFB; /* Fond très léger (gris/blanc cassé) pour détacher la section */
+    text-align: center;
+}
+
+/* Conteneur qui limite la largeur pour ne pas que le texte s'étale trop */
+.microproof-container {
+    max-width: 700px; /* Largeur idéale pour la lecture d'un témoignage */
+    margin: 0 auto; /* Centrage horizontal */
+}
+
+/* ================== BLOC AVATAR ================== */
+
+/* Wrapper pour positionner l'avatar et le badge */
+.avatar-wrapper {
+    position: relative; /* Nécessaire pour positionner le badge en absolu par rapport à lui */
+    width: 100px; /* Taille de l'avatar définie ici */
+    height: 100px;
+    margin: 0 auto 25px; /* Centré + marge en bas */
+}
+
+/* L'image ronde de l'avatar */
+.micro-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Rond parfait */
+    object-fit: cover; /* Remplissage sans déformation */
+    border: 4px solid white; /* Bordure blanche pour le faire ressortir */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Légère ombre portée */
+}
+
+/* Le petit badge de vérification (Optionnel mais recommandé) */
+.verified-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #1A365D; /* Ton Bleu Roi (ou un vert #10B981) */
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid white; /* Bordure pour le détacher de l'avatar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ================== BLOC CONTENU ================== */
+
+/* La ligne d'étoiles */
+.stars-row {
+    color: #F59E0B; /* Ta couleur Or/Jaune */
+    font-size: 24px; /* Taille des étoiles */
+    letter-spacing: 2px; /* Espacement entre les étoiles */
+    margin-bottom: 15px;
+}
+
+/* Le texte du témoignage */
+.micro-text {
+    font-size: 20px; /* Texte assez gros pour l'impact */
+    line-height: 1.5;
+    color: #1A365D; /* Ton Bleu Foncé */
+    font-weight: 500; /* Légèrement gras */
+    font-style: italic; /* Style citation */
+    margin-bottom: 25px;
+}
+
+/* Le gras dans le témoignage (pour le "punch") */
+.micro-text strong {
+    font-weight: 800; /* Très gras */
+    /* Optionnel : tu peux aussi le surligner en jaune */
+    /* background: linear-gradient(120deg, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0.3) 100%); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100% 40%; */
+    /* background-position: 0 90%; */
+}
+
+/* ================== BLOC SIGNATURE ================== */
+
+.micro-author {
+    font-size: 16px;
+    color: #4B5563; /* Gris moyen pour le texte secondaire */
+}
+
+/* Le nom en gras */
+.author-name {
+    font-weight: 700;
+    color: #1A365D; /* Bleu foncé */
+    margin-right: 8px; /* Espace avant le rôle */
+}
+
+/* Le rôle (ex: Restaurateur) */
+.author-role {
+    font-weight: 400;
+    /* Le petit trait vertical "|" peut être ajouté ici ou dans le HTML */
+}
+
+/* ================================================
+   RESPONSIVE MOBILE (Adaptations pour petit écran)
+================================================ */
+@media (max-width: 768px) {
+    .microproof-section {
+        padding: 60px 20px;
+    }
+    
+    .avatar-wrapper {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .verified-badge {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+    
+    .stars-row {
+        font-size: 20px;
+    }
+
+    .micro-text {
+        font-size: 18px; /* Texte un peu plus petit sur mobile */
+    }
+}
+/* ================================================
+   TESTIMONIALS PREMIUM
+================================================ */
+.testimonials-section {
+    padding: 80px 20px;
+    background: var(--gray-light);
+    text-align: center;
+}
+
+.testimonials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 26px;
+    border-radius: 14px;
+    max-width: 450px;
+    box-shadow:
+        0 10px 25px -5px rgba(0,0,0,0.08),
+        0 8px 10px -6px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.testimonial-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+}
+
+.testimonial-text {
+    flex: 1;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--blue);
+    margin-bottom: 10px;
+}
+
+.testimonial-author {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+/* ================================================
+   FORMULAIRE – Premium
+================================================ */
+.contact {
+    padding: 80px 20px;
+    background: var(--white);
+    text-align: center;
+}
+
+.contact h2.underline-premium {
+    display: inline-block;
+    border-bottom: 4px solid var(--gold);
+    padding-bottom: 6px;
+    margin-bottom: 40px;
+    color: var(--blue);
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+/* Formulaire */
+.form-container {
+    background-color: var(--gray-light);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 700px; /* un peu plus large pour confort */
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Labels */
+.form-label {
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Champs */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    margin-bottom: 20px;
+    background: #FFFFFF;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    background: #FFFBF3; /* légère teinte premium au focus */
+}
+
+/* Bouton */
+.form-submit-btn {
+    background-color: var(--gold);
+    color: var(--blue-dark);
+    font-weight: 800;
+    padding: 16px 34px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1rem;
+    transition: background 0.25s ease, transform 0.1s ease, box-shadow 0.25s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    margin-top: 10px;
+}
+
+.form-submit-btn:hover {
+    background-color: var(--gold-light);
+}
+
+.form-submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Texte de réassurance */
+.form-reassurance {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    color: #4B5563;
+    opacity: 0.9;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Placeholder */
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #9CA3AF;
+}
+
+/* ================================================
+   FAQ SECTION – VERSION STATIQUE (Toujours ouverte)
+================================================ */
+.faq-section {
+    padding: 80px 20px;
+    background-color: #FFFFFF;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-section h2 {
+    text-align: center;
+    color: #1A365D;
+    margin-bottom: 50px;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espace entre chaque bloc Question/Réponse */
+}
+
+.faq-item {
+    background: #F9FAFB; /* Fond gris très léger pour détacher le bloc */
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 30px; /* Espace interne confortable */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+}
+
+/* La Question (devient un titre) */
+.faq-question {
+    color: #1A365D; /* Bleu Roi */
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-bottom: 15px; /* Espace avant la réponse */
+    display: block;
+    line-height: 1.4;
+}
+
+/* La Réponse (toujours visible) */
+.faq-answer {
+    display: block; /* Toujours affiché ! */
+    color: #4B5563; /* Gris texte */
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.faq-answer p {
+    margin: 0;
+}
+
+.faq-answer strong {
+    color: #1A365D;
+    font-weight: 700;
+}
+
+/* ================================================
+   FOOTER
+================================================ */
+footer {
+    padding:40px 20px;
+    background: var(--blue-dark);
+    color: var(--white);
+    text-align:center;
+}

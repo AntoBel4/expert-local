@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔔 Nouvelle demande de diagnostic rapide</title>
+    <style>
+        /* Styles spécifiques pour notification admin */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #334155; }
+        .email-container { max-width: 700px; margin: 0 auto; background-color: #ffffff; border: 1px solid #E2E8F0; }
+        .header { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 30px; color: white; }
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        .alert-icon { font-size: 40px; text-align: center; margin: 20px 0; }
+        .content { padding: 30px; }
+        .data-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 20px; margin: 15px 0; }
+        .data-label { font-weight: 600; color: #64748B; font-size: 14px; }
+        .data-value { font-size: 16px; margin-bottom: 10px; }
+        .cta-button { display: inline-block; background: #10B981; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; margin: 10px 5px; }
+        .footer { background-color: #F1F5F9; padding: 20px; text-align: center; font-size: 12px; color: #64748B; }
+        .urgency { background: #FEF3C7; border: 1px solid #FBBF24; border-radius: 6px; padding: 15px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- En-tête -->
+        <div class="header">
+            <h1>🔔 NOUVELLE DEMANDE DE DIAGNOSTIC</h1>
+            <p>Formulaire rapide - Priorité : {PRIORITE}</p>
+        </div>
+        
+        <!-- Contenu -->
+        <div class="content">
+            <div class="alert-icon">🎯</div>
+            
+            <h2>Détails du prospect :</h2>
+            
+            <div class="data-card">
+                <div class="data-label">Email</div>
+                <div class="data-value">
+                    <strong>{EMAIL}</strong>
+                </div>
+                
+                <div class="data-label">Informations collectées</div>
+                <div class="data-value">
+                    • Département : {DEPARTEMENT}<br>
+                    • Nombre d'avis actuels : {NB_AVIS}<br>
+                    • Heure de soumission : {DATE_SOUMISSION}
+                </div>
+            </div>
+            
+            <div class="urgency">
+                <strong>📈 Potentiel estimé :</strong>
+                <p>Ce prospect a un potentiel de <strong>{POTENTIEL_AVIS}</strong> avis supplémentaires dans les 30 prochains jours.</p>
+            </div>
+            
+            <h3>📋 Actions recommandées :</h3>
+            
+            <div style="margin: 20px 0;">
+                <div style="background: #F1F5F9; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                    <strong>1. Envoyer le diagnostic personnalisé</strong><br>
+                    <small>Délai : dans les 24h</small>
+                </div>
+                
+                <div style="background: #F1F5F9; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                    <strong>2. Noter dans Google Sheets</strong><br>
+                    <small>Liste des prospects actifs</small>
+                </div>
+                
+                <div style="background: #F1F5F9; padding: 15px; border-radius: 6px;">
+                    <strong>3. Suivi dans 48h</strong><br>
+                    <small>Relance si pas de réponse au diagnostic</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <a href="mailto:{EMAIL}?subject=Votre%20diagnostic%20Expert%20Local&body=Bonjour," class="cta-button">
+                    📧 Répondre directement
+                </a>
+                
+                <a href="https://docs.google.com/spreadsheets/" class="cta-button" style="background: #3B82F6;">
+                    📊 Ajouter à Google Sheets
+                </a>
+            </div>
+            
+            <div style="margin-top: 40px; padding: 20px; background: #F8FAFC; border-radius: 8px;">
+                <h3>💡 Script de réponse suggéré :</h3>
+                <p style="font-style: italic;">
+                    "Bonjour,<br><br>
+                    Merci pour votre intérêt pour Expert Local !<br>
+                    Comme promis, je prépare actuellement votre diagnostic personnalisé qui analysera :<br>
+                    • Votre position vs vos concurrents locaux<br>
+                    • Votre potentiel d'avis 5★<br>
+                    • 3 actions prioritaires pour cette semaine<br><br>
+                    Vous recevrez ce diagnostic dans les 24h.<br><br>
+                    En attendant, avez-vous des questions spécifiques sur la gestion de vos avis Google ?<br><br>
+                    Antoine Estarellas<br>
+                    Expert Local - Studio Estarellas"
+                </p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>📍 Ce prospect vient du formulaire rapide - expert-local.fr</p>
+            <p>⏰ Soumis le {DATE_COMPLETE} • ID : {ID_UNIQUE}</p>
+        </div>
+    </div>
+</body>
+</html>

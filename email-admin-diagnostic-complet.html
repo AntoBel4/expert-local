@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔔 NOUVEAU DIAGNOSTIC COMPLET - Potentiel élevé</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #334155; }
+        .email-container { max-width: 800px; margin: 0 auto; background-color: #ffffff; border: 1px solid #E2E8F0; }
+        .header { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 30px; color: white; }
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        .content { padding: 30px; }
+        .data-section { margin-bottom: 30px; }
+        .data-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 20px; margin: 10px 0; }
+        .data-label { font-weight: 600; color: #64748B; font-size: 14px; display: block; margin-top: 15px; }
+        .data-value { font-size: 16px; }
+        .cta-button { display: inline-block; background: #10B981; color: white; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; margin: 10px 5px; }
+        .footer { background-color: #F1F5F9; padding: 20px; text-align: center; font-size: 12px; color: #64748B; }
+        .priority-high { background: #FEE2E2; border: 1px solid #F87171; border-radius: 6px; padding: 15px; margin: 20px 0; }
+        .priority-medium { background: #FEF3C7; border: 1px solid #FBBF24; border-radius: 6px; padding: 15px; margin: 20px 0; }
+        .priority-low { background: #D1FAE5; border: 1px solid #34D399; border-radius: 6px; padding: 15px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- En-tête -->
+        <div class="header">
+            <h1>🔔 DIAGNOSTIC COMPLET - Potentiel {PRIORITE}</h1>
+            <p>Nouveau prospect qualifié - Action requise dans les 24h</p>
+        </div>
+        
+        <!-- Contenu -->
+        <div class="content">
+            <!-- Priorité -->
+            <div class="priority-{NIVEAU_PRIORITE}">
+                <strong>🎯 Priorité : {PRIORITE}</strong>
+                <p>Ce prospect a un potentiel de conversion de {POTENTIEL_CONVERSION}%</p>
+            </div>
+            
+            <!-- Section 1 : Informations du prospect -->
+            <div class="data-section">
+                <h2>👤 Informations du prospect</h2>
+                
+                <div class="data-card">
+                    <span class="data-label">Commerce</span>
+                    <div class="data-value"><strong>{NOM_COMMERCE}</strong> • {TYPE_COMMERCE}</div>
+                    
+                    <span class="data-label">Contact</span>
+                    <div class="data-value">
+                        {PRENOM} {NOM}<br>
+                        📧 {EMAIL}<br>
+                        📱 {TELEPHONE}
+                    </div>
+                    
+                    <span class="data-label">Localisation</span>
+                    <div class="data-value">{DEPARTEMENT} • {VILLE}</div>
+                </div>
+            </div>
+            
+            <!-- Section 2 : Situation actuelle -->
+            <div class="data-section">
+                <h2>📊 Situation actuelle</h2>
+                
+                <div class="data-card">
+                    <span class="data-label">Lien Google (si fourni)</span>
+                    <div class="data-value">
+                        {LIEN_GOOGLE}
+                    </div>
+                    
+                    <span class="data-label">Défi principal</span>
+                    <div class="data-value">
+                        "{DEFI}"
+                    </div>
+                    
+                    <span class="data-label">Date et heure</span>
+                    <div class="data-value">
+                        {DATE_COMPLETE}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3 : Analyse & recommandations -->
+            <div class="data-section">
+                <h2>💡 Recommandations de suivi</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                    <div style="background: #EFF6FF; padding: 15px; border-radius: 6px;">
+                        <strong>🕒 Délai</strong>
+                        <p>Répondre dans les 24h maximum</p>
+                    </div>
+                    <div style="background: #F0FDF4; padding: 15px; border-radius: 6px;">
+                        <strong>💰 Potentiel</strong>
+                        <p>{PRIX_POTENTIEL}€</p>
+                    </div>
+                    <div style="background: #FEF3C7; padding: 15px; border-radius: 6px;">
+                        <strong>🎯 Offre cible</strong>
+                        <p>{OFFRE_RECOMMANDEE}</p>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <strong>📋 Plan d'action recommandé :</strong>
+                    <ol style="margin-top: 10px; padding-left: 20px;">
+                        <li>Envoyer le diagnostic personnalisé aujourd'hui</li>
+                        <li>Proposer un appel découverte de 15 minutes</li>
+                        <li>Focus sur l'offre {OFFRE_RECOMMANDEE}</li>
+                        <li>Relance dans 48h si pas de réponse</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- Section 4 : Actions rapides -->
+            <div class="data-section">
+                <h2>⚡ Actions rapides</h2>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="mailto:{EMAIL}?subject=Expert%20Local%20-%20Votre%20diagnostic%20personnalisé&body=Bonjour%20{PRENOM}," class="cta-button">
+                        📧 Envoyer le diagnostic
+                    </a>
+                    
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Appel+avec+{PRENOM}+{NOM_COMMERCE}&details=Prospect+Expert+Local" class="cta-button" style="background: #3B82F6;">
+                        📅 Créer un événement
+                    </a>
+                    
+                    <a href="https://docs.google.com/spreadsheets/" class="cta-button" style="background: #F97316;">
+                        📊 Ajouter au suivi
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Section 5 : Script de réponse -->
+            <div class="data-card">
+                <h3>💬 Script de réponse suggéré :</h3>
+                <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 10px; font-style: italic;">
+                    "Bonjour {PRENOM},<br><br>
+                    Merci pour votre confiance et le temps que vous avez pris pour compléter notre formulaire.<br><br>
+                    J'ai bien noté votre situation concernant {DEFI_RACCOURCI}.<br><br>
+                    Comme convenu, je prépare actuellement votre diagnostic personnalisé pour {NOM_COMMERCE} qui inclura :<br>
+                    • Analyse comparative avec vos concurrents de {VILLE}<br>
+                    • Votre potentiel exact d'avis 5★<br>
+                    • Un plan d'action concret sur 7 jours<br><br>
+                    Je vous enverrai ce diagnostic complet dans les prochaines heures.<br><br>
+                    En parallèle, je vous propose un appel découverte de 15 minutes {DATE_PROPOSEE} pour échanger sur vos priorités.<br><br>
+                    Bonne journée,<br>
+                    Antoine Estarellas<br>
+                    Expert Local - Studio Estarellas"
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>📍 Formulaire complet - expert-local.fr</p>
+            <p>⏰ ID prospect : {ID_UNIQUE} • Soumis le {DATE_COMPLETE}</p>
+        </div>
+    </div>
+</body>
+</html>

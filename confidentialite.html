@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Politique de Confidentialité RGPD – Expert Local 2026</title>
+  
+  <!-- Feuille de style 2026 -->
+  <link rel="stylesheet" href="style-2026.css" />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  
+  <style>
+    /* Styles spécifiques pour la page confidentialité */
+    .privacy-hero {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: white;
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .privacy-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    }
+    
+    .privacy-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .privacy-hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .privacy-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .privacy-section {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    
+    .privacy-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .privacy-section h2 {
+      color: #0F172A;
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #10B981;
+      display: inline-block;
+    }
+    
+    .privacy-content {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .privacy-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 1.25rem;
+    }
+    
+    .privacy-content strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
+    
+    .privacy-alert {
+      background: linear-gradient(90deg, rgba(249, 115, 22, 0.1), rgba(16, 185, 129, 0.05));
+      border-left: 4px solid #F97316;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+    
+    .privacy-alert p {
+      margin: 0;
+      color: #0F172A;
+      font-weight: 600;
+    }
+    
+    .privacy-list {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .privacy-list li {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    
+    .data-flow-box {
+      background: #0F172A;
+      color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .data-flow-box h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .data-flow-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .data-flow-box li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .data-flow-box li:before {
+      content: "→";
+      color: #10B981;
+      font-weight: bold;
+    }
+    
+    .privacy-contact-box {
+      background: linear-gradient(135deg, #10B981, #0EA5E9);
+      color: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+    
+    .privacy-contact-box h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .privacy-contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .privacy-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+    }
+    
+    .privacy-contact-item a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+    }
+    
+    .privacy-contact-item a:hover {
+      opacity: 0.9;
+      text-decoration: underline;
+    }
+    
+    .cnil-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      color: #0F172A;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .cnil-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #10B981;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .back-to-home:hover {
+      color: #F97316;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .privacy-hero {
+        padding: 4rem 1rem 3rem;
+      }
+      
+      .privacy-hero h1 {
+        font-size: 2.25rem;
+      }
+      
+      .privacy-container {
+        padding: 2rem 1rem;
+      }
+      
+      .privacy-content {
+        padding: 1.5rem;
+      }
+      
+      .privacy-section h2 {
+        font-size: 1.5rem;
+      }
+      
+      .privacy-contact-box {
+        padding: 1.5rem;
+      }
+      
+      .privacy-contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .privacy-hero h1 {
+        font-size: 1.875rem;
+      }
+      
+      .privacy-content p {
+        font-size: 1rem;
+      }
+      
+      .data-flow-box {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header RGPD -->
+  <header class="privacy-hero">
+    <div class="container">
+      <h1>Politique de Confidentialité</h1>
+      <p>Transparence & protection de vos données – Conforme RGPD 2026</p>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="privacy-container">
+    <div class="privacy-content">
+      
+      <!-- Engagement -->
+      <div class="privacy-alert">
+        <p>🔒 Vos données ne sont JAMAIS revendues. Nous les utilisons uniquement pour vous fournir nos services.</p>
+      </div>
+
+      <section class="privacy-section">
+        <h2>1. Responsable du traitement</h2>
+        <p>
+          Le responsable du traitement des données collectées sur 
+          <strong>expert-local.fr</strong> est :
+        </p>
+        <p>
+          <strong>Expert Local – Studio Estarellas</strong><br>
+          Micro-entreprise profession libérale<br>
+          <strong>SIREN : 994 038 339</strong><br>
+          Code APE : 62.02A<br>
+          Adresse administrative : Chartres, Eure-et-Loir (28)
+        </p>
+        <p>
+          <strong>Délégué à la protection des données :</strong><br>
+          Antoine Estarellas – contact@expert-local.fr
+        </p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>2. Données que nous collectons</h2>
+        <p>Nous collectons uniquement les données strictement nécessaires :</p>
+        <ul class="privacy-list">
+          <li><strong>Identité :</strong> Nom, prénom</li>
+          <li><strong>Coordonnées :</strong> Adresse email professionnelle</li>
+          <li><strong>Informations commerciales :</strong> Nom de votre commerce, secteur d'activité</li>
+          <li><strong>Communication :</strong> Contenu de vos messages via le formulaire de contact</li>
+          <li><strong>Transaction :</strong> Données de commande (date, montant, produit)</li>
+          <li><strong>Techniques :</strong> Adresse IP, navigateur, pages visitées (anonymisées)</li>
+        </ul>
+        <div class="data-flow-box">
+          <h4>🚫 Ce que nous ne collectons PAS :</h4>
+          <ul>
+            <li>Données bancaires (gérées par Stripe)</li>
+            <li>Données de localisation précise</li>
+            <li>Données de santé ou sensibles</li>
+            <li>Données des réseaux sociaux</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="privacy-section">
+        <h2>3. Finalités & bases légales</h2>
+        <p><strong>Pourquoi nous utilisons vos données :</strong></p>
+        <ul class="privacy-list">
+          <li><strong>Fournir nos services :</strong> Diagnostic gratuit, kits, accompagnement</li>
+          <li><strong>Exécuter les commandes :</strong> Livraison des produits digitaux, facturation</li>
+          <li><strong>Support client :</strong> Répondre à vos questions</li>
+          <li><strong>Amélioration :</strong> Analyser l'usage de notre site (anonymisé)</li>
+          <li><strong>Conformité :</strong> Respecter nos obligations légales et fiscales</li>
+        </ul>
+        <p><strong>Bases légales du traitement :</strong></p>
+        <div class="privacy-alert">
+          <p>✅ Exécution d'un contrat | ✅ Consentement | ✅ Obligation légale | ✅ Intérêt légitime</p>
+        </div>
+      </section>
+
+      <section class="privacy-section">
+        <h2>4. Durée de conservation</h2>
+        <p>Nous conservons vos données uniquement le temps nécessaire :</p>
+        <ul class="privacy-list">
+          <li><strong>Prospects (sans achat) :</strong> 3 ans après le dernier contact</li>
+          <li><strong>Clients (avec achat) :</strong> 5 ans après la fin de la relation commerciale</li>
+          <li><strong>Factures :</strong> 10 ans (obligation légale française)</li>
+          <li><strong>Données de contact :</strong> Jusqu'à votre demande de suppression</li>
+          <li><strong>Cookies techniques :</strong> 13 mois maximum</li>
+        </ul>
+        <p>
+          Après ces délais, vos données sont soit anonymisées pour les statistiques, 
+          soit définitivement supprimées.
+        </p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>5. Destinataires des données</h2>
+        <p>Vos données ne sont partagées qu'avec des prestataires de confiance :</p>
+        <div class="data-flow-box">
+          <h4>🔗 Nos sous-traitants certifiés :</h4>
+          <ul>
+            <li><strong>Stripe</strong> – Paiements sécurisés (Irlande, certifié PCI-DSS)</li>
+            <li><strong>O2Switch</strong> – Hébergement web (France)</li>
+            <li><strong>Mailjet</strong> – Envoi d'emails transactionnels (France)</li>
+          </ul>
+        </div>
+        <p>
+          <strong>Nous garantissons que :</strong><br>
+          • Aucune donnée n'est vendue ou louée<br>
+          • Aucun transfert hors UE/EEE<br>
+          • Tous les sous-traitants sont RGPD-compatibles<br>
+          • Des clauses contractuelles strictes protègent vos données
+        </p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>6. Sécurité & confidentialité</h2>
+        <p>Nous mettons en œuvre des mesures de sécurité renforcées :</p>
+        <ul class="privacy-list">
+          <li><strong>Chiffrement SSL/TLS 256 bits</strong> sur tout le site</li>
+          <li><strong>Hébergement sécurisé O2Switch</strong> avec sauvegardes quotidiennes</li>
+          <li><strong>Paiements Stripe PCI-DSS niveau 1</strong> (plus haut niveau)</li>
+          <li><strong>Authentification forte</strong> sur tous nos accès administrateurs</li>
+          <li><strong>Protection anti-spam</strong> (honeypot) sur les formulaires</li>
+          <li><strong>Audits réguliers</strong> de sécurité</li>
+        </ul>
+        <div class="privacy-alert">
+          <p>🛡️ En 2025, nous n'avons subi aucune fuite de données. La sécurité de vos informations est notre priorité absolue.</p>
+        </div>
+      </section>
+
+      <section class="privacy-section">
+        <h2>7. Vos droits RGPD</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données, vous disposez de :</p>
+        <ul class="privacy-list">
+          <li><strong>Droit d'accès :</strong> Savoir quelles données nous détenons sur vous</li>
+          <li><strong>Droit de rectification :</strong> Corriger des données inexactes</li>
+          <li><strong>Droit à l'effacement :</strong> Demander la suppression de vos données</li>
+          <li><strong>Droit d'opposition :</strong> Vous opposer à un traitement</li>
+          <li><strong>Droit à la limitation :</strong> Limiter temporairement le traitement</li>
+          <li><strong>Droit à la portabilité :</strong> Récupérer vos données dans un format standard</li>
+          <li><strong>Droit de retrait :</strong> Retirer votre consentement à tout moment</li>
+        </ul>
+        <p>
+          <strong>Exercice de vos droits :</strong><br>
+          Pour exercer vos droits, contactez-nous à 
+          <a href="mailto:contact@expert-local.fr" style="color: #10B981; font-weight: 600;">contact@expert-local.fr</a><br>
+          Nous répondons sous <strong>30 jours maximum</strong>.
+        </p>
+      </section>
+
+      <section class="privacy-section">
+        <h2>8. Cookies & traceurs</h2>
+        <p>Notre site utilise uniquement des cookies essentiels :</p>
+        <ul class="privacy-list">
+          <li><strong>Cookies de session :</strong> Pour le fonctionnement des formulaires</li>
+          <li><strong>Cookies de sécurité :</strong> Protection contre les attaques</li>
+          <li><strong>Cookies de préférence :</strong> Mémorisation de vos choix</li>
+        </ul>
+        <div class="data-flow-box">
+          <h4>🚫 Ce que nous n'utilisons PAS :</h4>
+          <ul>
+            <li>Cookies publicitaires ou de ciblage</li>
+            <li>Cookies de réseaux sociaux (Facebook, etc.)</li>
+            <li>Google Analytics invasif</li>
+            <li>Pixels de tracking</li>
+          </ul>
+        </div>
+        <p>
+          Vous pouvez configurer votre navigateur pour refuser les cookies, 
+          mais certaines fonctionnalités du site pourraient ne plus fonctionner.
+        </p>
+      </section>
+
+      <!-- Contact RGPD -->
+      <div class="privacy-contact-box">
+        <h3>Exercer vos droits RGPD</h3>
+        <p>Pour toute question concernant la protection de vos données :</p>
+        <div class="privacy-contact-info">
+          <div class="privacy-contact-item">
+            <span>📧</span>
+            <a href="mailto:contact@expert-local.fr">contact@expert-local.fr</a>
+          </div>
+          <div class="privacy-contact-item">
+            <span>📄</span>
+            <a href="mentions.html">Voir nos mentions légales</a>
+          </div>
+        </div>
+        
+        <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.9;">
+          Délai de réponse garanti : 30 jours maximum
+        </p>
+        
+        <a href="https://www.cnil.fr" target="_blank" class="cnil-link">
+          <span>🏛️</span>
+          Porter une réclamation à la CNIL
+        </a>
+      </div>
+
+      <!-- Retour à l'accueil -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/" class="back-to-home">
+          <span>←</span>
+          Retour à l'accueil Expert Local
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer simplifié -->
+  <footer style="background: #0F172A; color: white; padding: 3rem 0 2rem; text-align: center;">
+    <div class="container">
+      <div style="margin-bottom: 2rem;">
+        <h3 style="color: white; margin-bottom: 1rem;">Expert Local 2026</h3>
+        <p style="opacity: 0.8; max-width: 600px; margin: 0 auto;">
+          La réputation Google des commerçants d'Eure-et-Loir
+        </p>
+      </div>
+      
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <a href="mentions.html" style="color: #34D399; text-decoration: none; font-weight: 600;">Mentions légales</a>
+        <a href="confidentialite.html" style="color: #34D399; text-decoration: none; font-weight: 600;">Confidentialité</a>
+        <a href="cgv.html" style="color: #34D399; text-decoration: none; font-weight: 600;">CGV</a>
+        <a href="contact.php" style="color: #34D399; text-decoration: none; font-weight: 600;">Contact</a>
+      </div>
+      
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+        <p style="opacity: 0.7; font-size: 0.9rem;">
+          © 2025-2026 Expert Local • Tous droits réservés • SIREN : 994 038 339<br>
+          Micro-entreprise profession libérale • Site sécurisé SSL • Conforme RGPD
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script de retour en haut -->
+  <script>
+    // Smooth scroll pour les ancres
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
