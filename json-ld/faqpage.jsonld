@@ -1,0 +1,62 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment obtenir 10 avis Google en 10 jours ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour obtenir des avis Google rapidement, il faut combiner trois éléments : demander au bon moment (quand le client est satisfait), utiliser les bonnes phrases (sans demander directement un avis), et faciliter le processus avec un support visuel. Les clients satisfaits ont besoin d'un déclencheur pour passer à l'action."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi mes clients ne laissent pas d'avis Google ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Plusieurs raisons expliquent ce manque de retours : le moment de la demande est souvent mauvais (à la sortie du commerce), la formulation peut être perçue comme une contrainte, et le processus semble trop long pour le client. La plupart des consommateurs veulent laisser un avis mais oublient ou reportent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Est-ce que ça marche pour tous les commerces ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cette méthode fonctionne pour tous les commerces avec des clients physiques : restaurant, coiffeur, garagiste, boulangerie, pharmacien, plombier, électricien, esthétique, et autres services. L'important est d'avoir des clients satisfaits prêts à partager leur expérience."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un accompagnement pour les avis Google ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les tarifs varient selon le niveau d'accompagnement souhaité. Un diagnostic initial gratuit permet d'évaluer votre situation. Plusieurs formules existent selon vos besoins : audit de votre fiche, optimisation, scripts et kit prêt à l'emploi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Google punit-il les avis demandés ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google surveille les pratiques suspectes comme les faux avis ou les incitations exagérées. En revanche, demander poliment un avis à un client réellement satisfait reste parfaitement autorisé. La clé est de respecter les consignes Google en matière de sollicitation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment améliorer ma position sur Google Maps ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour améliorer votre positionnement local : complétez entièrement votre fiche Google Business, ajoutez des photos régulières, répondez à tous les avis (positifs et négatifs), et accumulez des avis récents. La régularité des avis compte autant que leur nombre."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je avoir des avis Google sans les demander ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En moyenne, seuls quelques pourcents des clients laisseront un avis spontanément sans être sollicités. La demande reste nécessaire pour la majorité des avis, mais la manière de solliciter fait toute la différence. Un client très satisfait peut devenir ambassadeur avec le bon accompagnement."
+      }
+    }
+  ]
+}
