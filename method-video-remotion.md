@@ -74,37 +74,129 @@ Logo Expert Local centré. Slogan en dessous: "On s'occupe de vos avis". Backgro
 
 ---
 
-## 3. VOIX OFF - PROMPT MINIMAX
+## 3. VOIX OFF - SCRIPTS COPIER-COLLER MINIMAX
 
-Prompt pour générer l'audio:
+### Scene 1 (0-5s) - Intro
+**Technique: AIDA - Attention**
+> Vous avez un beau magasin. De bons produits. Des clients satisfaits. Et pourtant... quelque chose vous échappe.
+
+### Scene 2 (6-12s) - Le problème
+**Technique: PAS - Problem-Agitate-Solution**
+> Vos concurrents ont plus d'avis que vous. Beaucoup plus. Et ce n'est pas une question de chance. C'est une question de méthode.
+
+### Scene 3 (13-18s) - Preuve sociale
+**Technique: Preuve sociale + Chiffre choc**
+> 3 avis contre 25 avis. Vous savez ce que ça change ? Tout. 67% des clics vont aux 3 premières positions Google.
+
+### Scene 4 (19-24s) - Conséquence
+**Technique: FOMO (Fear Of Missing Out)**
+> Chaque jour qui passe, vous perdez des clients. Sans le savoir. Parce que votre visibilité fond comme neige au soleil.
+
+### Scene 5 (25-30s) - Résolution
+**Technique: Solution + Urgence**
+> Mais bonne nouvelle : on résout ça. Ensemble.
+
+### Scene 6 (31-36s) - Méthode
+**Technique: Bloc + Bénéfice**
+> Étape 1 : on analyse votre fiche Google. Étape 2 : on vous donne les phrases qui marchent. Étape 3 : on vous suit jusqu'à 10 avis. En 10 jours.
+
+### Scene 7 (37-44s) - Témoignage
+**Technique: Storytelling + Preuve**
+> Marie, restauratrice à Dreux : "10 avis en 10 jours. Mon chiffre d'affaires a augmenté de 15% en un mois."
+
+### Scene 8 (45-50s) - Résultat
+**Technique: Transformation + Quantifié**
+> +240% de visibilité en 30 jours. Vos concurrents vous regardent dans le rétroiseur.
+
+### Scene 9 (51-58s) - Offre
+**Technique: CTA + Gratuit**
+> Et le meilleur ? Le diagnostic est gratuit. 2 minutes. Zéro engagement. Juste les faits.
+
+### Scene 10 (59-65s) - Validation
+**Technique: Authority + Garantie**
+> Des centaines de commerçants nous font confiance. En Eure-et-Loir et ailleurs.
+
+### Scene 11 (66-72s) - CTA Final
+**Technique: Urgence + Action**
+> Cliquez maintenant. C'est gratuit. Ça prend 2 minutes. Votre visibilité vous attend.
+
+### Scene 12 (73-78s) - Outro
+**Technique: Relationship + Rappel**
+> Expert Local. On s'occupe de vos avis. Vous, occupez-vous de vos clients.
+
+---
+
+## 4. SOUS-TITRES (SRT)
+
+Voici le fichier SRT complet à copier:
+
 ```
-Tu es un voiceover professionnel français. Tone: positif, rassurant, expert. Pas de sentiment negatif, toujours solution-oriented.
+1
+00:00:00,000 --> 00:00:05,000
+Vous avez un beau magasin. De bons produits. Des clients satisfaits.
 
-Script:
-[INSUER LE TEXTE CORRESPONDANT A CHAQUE SCENE]
+2
+00:00:06,000 --> 00:00:12,000
+Et pourtant... vos concurrents ont plus d'avis que vous.
 
-Specifications:
-- Format: MP3
-- Duration:adapter au timing de la scene
-- Style: narration claire, rythme moderé, pauses naturelles
+3
+00:00:13,000 --> 00:00:18,000
+3 avis contre 25 avis. Vous savez ce que ça改变 tout?
+
+4
+00:00:19,000 --> 00:00:24,000
+67% des clics vont aux 3 premières positions Google.
+
+5
+00:00:25,000 --> 00:00:30,000
+Vous perdez des clients chaque jour sans le savoir.
+
+6
+00:00:31,000 --> 00:00:36,000
+Mais bonne nouvelle : on résout ça.
+
+7
+00:00:37,000 --> 00:00:44,000
+On analyse. On vous donne les scripts. On vous suit jusqu'à 10 avis.
+
+8
+00:00:45,000 --> 00:00:50,000
+10 avis en 10 jours. Résultats garantis.
+
+9
+00:00:51,000 --> 00:00:58,000
+Plus 240% de visibilité en 30 jours.
+
+10
+00:00:59,000 --> 00:01:05,000
+Diagnostic gratuit. 2 minutes. Zéro engagement.
+
+11
+00:01:06,000 --> 00:01:12,000
+Cliquez maintenant. C'est gratuit.
+
+12
+00:01:13,000 --> 00:01:18,000
+Expert Local. On s'occupe de vos avis.
 ```
 
 ---
 
-## 4. SOUS-TITRES
+## 5. TECHNIQUES DE COPYWRITING UTILISEES
 
-Prompt pour générer les subtitles:
-```
-Génère les sous-titres pour une vidéo de [X] secondes.
-Format: fichier SRT avec timestamps.
-
-Texte:
-[LE SCRIPT COMPLET]
-```
+| Technique | Description | Exemple dans la vidéo |
+|-----------|-------------|----------------------|
+| **AIDA** | Attention, Intérêt, Désir, Action | Scene 1: créer la tension |
+| **PAS** | Problem, Agitate, Solution | Scene 2-4: amplifie le problème |
+| **FOMO** | Fear Of Missing Out | Scene 5: perte de clients |
+| **Preuve sociale** | Témoignages, chiffres | Scene 7-8: Marie, +240% |
+| **Urgence** | Maintenant, 2 minutes | Scene 10-11: CTA |
+| **Authority** | Expert, spécialisé | Scene 9:数百 de commerçants |
+| **Benefice** | What's in it for you | Scene 6: 10 avis en 10 jours |
 
 ---
 
-## 5. ASSEMBLAGE FINAL
+## 6. ASSEMBLAGE FINAL
 
 Outils recommandes:
 - **CapCut** (gratuit, tres bon pour IA + subtitles)
@@ -120,7 +212,7 @@ Etapes:
 
 ---
 
-## 6. SPECS TECHNIQUES
+## 7. SPECS TECHNIQUES
 
 - Resolution: 1920x1080 (16:9) ou 1080x1920 (9:16 pour reels)
 - FPS: 30
