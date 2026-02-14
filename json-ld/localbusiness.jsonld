@@ -1,0 +1,60 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Expert Local",
+  "description": "Service de gestion des avis Google pour commerçants locaux. Méthode pour collecter des avis clients authentiques.",
+  "url": "https://expert-local.fr",
+  "email": "contact@expert-local.fr",
+  "priceRange": "€€",
+  "areaServed": [
+    {
+      "@type": "State",
+      "name": "Eure-et-Loir",
+      "sameAs": "https://fr.wikipedia.org/wiki/Eure-et-Loir"
+    },
+    {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 48.3708,
+        "longitude": 1.2485
+      },
+      "geoRadius": "50000"
+    }
+  ],
+  "serviceType": [
+    "Gestion des avis Google",
+    "Optimisation fiche Google My Business",
+    "Stratégie de collecte d'avis",
+    "Formation à la demande d'avis clients"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Chartres",
+    "addressRegion": "Eure-et-Loir",
+    "addressCountry": "FR",
+    "postalCode": "28000"
+  },
+  "image": "https://expert-local.fr/assets/logo.png",
+  "logo": "https://expert-local.fr/assets/logo.png",
+  "sameAs": [
+    "https://www.linkedin.com/company/expert-local",
+    "https://www.facebook.com/expertlocalfr"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Antoine Estarellas"
+  }
+}
