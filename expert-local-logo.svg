@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <!-- Glow filter for white text -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Subtle outer glow for neon effect -->
+    <filter id="neonGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="blur1"/>
+      <feGaussianBlur stdDeviation="8" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Transparent background (no rect) -->
+  
+  <!-- Logo text with animation -->
+  <g>
+    <!-- "EXPERT" text - bold, modern -->
+    <text 
+      x="200" 
+      y="55" 
+      font-family="'SF Pro Display', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif" 
+      font-size="36" 
+      font-weight="700" 
+      letter-spacing="4"
+      fill="#FFFFFF"
+      filter="url(#neonGlow)"
+      text-anchor="middle"
+    >
+      <animate 
+        attributeName="opacity" 
+        from="0" 
+        to="1" 
+        dur="1.2s" 
+        begin="0s" 
+        fill="freeze"
+        calcMode="spline"
+        keySplines="0.25 0.1 0.25 1"
+      />
+      <animate 
+        attributeName="transform" 
+        type="scale" 
+        from="0.8" 
+        to="1" 
+        dur="1.2s" 
+        begin="0s" 
+        fill="freeze"
+        calcMode="spline"
+        keySplines="0.25 0.1 0.25 1"
+        additive="sum"
+      />
+    </text>
+    
+    <!-- "LOCAL" text - lighter weight, positioned below -->
+    <text 
+      x="200" 
+ y="95" 
+      font-family="'SF Pro Display', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif" 
+      font-size="24" 
+      font-weight="300" 
+      letter-spacing="12"
+      fill="#FFFFFF"
+      filter="url(#neonGlow)"
+      text-anchor="middle"
+    >
+      <animate 
+        attributeName="opacity" 
+        from="0" 
+        to="1" 
+        dur="1.2s" 
+        begin="0.2s" 
+        fill="freeze"
+        calcMode="spline"
+        keySplines="0.25 0.1 0.25 1"
+      />
+      <animate 
+        attributeName="transform" 
+        type="scale" 
+        from="0.8" 
+        to="1" 
+        dur="1.2s" 
+        begin="0.2s" 
+        fill="freeze"
+        calcMode="spline"
+        keySplines="0.25 0.1 0.25 1"
+        additive="sum"
+      />
+    </text>
+  </g>
+</svg>

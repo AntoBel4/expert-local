@@ -1,18 +1,41 @@
-# Rewrite rules for Expert Local
-# Enable RewriteEngine
+# Expert Local - o2switch
+
 RewriteEngine On
-RewriteBase /
 
-# Redirect .html URLs to non-.html (301 permanent redirect)
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+# Rediriger .html vers URL propre (301)
+RewriteCond %{THE_REQUEST} \s/(.+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
 
-# If the request file doesn't exist but .html exists, serve it
+# Servir le fichier .html si l'URL propre est demandée
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*)$ /$1.html [L]
+RewriteRule ^ %{REQUEST_URI}.html [L]
 
-# Force trailing slash for directories (optional)
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.*)/$ /$1 [R=301,L]
+# Compression gzip
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# Cache navigateur
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access plus 1 hour"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
+
+# Sécurité headers
+<IfModule mod_headers.c>
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Pages d'erreur
+ErrorDocument 404 /404.html
