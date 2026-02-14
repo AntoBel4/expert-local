@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conditions Générales de Vente – Expert Local 2026</title>
+  
+  <!-- Feuille de style 2026 -->
+  <link rel="stylesheet" href="style-2026.css" />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  
+  <style>
+    /* Styles spécifiques pour la page CGV */
+    .cgv-hero {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: white;
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cgv-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+    }
+    
+    .cgv-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .cgv-hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .cgv-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .cgv-header {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(249, 115, 22, 0.05));
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      border-left: 4px solid #10B981;
+    }
+    
+    .cgv-header h2 {
+      color: #0F172A;
+      margin-bottom: 1rem;
+      font-size: 1.75rem;
+    }
+    
+    .cgv-article {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    
+    .cgv-article:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .article-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .article-number {
+      background: #10B981;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    
+    .article-title {
+      color: #0F172A;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    
+    .article-content {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .article-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 1.25rem;
+    }
+    
+    .article-content strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
+    
+    .legal-notice {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid #F97316;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+    
+    .legal-notice p {
+      margin: 0;
+      color: #0F172A;
+      font-weight: 600;
+    }
+    
+    .offer-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .offer-card-mini {
+      background: white;
+      border: 2px solid #F1F5F9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .offer-card-mini:hover {
+      transform: translateY(-5px);
+      border-color: #10B981;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    
+    .offer-card-mini h4 {
+      color: #0F172A;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .offer-card-mini ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .offer-card-mini li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    .offer-card-mini li:before {
+      content: "✓";
+      color: #10B981;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .cgv-contact-box {
+      background: #0F172A;
+      color: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+    
+    .cgv-contact-box h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .cgv-contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .cgv-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+    }
+    
+    .cgv-contact-item a {
+      color: #34D399;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .cgv-contact-item a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #10B981;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .back-to-home:hover {
+      color: #F97316;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .cgv-hero {
+        padding: 4rem 1rem 3rem;
+      }
+      
+      .cgv-hero h1 {
+        font-size: 2.25rem;
+      }
+      
+      .cgv-container {
+        padding: 2rem 1rem;
+      }
+      
+      .cgv-header {
+        padding: 1.5rem;
+      }
+      
+      .article-content {
+        padding: 1.5rem;
+      }
+      
+      .article-title {
+        font-size: 1.3rem;
+      }
+      
+      .offer-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .cgv-contact-box {
+        padding: 1.5rem;
+      }
+      
+      .cgv-contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cgv-hero h1 {
+        font-size: 1.875rem;
+      }
+      
+      .article-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      
+      .article-content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header CGV -->
+  <header class="cgv-hero">
+    <div class="container">
+      <h1>Conditions Générales de Vente</h1>
+      <p>Contrat de vente des produits et services digitaux Expert Local 2026</p>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="cgv-container">
+    
+    <!-- En-tête CGV -->
+    <div class="cgv-header">
+      <h2>Informations importantes</h2>
+      <p>
+        Les présentes Conditions Générales de Vente (CGV) régissent exclusivement la vente des produits et services digitaux 
+        proposés par <strong>Expert Local</strong>. En passant commande, vous acceptez sans réserve l'intégralité de ces conditions.
+      </p>
+      <p style="margin-top: 1rem; font-size: 0.95rem; color: #64748B;">
+        <strong>Dernière mise à jour :</strong> 10 décembre 2025
+      </p>
+    </div>
+
+    <!-- Article 1 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">1</div>
+        <h3 class="article-title">Objet et champ d'application</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          Les présentes Conditions Générales de Vente (CGV) ont pour objet de définir les droits et obligations des parties 
+          dans le cadre de la vente en ligne des produits et services digitaux proposés par :
+        </p>
+        <p>
+          <strong>Expert Local – Studio Estarellas</strong><br>
+          Micro-entreprise profession libérale<br>
+          SIREN : 994 038 339<br>
+          Code APE : 62.02A<br>
+          Site web : <a href="https://expert-local.fr" style="color: #10B981;">https://expert-local.fr</a><br>
+          Email : <a href="mailto:contact@expert-local.fr" style="color: #10B981;">contact@expert-local.fr</a>
+        </p>
+        <p>
+          Ces CGV s'appliquent à toutes les commandes passées sur le site expert-local.fr, 
+          quel que soit le pays de résidence du Client.
+        </p>
+      </div>
+    </article>
+
+    <!-- Article 2 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">2</div>
+        <h3 class="article-title">Produits et services</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          Expert Local commercialise exclusivement des produits et services digitaux visant à améliorer 
+          la réputation en ligne des commerçants, artisans et professionnels locaux.
+        </p>
+        
+        <div class="offer-details">
+          <div class="offer-card-mini">
+            <h4>🎯 Kit Express 2026</h4>
+            <p><strong>49€ HT • Accès immédiat</strong></p>
+            <ul>
+              <li>Designs premium personnalisables</li>
+              <li>QR Code haute conversion</li>
+              <li>Scripts psychologiques</li>
+              <li>Guide "10 avis en 10 jours"</li>
+              <li>Support email 48h</li>
+            </ul>
+          </div>
+          
+          <div class="offer-card-mini">
+            <h4>🚀 Pack PRO 2026</h4>
+            <p><strong>179€ HT • Livraison 48h-5 jours</strong></p>
+            <ul>
+              <li>Tout le Kit Express</li>
+              <li>Audit concurrentiel complet</li>
+              <li>Optimisation Google Business</li>
+              <li>Réponses aux avis rédigées</li>
+              <li>Accompagnement 1 mois</li>
+            </ul>
+          </div>
+        </div>
+        
+        <p>
+          Les caractéristiques essentielles des produits sont présentées sur le site. 
+          Expert Local se réserve le droit de modifier ses offres, sans incidence sur les commandes déjà validées.
+        </p>
+      </div>
+    </article>
+
+    <!-- Article 3 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">3</div>
+        <h3 class="article-title">Prix et facturation</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          <strong>Prix :</strong> Les prix sont indiqués en euros hors taxes (HT). 
+          Conformément à l'article 293 B du CGI, la TVA n'est pas applicable.
+        </p>
+        <p>
+          <strong>Facturation :</strong> Une facture est automatiquement générée et envoyée par email après chaque commande. 
+          Cette facture fait preuve de la transaction.
+        </p>
+        <p>
+          <strong>Modification des prix :</strong> Expert Local se réserve le droit de modifier ses prix à tout moment. 
+          Les produits sont facturés au prix en vigueur au moment de l'enregistrement de la commande.
+        </p>
+        <div class="legal-notice">
+          <p>💡 Tous les paiements sont sécurisés via Stripe (certifié PCI-DSS niveau 1).</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 4 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">4</div>
+        <h3 class="article-title">Commande et paiement</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          <strong>Processus de commande :</strong><br>
+          1. Sélection du produit<br>
+          2. Validation du panier<br>
+          3. Paiement sécurisé via Stripe<br>
+          4. Confirmation automatique par email<br>
+          5. Livraison des produits digitaux
+        </p>
+        <p>
+          <strong>Acceptation :</strong> La validation du paiement vaut acceptation expresse et irrévocable des présentes CGV.
+        </p>
+        <p>
+          <strong>Paiement :</strong> Le paiement s'effectue exclusivement par carte bancaire via la plateforme sécurisée Stripe. 
+          Aucune information bancaire n'est stockée sur nos serveurs.
+        </p>
+        <p>
+          <strong>Confirmation :</strong> Un email de confirmation est envoyé immédiatement après le paiement. 
+          En cas de non-réception, vérifiez vos spams ou contactez-nous.
+        </p>
+      </div>
+    </article>
+
+    <!-- Article 5 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">5</div>
+        <h3 class="article-title">Livraison</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          Les produits étant dématérialisés, la livraison consiste en l'envoi des accès et fichiers par email.
+        </p>
+        <p>
+          <strong>Délais de livraison :</strong>
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #10B981; font-weight: bold;">⚡</span>
+            <span><strong>Kit Express :</strong> Livraison immédiate après paiement (sous 24h maximum)</span>
+          </li>
+          <li style="margin-bottom: 0.75rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #10B981; font-weight: bold;">📦</span>
+            <span><strong>Pack PRO :</strong> Livraison sous 48h à 5 jours ouvrés selon les éléments fournis</span>
+          </li>
+        </ul>
+        <p>
+          En cas de retard de livraison, le Client est invité à contacter 
+          <a href="mailto:contact@expert-local.fr" style="color: #10B981;">contact@expert-local.fr</a>.
+        </p>
+      </div>
+    </article>
+
+    <!-- Article 6 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">6</div>
+        <h3 class="article-title">Droit de rétractation</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          Conformément à l'article L.221-28 du Code de la consommation, <strong>le droit de rétractation ne s'applique pas</strong> 
+          aux prestations de services pleinement exécutées avant la fin du délai de rétractation et dont l'exécution 
+          a commencé après accord préalable exprès du consommateur.
+        </p>
+        <div class="legal-notice">
+          <p>
+            ⚠️ Les produits digitaux étant fournis immédiatement après le paiement, 
+            le Client renonce expressément à son droit de rétractation en validant sa commande.
+          </p>
+        </div>
+        <p>
+          En cas de problème technique empêchant l'accès aux produits, le Client dispose d'un délai de 15 jours 
+          pour signaler le problème et obtenir une nouvelle livraison.
+        </p>
+      </div>
+    </article>
+
+    <!-- Article 7 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">7</div>
+        <h3 class="article-title">Garanties et responsabilités</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          <strong>Garantie de conformité :</strong> Expert Local garantit que les produits sont conformes à leur description 
+          et exempts de vices cachés au moment de la livraison.
+        </p>
+        <p>
+          <strong>Garantie des vices cachés :</strong> Conformément aux articles 1641 et suivants du Code civil, 
+          Expert Local est tenu de la garantie des vices cachés.
+        </p>
+        <p>
+          <strong>Limitation de responsabilité :</strong> La responsabilité d'Expert Local ne saurait être engagée pour :
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">•</span>
+            <span>Les résultats obtenus par le Client (non garantis)</span>
+          </li>
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">•</span>
+            <span>L'utilisation faite des méthodes proposées</span>
+          </li>
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">•</span>
+            <span>Les modifications des algorithmes Google</span>
+          </li>
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">•</span>
+            <span>Les cas de force majeure</span>
+          </li>
+        </ul>
+        <p>
+          <strong>Garantie Satisfait ou Remboursé :</strong> En complément des garanties légales, 
+          Expert Local propose une garantie commerciale "Satisfait ou Remboursé sous 30 jours" 
+          pour les produits non utilisés et dans leur état d'origine.
+        </p>
+      </div>
+    </article>
+
+    <!-- Article 8 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">8</div>
+        <h3 class="article-title">Propriété intellectuelle</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          Tous les éléments du site et des produits (textes, images, designs, logos, méthodes, scripts, vidéos) 
+          sont et restent la propriété intellectuelle exclusive d'Expert Local.
+        </p>
+        <p>
+          <strong>Licence d'utilisation :</strong> L'achat d'un produit confère au Client une licence d'utilisation 
+          personnelle, non exclusive et non transférable, pour son commerce uniquement.
+        </p>
+        <p>
+          <strong>Interdictions :</strong> Sont strictement interdits sans autorisation écrite préalable :
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">🚫</span>
+            <span>La reproduction, modification ou diffusion des contenus</span>
+          </li>
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">🚫</span>
+            <span>La revente ou la location des produits</span>
+          </li>
+          <li style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 0.5rem;">
+            <span style="color: #F97316;">🚫</span>
+            <span>L'utilisation pour plusieurs établissements</span>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- Article 9 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">9</div>
+        <h3 class="article-title">Données personnelles</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          Les données personnelles collectées sont traitées conformément à notre 
+          <a href="confidentialite.html" style="color: #10B981; font-weight: 600;">Politique de Confidentialité</a> 
+          et au Règlement Général sur la Protection des Données (RGPD).
+        </p>
+        <p>
+          <strong>Données collectées :</strong> nom, prénom, email, informations de commande.
+        </p>
+        <p>
+          <strong>Finalités :</strong> exécution de la commande, facturation, support client, amélioration de nos services.
+        </p>
+        <p>
+          <strong>Conservation :</strong> 10 ans pour les données comptables, 3 ans pour les données clients.
+        </p>
+        <div class="legal-notice">
+          <p>
+            🔒 Aucune donnée n'est vendue ou transmise à des tiers à des fins commerciales. 
+            Vos données sont sécurisées et protégées.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 10 -->
+    <article class="cgv-article">
+      <div class="article-header">
+        <div class="article-number">10</div>
+        <h3 class="article-title">Règlement des litiges</h3>
+      </div>
+      <div class="article-content">
+        <p>
+          <strong>Médiation :</strong> En cas de litige, le Client peut recourir à un médiateur de la consommation.
+          Le médiateur compétent est :
+        </p>
+        <p style="background: #F8FAFC; padding: 1rem; border-radius: 8px;">
+          <strong>Médicys</strong><br>
+          73 boulevard de Clichy – 75009 Paris<br>
+          Site : <a href="https://www.medicys.fr" style="color: #10B981;">https://www.medicys.fr</a><br>
+          Formulaire : <a href="https://www.medicys.fr/consommateurs" style="color: #10B981;">https://www.medicys.fr/consommateurs</a>
+        </p>
+        <p>
+          <strong>Recours en ligne :</strong> Conformément à l'article 14 du Règlement (UE) n°524/2013, 
+          le Client peut utiliser la plateforme de règlement en ligne des litiges (RLL) accessible à 
+          <a href="https://ec.europa.eu/consumers/odr" style="color: #10B981;">https://ec.europa.eu/consumers/odr</a>.
+        </p>
+        <p>
+          <strong>Compétence juridique :</strong> En l'absence de résolution amiable, les tribunaux français 
+          seront seuls compétents, conformément aux règles de droit commun.
+        </p>
+        <p>
+          <strong>Loi applicable :</strong> Les présentes CGV sont régies par le droit français.
+        </p>
+      </div>
+    </article>
+
+    <!-- Contact CGV -->
+    <div class="cgv-contact-box">
+      <h3>Questions sur nos CGV ?</h3>
+      <p>Contactez-nous pour toute question concernant nos conditions de vente :</p>
+      <div class="cgv-contact-info">
+        <div class="cgv-contact-item">
+          <span>📧</span>
+          <a href="mailto:contact@expert-local.fr">contact@expert-local.fr</a>
+        </div>
+        <div class="cgv-contact-item">
+          <span>📄</span>
+          <a href="mentions.html">Mentions légales</a>
+        </div>
+        <div class="cgv-contact-item">
+          <span>🔒</span>
+          <a href="confidentialite.html">Politique de confidentialité</a>
+        </div>
+      </div>
+      
+      <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.9;">
+        Réponse sous 48h ouvrées • Expert Local – SIREN 994 038 339
+      </p>
+    </div>
+
+    <!-- Retour à l'accueil -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="/" class="back-to-home">
+        <span>←</span>
+        Retour à l'accueil Expert Local
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer simplifié -->
+  <footer style="background: #0F172A; color: white; padding: 3rem 0 2rem; text-align: center;">
+    <div class="container">
+      <div style="margin-bottom: 2rem;">
+        <h3 style="color: white; margin-bottom: 1rem;">Expert Local 2026</h3>
+        <p style="opacity: 0.8; max-width: 600px; margin: 0 auto;">
+          La réputation Google des commerçants d'Eure-et-Loir
+        </p>
+      </div>
+      
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <a href="mentions.html" style="color: #34D399; text-decoration: none; font-weight: 600;">Mentions légales</a>
+        <a href="confidentialite.html" style="color: #34D399; text-decoration: none; font-weight: 600;">Confidentialité</a>
+        <a href="cgv.html" style="color: #34D399; text-decoration: none; font-weight: 600;">CGV</a>
+        <a href="contact.php" style="color: #34D399; text-decoration: none; font-weight: 600;">Contact</a>
+      </div>
+      
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+        <p style="opacity: 0.7; font-size: 0.9rem;">
+          © 2025-2026 Expert Local • Tous droits réservés • SIREN : 994 038 339<br>
+          Micro-entreprise profession libérale • Site sécurisé SSL • CGV conformes au droit français
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script de retour en haut -->
+  <script>
+    // Smooth scroll pour les ancres
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

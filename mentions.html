@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentions légales – Expert Local 2026</title>
+  
+  <!-- Feuille de style 2026 -->
+  <link rel="stylesheet" href="style-2026.css" />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  
+  <style>
+    /* Styles spécifiques pour la page légale */
+    .legal-hero {
+      background: linear-gradient(135deg, var(--midnight) 0%, var(--twilight) 100%);
+      color: white;
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .legal-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    }
+    
+    .legal-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .legal-hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .legal-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .legal-section {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--light);
+    }
+    
+    .legal-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .legal-section h2 {
+      color: var(--midnight);
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid var(--mint);
+      display: inline-block;
+    }
+    
+    .legal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .legal-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+    
+    .legal-content strong {
+      color: var(--midnight);
+      font-weight: 700;
+    }
+    
+    .legal-highlight {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(249, 115, 22, 0.05));
+      border-left: 4px solid var(--mint);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+    
+    .legal-highlight p {
+      margin: 0;
+      color: var(--midnight);
+    }
+    
+    .legal-contact-box {
+      background: var(--midnight);
+      color: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+    
+    .legal-contact-box h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .legal-contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .legal-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+    }
+    
+    .legal-contact-item a {
+      color: var(--mint-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .legal-contact-item a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--mint);
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .back-to-home:hover {
+      color: var(--coral);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .legal-hero {
+        padding: 4rem 1rem 3rem;
+      }
+      
+      .legal-hero h1 {
+        font-size: 2.25rem;
+      }
+      
+      .legal-container {
+        padding: 2rem 1rem;
+      }
+      
+      .legal-content {
+        padding: 1.5rem;
+      }
+      
+      .legal-section h2 {
+        font-size: 1.5rem;
+      }
+      
+      .legal-contact-box {
+        padding: 1.5rem;
+      }
+      
+      .legal-contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .legal-hero h1 {
+        font-size: 1.875rem;
+      }
+      
+      .legal-content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header légal -->
+  <header class="legal-hero">
+    <div class="container">
+      <h1>Mentions légales</h1>
+      <p>Informations légales et conformité RGPD - Expert Local 2026</p>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="legal-container">
+    <div class="legal-content">
+      
+      <section class="legal-section">
+        <h2>1. Éditeur du site</h2>
+        <p>
+          Le site <a href="https://expert-local.fr" style="color: var(--mint); font-weight: 600;">expert-local.fr</a> est édité par :
+        </p>
+        <div class="legal-highlight">
+          <p>
+            <strong>Expert Local – Studio Estarellas</strong><br>
+            Entreprise Individuelle – Prestations de services numériques<br>
+            <strong>SIREN : 994 038 339</strong><br>
+            <strong>Code APE : 62.02A</strong><br>
+            Micro-entreprise profession libérale<br>
+            Adresse administrative : Chartres, Eure-et-Loir (28)
+          </p>
+        </div>
+        <p>
+          Le directeur de la publication est : <strong>Antoine Estarellas</strong>, gestionnaire de l'entreprise.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>2. Hébergement</h2>
+        <p>
+          Le site est hébergé par :
+        </p>
+        <p>
+          <strong>O2Switch</strong><br>
+          Chemin des Pardiaux<br>
+          63000 Clermont-Ferrand – France<br>
+          Site : <a href="https://www.o2switch.fr/" target="_blank" style="color: var(--mint);">https://www.o2switch.fr/</a><br>
+          Téléphone : 04 44 44 60 40
+        </p>
+        <p>
+          L'hébergement est situé en France et respecte les normes de sécurité européennes.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>3. Propriété intellectuelle</h2>
+        <p>
+          Tous les contenus présents sur <strong>expert-local.fr</strong> sont protégés par le droit d'auteur et la propriété intellectuelle :
+        </p>
+        <p>
+          • Textes, articles, guides et méthodes<br>
+          • Design, interface et graphismes<br>
+          • Logos, marques et identité visuelle<br>
+          • Systèmes et processus exclusifs<br>
+          • Supports numériques et templates
+        </p>
+        <div class="legal-highlight">
+          <p>
+            Toute reproduction, représentation, modification ou exploitation, même partielle, 
+            est strictement interdite sans autorisation écrite préalable d'Expert Local.
+          </p>
+        </div>
+      </section>
+
+      <section class="legal-section">
+        <h2>4. Protection des données (RGPD)</h2>
+        <p>
+          Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, 
+          nous collectons uniquement les données nécessaires :
+        </p>
+        <p>
+          <strong>Données collectées :</strong><br>
+          • Nom et prénom (pour la personnalisation)<br>
+          • Adresse email professionnelle<br>
+          • Informations de votre commerce<br>
+          • Lien de votre fiche Google Business (optionnel)
+        </p>
+        <p>
+          <strong>Finalités :</strong><br>
+          • Fournir le diagnostic gratuit demandé<br>
+          • Vous accompagner dans l'amélioration de votre réputation<br>
+          • Vous informer des nouveautés (avec votre consentement)<br>
+          • Exécuter les commandes passées
+        </p>
+        <div class="legal-highlight">
+          <p>
+            <strong>Vos droits :</strong><br>
+            Vous disposez d'un droit d'accès, de rectification, de suppression, d'opposition 
+            et de portabilité de vos données. Pour exercer ces droits, contactez-nous à 
+            <a href="mailto:contact@expert-local.fr" style="color: var(--midnight); font-weight: 600;">contact@expert-local.fr</a>
+          </p>
+        </div>
+        <p>
+          <strong>Durée de conservation :</strong><br>
+          • Prospects : 3 ans après le dernier contact<br>
+          • Clients : 5 ans après la fin de la relation commerciale<br>
+          • Factures : 10 ans (obligation légale)
+        </p>
+        <p>
+          <strong>Sous-traitants :</strong><br>
+          • Stripe (paiements sécurisés) – Irlande<br>
+          • O2Switch (hébergement) – France<br>
+          • Mailjet (envoi d'emails) – France
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>5. Cookies & Traçabilité</h2>
+        <p>
+          Notre site utilise uniquement des cookies techniques essentiels :
+        </p>
+        <p>
+          • <strong>Cookies de session :</strong> pour le fonctionnement des formulaires<br>
+          • <strong>Cookies de sécurité :</strong> protection contre les attaques<br>
+          • <strong>Cookies de préférences :</strong> mémorisation de vos choix
+        </p>
+        <p>
+          Nous n'utilisons <strong>PAS</strong> :
+        </p>
+        <p>
+          • Cookies publicitaires ou de ciblage<br>
+          • Cookies de réseaux sociaux<br>
+          • Cookies de pistage (tracking)<br>
+          • Analytics invasifs
+        </p>
+        <p>
+          La navigation sur notre site est donc respectueuse de votre vie privée.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>6. Responsabilité</h2>
+        <p>
+          <strong>Expert Local</strong> met tout en œuvre pour fournir des informations exactes et à jour. 
+          Cependant, nous ne pouvons garantir :
+        </p>
+        <p>
+          • L'exactitude permanente de tous les contenus<br>
+          • L'absence d'interruption du service<br>
+          • La compatibilité avec tous les navigateurs<br>
+          • Les résultats spécifiques de chaque client
+        </p>
+        <p>
+          Les méthodes proposées sont basées sur notre expérience et ont fait leurs preuves, 
+          mais les résultats peuvent varier selon l'engagement et le contexte de chaque commerce.
+        </p>
+        <p>
+          Les liens vers des sites externes ne constituent pas une approbation de leur contenu.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>7. Paiements & Sécurité</h2>
+        <p>
+          Les paiements sont sécurisés via <strong>Stripe</strong>, leader mondial des paiements en ligne :
+        </p>
+        <p>
+          • Cryptage SSL 256 bits<br>
+          • Conformité PCI DSS niveau 1<br>
+          • Aucune donnée bancaire stockée sur nos serveurs<br>
+          • Paiement sécurisé par 3D Secure
+        </p>
+        <p>
+          En cas de problème de paiement, contactez directement Stripe ou votre banque.
+        </p>
+      </section>
+
+      <!-- Contact légal -->
+      <div class="legal-contact-box">
+        <h3>Contact légal & RGPD</h3>
+        <p>Pour toute question concernant ces mentions légales ou l'exercice de vos droits RGPD :</p>
+        <div class="legal-contact-info">
+          <div class="legal-contact-item">
+            <span>📧</span>
+            <a href="mailto:contact@expert-local.fr">contact@expert-local.fr</a>
+          </div>
+          <div class="legal-contact-item">
+            <span>📍</span>
+            <span>Eure-et-Loir (28), France</span>
+          </div>
+          <div class="legal-contact-item">
+            <span>📄</span>
+            <span>SIREN : 994 038 339</span>
+          </div>
+        </div>
+        <p style="margin-top: 1.5rem; opacity: 0.9; font-size: 0.95rem;">
+          Dernière mise à jour : 10 décembre 2025
+        </p>
+      </div>
+
+      <!-- Retour à l'accueil -->
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/" class="back-to-home">
+          <span>←</span>
+          Retour à l'accueil Expert Local
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer simplifié -->
+  <footer style="background: var(--midnight); color: white; padding: 3rem 0 2rem; text-align: center;">
+    <div class="container">
+      <div style="margin-bottom: 2rem;">
+        <h3 style="color: white; margin-bottom: 1rem;">Expert Local 2026</h3>
+        <p style="opacity: 0.8; max-width: 600px; margin: 0 auto;">
+          La réputation Google des commerçants d'Eure-et-Loir
+        </p>
+      </div>
+      
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <a href="mentions.html" style="color: var(--mint-light); text-decoration: none;">Mentions légales</a>
+        <a href="confidentialite.html" style="color: var(--mint-light); text-decoration: none;">Confidentialité</a>
+        <a href="cgv.html" style="color: var(--mint-light); text-decoration: none;">CGV</a>
+        <a href="contact.php" style="color: var(--mint-light); text-decoration: none;">Contact</a>
+      </div>
+      
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+        <p style="opacity: 0.7; font-size: 0.9rem;">
+          © 2025-2026 Expert Local • Tous droits réservés • SIREN : 994 038 339<br>
+          Micro-entreprise profession libérale • Site sécurisé SSL
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script de retour en haut -->
+  <script>
+    // Smooth scroll pour les ancres
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
