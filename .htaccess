@@ -1,6 +1,7 @@
 # Rewrite rules for Expert Local
 # Enable RewriteEngine
 RewriteEngine On
+RewriteBase /
 
 # Redirect .html URLs to non-.html (301 permanent redirect)
 RewriteCond %{REQUEST_FILENAME} -f
@@ -11,3 +12,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ /$1.html [L]
+
+# Force trailing slash for directories (optional)
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
