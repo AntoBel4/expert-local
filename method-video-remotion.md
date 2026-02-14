@@ -126,7 +126,168 @@ Logo Expert Local centré. Slogan en dessous: "On s'occupe de vos avis". Backgro
 
 ---
 
-## 4. SOUS-TITRES (SRT)
+## 4. PLAN D'ANIMATION CAPCUT
+
+**Règles générales:**
+- Durée minimum par texte: 2.5 secondes (temps de lecture)
+- Transitions: 0.5s entre chaque animation
+- Tempo général: dynamique mais lisible
+- Garder 1-2 secondes de "pause" entre les idées clés
+
+---
+
+### SCÈNE 1: INTRO (0:00 - 0:05)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:00 | Fade in | Fond noir | 0.5s |
+| 0:01 | Scale + Glow | Logo "Expert Local" | 1.5s |
+| 0:03 | Pulse subtil | Logo (loop) | 1.5s |
+
+**Voice over:** "Vous avez un beau magasin..."
+
+---
+
+### SCÈNE 2: RUE COMMERÇANTE (0:06 - 0:12)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:06 | Slide in left | Illustration rue | 1s |
+| 0:08 | Pan doucement | Gauche → Droite | 3s |
+| 0:11 | Fade out | Transition | 0.5s |
+
+**Voice over:** "...de bons produits. Des clients satisfaits."
+
+---
+
+### SCÈNE 3: 3 VS 25 AVIS (0:13 - 0:18)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:13 | Appear | 2 smartphones (fade in) | 0.8s |
+| 0:14 | Bounce | "3" en rouge | 0.5s |
+| 0:15 | Scale up | "25" en vert | 0.5s |
+| 0:16 | Pulse | Les 2 chiffres | 1.2s |
+
+**Voice over:** "Et pourtant... vos concurrents ont plus d'avis que vous."
+
+---
+
+### SCÈNE 4: 67% CLICS (0:19 - 0:24)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:19 | Fade in | Barre Google | 0.8s |
+| 0:20 | Glow expand | 3 premiers résultats | 1s |
+| 0:22 | Counter animation | "67%" (compte) | 1.5s |
+| 0:24 | Hold | Pause finale | 0.5s |
+
+**Voice over:** "67% des clics vont aux 3 premières positions Google."
+
+---
+
+### SCÈNE 5: COMMERÇANT INQUIET (0:25 - 0:30)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:25 | Fade in | Silhouette commerçant | 1s |
+| 0:27 | Shake subtil | Tremblement souci | 1.5s |
+| 0:29 | Fade to orange | Teinte chaude | 0.8s |
+
+**Voice over:** "Vous perdez des clients chaque jour sans le savoir."
+
+---
+
+### SCÈNE 6: SOLUTION (0:31 - 0:36)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:31 | Flash | Lumière blanche | 0.3s |
+| 0:32 | Scale in | Logo Expert Local | 1.2s |
+| 0:34 | Glow expand | Fond vert | 1s |
+| 0:35 | Text appear | "On résout ça" | 0.8s |
+
+**Voice over:** "Mais bonne nouvelle : on résout ça."
+
+---
+
+### SCÈNE 7: 3 ETAPES (0:37 - 0:44)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:37 | Fade in | Cercle 1 "Analyse" | 0.8s |
+| 0:38 | Draw line | Ligne vers cercle 2 | 0.5s |
+| 0:39 | Fade in | Cercle 2 "Scripts" | 0.8s |
+| 0:40 | Draw line | Ligne vers cercle 3 | 0.5s |
+| 0:41 | Fade in | Cercle 3 "Suivi" | 0.8s |
+| 0:42 | Pulse | Les 3 cercles | 1.5s |
+
+**Voice over:** "On analyse. On vous donne les scripts. On vous suit jusqu'à 10 avis."
+
+---
+
+### SCÈNE 8: TEMOIGNAGE (0:45 - 0:50)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:45 | Slide up | Carte témoignage | 1s |
+| 0:47 | Star fill | Les 5 étoiles (une par une) | 1s |
+| 0:49 | Badge pop | "10 avis en 10 jours" | 0.8s |
+
+**Voice over:** "10 avis en 10 jours. Résultats garantis."
+
+---
+
+### SCÈNE 9: GRAPHIQUE +240% (0:51 - 0:58)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:51 | Draw axis | Axes X et Y | 1s |
+| 0:53 | Line draw | Courbe qui monte | 1.5s |
+| 0:55 | Fill area | Zone verte (apparition) | 1s |
+| 0:57 | Counter | "+240%" (compte) | 1s |
+
+**Voice over:** "+240% de visibilité en 30 jours."
+
+---
+
+### SCÈNE 10: DIAGNOSTIC (0:59 - 1:05)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 0:59 | Fade in | Mockup formulaire | 1s |
+| 1:01 | Field highlight | Champs un par un | 1.5s |
+| 1:03 | Glow | Bouton "Diagnostic gratuit" | 1s |
+
+**Voice over:** "Diagnostic gratuit. 2 minutes. Zéro engagement."
+
+---
+
+### SCÈNE 11: CTA FINAL (1:06 - 1:12)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 1:06 | Scale in | Gros bouton | 1s |
+| 1:08 | Pulse loop | Animation bouton | 2s |
+| 1:11 | Hold | Pause finale | 0.5s |
+
+**Voice over:** "Cliquez maintenant. C'est gratuit."
+
+---
+
+### SCÈNE 12: OUTRO (1:13 - 1:18)
+
+| Temps | Animation | Element | Durée |
+|-------|-----------|---------|-------|
+| 1:13 | Fade in | Logo | 1s |
+| 1:15 | Text appear | Slogan | 1.5s |
+| 1:17 | Fade out | Fin | 1s |
+
+**Voice over:** "Expert Local. On s'occupe de vos avis."
+
+---
+
+## 5. SOUS-TITRES (SRT)
 
 Voici le fichier SRT complet à copier:
 
@@ -182,7 +343,7 @@ Expert Local. On s'occupe de vos avis.
 
 ---
 
-## 5. TECHNIQUES DE COPYWRITING UTILISEES
+## 6. TECHNIQUES DE COPYWRITING UTILISEES
 
 | Technique | Description | Exemple dans la vidéo |
 |-----------|-------------|----------------------|
@@ -196,7 +357,7 @@ Expert Local. On s'occupe de vos avis.
 
 ---
 
-## 6. ASSEMBLAGE FINAL
+## 7. ASSEMBLAGE FINAL
 
 Outils recommandes:
 - **CapCut** (gratuit, tres bon pour IA + subtitles)
@@ -212,13 +373,25 @@ Etapes:
 
 ---
 
-## 7. SPECS TECHNIQUES
+## 8. SPECS TECHNIQUES
 
 - Resolution: 1920x1080 (16:9) ou 1080x1920 (9:16 pour reels)
 - FPS: 30
 - Codec: H.264
 - Bitrate: 8-12 Mbps
 - Audio: AAC, 192kbps
+
+---
+
+## 9. CHECKLIST AVANT EXPORT
+
+- [ ] Chaque texte reste minimum 2.5 secondes à l'écran
+- [ ] Voix off et texte sont synchronisés
+- [ ] Transitions pas trop rapides (0.5s minimum)
+- [ ] CTA final visible au moins 3 secondes
+- [ ] Sous-titres lisibles (taille assez grande)
+- [ ] Musique pas trop forte (voix audible)
+- [ ]Logo présent au début et à la fin
 
 ---
 
