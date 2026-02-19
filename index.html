@@ -208,48 +208,21 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFo
 .video-main-play-label { color: #fff; font-weight: 700; font-size: 17px; }
 .video-main-play-sub { color: rgba(255,255,255,0.55); font-size: 14px; margin-top: -8px; }
 
-/* Barre de contrôles custom */
-.video-controls-bar {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 14px 20px 18px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 0 0 20px 20px;
+/* Contrôles natifs navigateur — style cohérent */
+.video-main-inner video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0A0F1A;
 }
-.video-main-inner:hover .video-controls-bar,
-.video-main-wrapper.is-playing .video-controls-bar { opacity: 1; }
-
-.ctrl-sound {
-  background: none; border: none; cursor: pointer;
-  color: rgba(255,255,255,0.75); font-size: 18px; padding: 0; line-height: 1;
-  transition: color 0.2s; flex-shrink: 0;
+/* Accent couleur sur la barre native (Chrome/Edge) */
+.video-main-inner video::-webkit-media-controls-panel {
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
 }
-.ctrl-sound:hover { color: #fff; }
-
-.ctrl-progress {
-  flex: 1; height: 5px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 3px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.ctrl-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #E67E22, #F39C12);
-  border-radius: 3px;
-  width: 0%;
-  transition: width 0.15s linear;
-}
-.ctrl-time {
-  color: rgba(255,255,255,0.7);
-  font-size: 13px; font-family: monospace;
-  white-space: nowrap; flex-shrink: 0;
+.video-main-inner video::-webkit-media-controls-play-button,
+.video-main-inner video::-webkit-media-controls-current-time-display,
+.video-main-inner video::-webkit-media-controls-time-remaining-display {
+  color: #E67E22;
 }
 
 /* Pastilles de réassurance */
@@ -728,22 +701,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFo
         <div class="video-main-glow-border" aria-hidden="true"></div>
         <div class="video-main-inner">
 
-          <video
-            id="mainVideo"
-            src="expert-local-video.mp4"
-            poster="video-thumbnail.jpg"
-            preload="auto"
-            muted
-            playsinline
-            aria-label="Méthode Expert Local 2026 — 10 avis 5★ en 10 jours"
-          >
-            <track kind="captions" src="sous-titres.vtt" srclang="fr" label="Français">
-            <p>Votre navigateur ne prend pas en charge la vidéo HTML5.
-               <a href="expert-local-video.mp4">Télécharger la vidéo</a>.</p>
-          </video>
-
-          <!-- Overlay cliquable -->
-          <div class="video-main-overlay" id="mainVideoOverlay" onclick="mainPlayVideo()">
+          <!-- Overlay play (masqué après démarrage) -->
+          <div class="video-main-overlay" id="mainVideoOverlay">
             <div class="video-main-play-ring">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
                 <path d="M8 5V19L19 12L8 5Z" fill="white"/>
@@ -753,14 +712,20 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFo
             <div class="video-main-play-sub">1 min 18 sec · Sous-titres inclus · Sans engagement</div>
           </div>
 
-          <!-- Contrôles -->
-          <div class="video-controls-bar">
-            <button class="ctrl-sound" id="mainSoundBtn" onclick="mainToggleSound()" title="Activer/couper le son" aria-label="Activer le son">🔇</button>
-            <div class="ctrl-progress" id="mainProgress" onclick="mainSeek(event)" role="slider" aria-label="Progression de la vidéo">
-              <div class="ctrl-progress-fill" id="mainProgressFill"></div>
-            </div>
-            <span class="ctrl-time" id="mainTime" aria-live="off">0:00 / 1:18</span>
-          </div>
+          <video
+            id="mainVideo"
+            src="expert-local-video.mp4"
+            poster="video-thumbnail.jpg"
+            preload="auto"
+            muted
+            playsinline
+            controls
+            aria-label="Méthode Expert Local 2026 — 10 avis 5★ en 10 jours"
+          >
+            <track kind="captions" src="sous-titres.vtt" srclang="fr" label="Français">
+            <p>Votre navigateur ne prend pas en charge la vidéo HTML5.
+               <a href="expert-local-video.mp4">Télécharger la vidéo</a>.</p>
+          </video>
 
         </div>
       </div><!-- /.video-main-wrapper -->
@@ -1353,14 +1318,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFo
   (function () {
     'use strict';
 
-    /* ─── Utilitaires ─────────────────────────── */
-    function fmt(s) {
-      if (isNaN(s)) return '0:00';
-      var m = Math.floor(s / 60);
-      var sec = Math.floor(s % 60);
-      return m + ':' + (sec < 10 ? '0' : '') + sec;
-    }
-
     /* ─── Vidéo HERO (compacte) ──────────────── */
     var heroVid     = document.getElementById('heroVideo');
     var heroOverlay = document.getElementById('heroVideoOverlay');
@@ -1370,79 +1327,55 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFo
       heroVid.muted = false;
       heroVid.play().catch(function () { heroVid.muted = true; heroVid.play(); });
       heroOverlay.classList.add('hidden');
-      document.querySelector('.video-hero-bar-hint').textContent = 'En lecture…';
+      var hint = document.querySelector('.video-hero-bar-hint');
+      if (hint) hint.textContent = 'En lecture…';
     };
 
     if (heroVid) {
       heroVid.addEventListener('ended', function () {
         heroOverlay.classList.remove('hidden');
-        document.querySelector('.video-hero-bar-hint').textContent = 'Cliquez pour rejouer';
+        var hint = document.querySelector('.video-hero-bar-hint');
+        if (hint) hint.textContent = 'Cliquez pour rejouer';
       });
     }
 
-    /* ─── Vidéo PRINCIPALE ────────────────────── */
+    /* ─── Vidéo PRINCIPALE — autoplay silencieux ── */
     var mainVid     = document.getElementById('mainVideo');
     var mainOverlay = document.getElementById('mainVideoOverlay');
     var mainWrapper = document.getElementById('mainVideoWrapper');
-    var mainFill    = document.getElementById('mainProgressFill');
-    var mainTime    = document.getElementById('mainTime');
-    var mainSound   = document.getElementById('mainSoundBtn');
 
-    window.mainPlayVideo = function () {
-      if (!mainVid) return;
-      mainVid.muted = false;
-      mainVid.play().catch(function () { mainVid.muted = true; mainVid.play(); });
-      mainOverlay.classList.add('hidden');
-      mainWrapper.classList.add('is-playing');
-      mainSound.textContent = '🔊';
-      mainSound.setAttribute('aria-label', 'Couper le son');
-    };
-
-    window.mainToggleSound = function () {
-      if (!mainVid) return;
-      mainVid.muted = !mainVid.muted;
-      mainSound.textContent = mainVid.muted ? '🔇' : '🔊';
-      mainSound.setAttribute('aria-label', mainVid.muted ? 'Activer le son' : 'Couper le son');
-    };
-
-    window.mainSeek = function (e) {
-      if (!mainVid || !mainVid.duration) return;
-      var bar  = document.getElementById('mainProgress');
-      var rect = bar.getBoundingClientRect();
-      var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      mainVid.currentTime = ratio * mainVid.duration;
-    };
+    // Clic sur overlay = activer le son et lancer si pas en lecture
+    if (mainOverlay) {
+      mainOverlay.addEventListener('click', function () {
+        if (!mainVid) return;
+        mainVid.muted = false;
+        if (mainVid.paused) mainVid.play();
+        mainOverlay.classList.add('hidden');
+      });
+    }
 
     if (mainVid) {
-      mainVid.addEventListener('timeupdate', function () {
-        if (!mainVid.duration) return;
-        var pct = (mainVid.currentTime / mainVid.duration) * 100;
-        mainFill.style.width = pct + '%';
-        mainTime.textContent = fmt(mainVid.currentTime) + ' / ' + fmt(mainVid.duration);
+      // Masquer l'overlay dès que la vidéo joue
+      mainVid.addEventListener('play', function () {
+        if (mainOverlay) mainOverlay.classList.add('hidden');
       });
-
       mainVid.addEventListener('ended', function () {
-        mainOverlay.classList.remove('hidden');
-        mainWrapper.classList.remove('is-playing');
-        mainFill.style.width = '0%';
+        if (mainOverlay) mainOverlay.classList.remove('hidden');
       });
 
-      /* Lecture automatique silencieuse à 60% de visibilité */
+      // Autoplay silencieux à 60% de visibilité
       if ('IntersectionObserver' in window) {
         var obs = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting && mainVid.paused && mainVid.currentTime === 0) {
               mainVid.muted = true;
               mainVid.play().catch(function () {});
-              mainOverlay.classList.add('hidden');
-              mainWrapper.classList.add('is-playing');
             } else if (!entry.isIntersecting && !mainVid.paused) {
               mainVid.pause();
-              mainWrapper.classList.remove('is-playing');
             }
           });
         }, { threshold: 0.6 });
-        obs.observe(mainWrapper);
+        obs.observe(mainWrapper || mainVid);
       }
     }
 
