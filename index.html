@@ -7,51 +7,393 @@
   <title>Expert Local 2026 | Obtenez 10 Avis Google 5★ en 10 Jours</title>
   <meta name="description" content="La méthode psychologique 2026 pour transformer vos clients satisfaits en avis 5★ Google. Spécialisé pour les commerçants d'Eure-et-Loir.">
   
-  <!-- Feuille de style 2026 -->
   <link rel="stylesheet" href="style-2026.css">
   
-  <!-- Google Fonts 2026 -->
-  <!-- Police système optimisée -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 
-/* Fallback fonts */
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+/* ═══════════════════════════════════════
+   VIDÉO COMPACTE HERO
+═══════════════════════════════════════ */
+.video-hero-block {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0A0F1A;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(230,126,34,0.25);
+  cursor: pointer;
+  position: relative;
+}
+.video-hero-block video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px 16px 0 0;
+}
+.video-hero-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 12px;
+  background: rgba(10,15,26,0.92);
+  border-top: 1px solid rgba(230,126,34,0.2);
+}
+.video-hero-bar-label {
+  color: #E67E22;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  flex: 1;
+}
+.video-hero-bar-hint {
+  color: rgba(255,255,255,0.45);
+  font-size: 12px;
+}
+.video-hero-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px 16px 0 0;
+  background: rgba(10,15,26,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease;
+}
+.video-hero-overlay.hidden { opacity: 0; pointer-events: none; }
+.video-hero-play {
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #E67E22, #F39C12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 12px rgba(230,126,34,0.2), 0 6px 24px rgba(230,126,34,0.5);
+  animation: pulse-hero 2s ease-in-out infinite;
+}
+.video-hero-play svg { margin-left: 4px; }
+@keyframes pulse-hero {
+  0%,100% { box-shadow: 0 0 0 12px rgba(230,126,34,0.2), 0 6px 24px rgba(230,126,34,0.45); }
+  50%      { box-shadow: 0 0 0 22px rgba(230,126,34,0.08), 0 6px 24px rgba(230,126,34,0.45); }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+/* ═══════════════════════════════════════
+   SECTION VIDÉO PRINCIPALE
+═══════════════════════════════════════ */
+.video-section {
+  background: linear-gradient(160deg, #090E18 0%, #0C2336 55%, #090E18 100%);
+  padding: 80px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+.video-section::before,
+.video-section::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #E67E22, #F39C12, #E67E22, transparent);
+}
+.video-section::before { top: 0; }
+.video-section::after  { bottom: 0; }
+
+/* Lueur décorative en fond */
+.video-section-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(230,126,34,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.video-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.video-section-label {
+  display: inline-block;
+  background: linear-gradient(135deg, #E67E22, #F39C12);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.video-section-title {
+  color: #fff;
+  font-size: clamp(26px, 3.8vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 14px;
+}
+.video-section-title em {
+  font-style: normal;
+  color: #E67E22;
+}
+.video-section-subtitle {
+  color: #8FA3B1;
+  font-size: 17px;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Wrapper vidéo avec bordure lumineuse */
+.video-main-wrapper {
+  position: relative;
+  max-width: 940px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+.video-main-glow-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: 21px;
+  background: linear-gradient(135deg, rgba(230,126,34,0.6), rgba(230,126,34,0.05) 40%, rgba(230,126,34,0.6));
+  z-index: 0;
+  animation: border-glow 3s ease-in-out infinite alternate;
+}
+@keyframes border-glow {
+  from { opacity: 0.4; }
+  to   { opacity: 0.85; }
+}
+.video-main-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0A0F1A;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.65);
+}
+.video-main-inner video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0A0F1A;
+}
+
+/* Overlay play principal */
+.video-main-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9,14,24,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  border-radius: 20px;
+}
+.video-main-overlay.hidden { opacity: 0; pointer-events: none; }
+.video-main-play-ring {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E67E22, #F39C12);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 20px rgba(230,126,34,0.15), 0 12px 40px rgba(230,126,34,0.55);
+  animation: pulse-main 2.2s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+.video-main-play-ring:hover { transform: scale(1.08); }
+.video-main-play-ring svg { margin-left: 6px; }
+@keyframes pulse-main {
+  0%,100% { box-shadow: 0 0 0 20px rgba(230,126,34,0.15), 0 12px 40px rgba(230,126,34,0.5); }
+  50%      { box-shadow: 0 0 0 36px rgba(230,126,34,0.06), 0 12px 40px rgba(230,126,34,0.5); }
+}
+.video-main-play-label { color: #fff; font-weight: 700; font-size: 17px; }
+.video-main-play-sub { color: rgba(255,255,255,0.55); font-size: 14px; margin-top: -8px; }
+
+/* Barre de contrôles custom */
+.video-controls-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 20px 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 0 0 20px 20px;
+}
+.video-main-inner:hover .video-controls-bar,
+.video-main-wrapper.is-playing .video-controls-bar { opacity: 1; }
+
+.ctrl-sound {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.75); font-size: 18px; padding: 0; line-height: 1;
+  transition: color 0.2s; flex-shrink: 0;
+}
+.ctrl-sound:hover { color: #fff; }
+
+.ctrl-progress {
+  flex: 1; height: 5px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.ctrl-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #E67E22, #F39C12);
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.15s linear;
+}
+.ctrl-time {
+  color: rgba(255,255,255,0.7);
+  font-size: 13px; font-family: monospace;
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* Pastilles de réassurance */
+.video-trust-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.video-trust-item {
+  display: flex; align-items: center; gap: 7px;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px; font-weight: 500;
+}
+.video-trust-item .trust-ico { font-size: 16px; }
+
+/* Transcription SEO */
+.video-transcript-block {
+  max-width: 940px;
+  margin: 32px auto 0;
+}
+.video-transcript-block details {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 22px;
+}
+.video-transcript-block summary {
+  color: #6C8091; font-size: 13px;
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.video-transcript-block summary::-webkit-details-marker { display: none; }
+.video-transcript-block summary::before {
+  content: '▶'; font-size: 9px;
+  transition: transform 0.2s;
+}
+.video-transcript-block details[open] summary::before { transform: rotate(90deg); }
+.video-transcript-text {
+  color: #6C8091; font-size: 13px; line-height: 1.9;
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.video-transcript-text p { margin: 0 0 8px; }
+
+/* ═══════════════════════════════════════
+   CTA FLOTTANT
+═══════════════════════════════════════ */
+.floating-cta {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 9000;
+  display: none;
+}
+.floating-cta.show {
+  display: block;
+  animation: slideInUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes slideInUp {
+  from { transform: translateY(80px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.floating-cta-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #E67E22, #F39C12);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 8px 30px rgba(230,126,34,0.6), 0 2px 8px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.floating-cta-inner:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 40px rgba(230,126,34,0.75);
+  color: #fff;
+  text-decoration: none;
+}
+.floating-cta-dot {
+  width: 9px; height: 9px;
+  background: #fff; border-radius: 50%;
+  animation: dot-pulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes dot-pulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.5); opacity: 0.55; }
+}
+.floating-cta-close {
+  position: absolute;
+  top: -9px; right: -9px;
+  width: 22px; height: 22px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 11px; color: rgba(255,255,255,0.8);
+  line-height: 1;
+  transition: background 0.2s;
+}
+.floating-cta-close:hover { background: rgba(0,0,0,0.85); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .video-section { padding: 52px 0 60px; }
+  .video-section-title { font-size: 24px; }
+  .video-trust-row { gap: 14px; }
+  .video-trust-item { font-size: 12px; }
+  .floating-cta { bottom: 16px; right: 16px; }
+  .floating-cta-inner { font-size: 13px; padding: 12px 16px; }
+  .video-main-play-ring { width: 68px; height: 68px; }
 }
 </style>
   
-  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   
-  <!-- Open Graph - ESSENTIEL pour réseaux sociaux -->
-<meta property="og:title" content="Expert Local 2026 | La Méthode Qui Multiplie Vos Avis Google">
-<meta property="og:description" content="Arrêtez de supplier vos clients. Obtenez des avis 5★ naturellement avec notre méthode psychologique testée en Eure-et-Loir.">
-<meta property="og:image" content="https://expert-local.fr/og-image-2026.webp">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/webp">
-<meta property="og:image:alt" content="Expert Local - Méthode 2026 pour avis Google 5★">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://expert-local.fr/">
-<meta property="og:site_name" content="Expert Local">
-<meta property="og:locale" content="fr_FR">
-
-<!-- Twitter Card (pour Twitter) -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Expert Local 2026 | La Méthode Qui Multiplie Vos Avis Google">
-<meta name="twitter:description" content="Arrêtez de supplier vos clients. Obtenez des avis 5★ naturellement avec notre méthode psychologique testée en Eure-et-Loir.">
-<meta name="twitter:image" content="https://expert-local.fr/og-image-2026.webp">
-<meta name="twitter:image:alt" content="Expert Local - Méthode 2026 pour avis Google 5★">
-<!-- <meta name="twitter:site" content="@votrecompte"> --> <!-- Optionnel si vous avez Twitter -->
+  <meta property="og:title" content="Expert Local 2026 | La Méthode Qui Multiplie Vos Avis Google">
+  <meta property="og:description" content="Arrêtez de supplier vos clients. Obtenez des avis 5★ naturellement avec notre méthode psychologique testée en Eure-et-Loir.">
+  <meta property="og:image" content="https://expert-local.fr/og-image-2026.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/webp">
+  <meta property="og:image:alt" content="Expert Local - Méthode 2026 pour avis Google 5★">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://expert-local.fr/">
+  <meta property="og:site_name" content="Expert Local">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Expert Local 2026 | La Méthode Qui Multiplie Vos Avis Google">
+  <meta name="twitter:description" content="Arrêtez de supplier vos clients. Obtenez des avis 5★ naturellement avec notre méthode psychologique testée en Eure-et-Loir.">
+  <meta name="twitter:image" content="https://expert-local.fr/og-image-2026.webp">
+  <meta name="twitter:image:alt" content="Expert Local - Méthode 2026 pour avis Google 5★">
   
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -68,6 +410,29 @@ h1, h2, h3, h4, h5, h6 {
     "offers": {
       "@type": "Offer",
       "name": "Diagnostic Réputation Google Gratuit"
+    }
+  }
+  </script>
+
+  <!-- ✅ Schema vidéo : indexation par Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Méthode Expert Local 2026 — Multipliez vos avis Google en 10 jours",
+    "description": "Découvrez pourquoi vos concurrents ont plus d'avis que vous et comment obtenir 10 avis 5★ en 10 jours grâce à la méthode psychologique 2026.",
+    "thumbnailUrl": "https://expert-local.fr/video-thumbnail.jpg",
+    "uploadDate": "2026-01-15",
+    "duration": "PT1M18S",
+    "contentUrl": "https://expert-local.fr/expert-local-video.mp4",
+    "embedUrl": "https://expert-local.fr/#video",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Expert Local",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://expert-local.fr/photo-profil.jpg"
+      }
     }
   }
   </script>
@@ -89,10 +454,8 @@ h1, h2, h3, h4, h5, h6 {
   <header class="hero-2026" id="hero">
     <div class="container hero-container">
       
-      <!-- Colonne gauche : Message principal -->
       <div class="hero-content">
         
-        <!-- Badge d'autorité -->
         <div class="authority-badge">
           <img src="https://expert-local.fr/photo-profil.jpg" alt="Antoine Estarellas" class="badge-avatar">
           <div class="badge-text">
@@ -102,7 +465,6 @@ h1, h2, h3, h4, h5, h6 {
           <div class="verified-mark">✓</div>
         </div>
         
-        <!-- Titre principal -->
         <h1 class="hero-title">
           Vos concurrents ont 
           <span class="title-gradient">10 avis de plus</span> 
@@ -110,14 +472,12 @@ h1, h2, h3, h4, h5, h6 {
           <span class="title-regular">Découvrez la faille 2026.</span>
         </h1>
         
-        <!-- Sous-titre percutant -->
         <p class="hero-subtitle">
           Les QR Codes seuls ne fonctionnent <strong class="text-coral">PLUS</strong>. 
           En 2026, il faut une <span class="text-mint">méthode psychologique</span> 
           qui transforme vos clients satisfaits en ambassadeurs.
         </p>
         
-        <!-- Statistiques prouvées -->
         <div class="hero-stats">
           <div class="stat">
             <span class="stat-number">87%</span>
@@ -133,7 +493,6 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div>
         
-        <!-- CTA principal : Diagnostic en 3 questions -->
         <div class="hero-cta-card glass-effect">
           <div class="cta-header">
             <div class="cta-icon">🎯</div>
@@ -143,135 +502,109 @@ h1, h2, h3, h4, h5, h6 {
             </div>
           </div>
           
-         <!-- Dans votre index.html, section Hero, remplacez le formulaire existant par : -->
-<form id="quickDiagnostic" class="diagnostic-form" method="POST" action="quick-diagnostic.php">
-    <!-- Étape 1 -->
-    <div class="form-step active" data-step="1">
-        <div class="step-indicator">
-            <span class="step-active">1</span>
-            <span class="step-line"></span>
-            <span>2</span>
-            <span class="step-line"></span>
-            <span>3</span>
-        </div>
-        
-        <p class="step-question">Votre commerce se situe dans quel département ?</p>
-        
-        <div class="options-grid">
-            <label class="option-card">
-                <input type="radio" name="department" value="28" required>
-                <div class="option-content">
+          <form id="quickDiagnostic" class="diagnostic-form" method="POST" action="quick-diagnostic.php">
+            <div class="form-step active" data-step="1">
+              <div class="step-indicator">
+                <span class="step-active">1</span>
+                <span class="step-line"></span>
+                <span>2</span>
+                <span class="step-line"></span>
+                <span>3</span>
+              </div>
+              <p class="step-question">Votre commerce se situe dans quel département ?</p>
+              <div class="options-grid">
+                <label class="option-card">
+                  <input type="radio" name="department" value="28" required>
+                  <div class="option-content">
                     <span class="option-emoji">📍</span>
                     <span class="option-text">Eure-et-Loir (28)</span>
                     <small>Spécialiste local</small>
-                </div>
-            </label>
-            
-            <label class="option-card">
-                <input type="radio" name="department" value="45">
-                <div class="option-content">
+                  </div>
+                </label>
+                <label class="option-card">
+                  <input type="radio" name="department" value="45">
+                  <div class="option-content">
                     <span class="option-emoji">🚗</span>
                     <span class="option-text">Loiret (45)</span>
                     <small>Zone couverte</small>
-                </div>
-            </label>
-            
-            <label class="option-card">
-                <input type="radio" name="department" value="78">
-                <div class="option-content">
+                  </div>
+                </label>
+                <label class="option-card">
+                  <input type="radio" name="department" value="78">
+                  <div class="option-content">
                     <span class="option-emoji">🏙️</span>
                     <span class="option-text">Yvelines (78)</span>
                     <small>Zone couverte</small>
-                </div>
-            </label>
-        </div>
-        
-        <button type="button" class="btn-next" data-next="2">Suivant →</button>
-    </div>
-    
-    <!-- Étape 2 -->
-    <div class="form-step" data-step="2">
-        <div class="step-indicator">
-            <span class="step-complete">✓</span>
-            <span class="step-line"></span>
-            <span class="step-active">2</span>
-            <span class="step-line"></span>
-            <span>3</span>
-        </div>
-        
-        <p class="step-question">Combien d'avis avez-vous actuellement sur Google ?</p>
-        
-        <div class="options-grid">
-            <label class="option-card">
-                <input type="radio" name="reviews" value="0-5" required>
-                <div class="option-content">
+                  </div>
+                </label>
+              </div>
+              <button type="button" class="btn-next" data-next="2">Suivant →</button>
+            </div>
+            <div class="form-step" data-step="2">
+              <div class="step-indicator">
+                <span class="step-complete">✓</span>
+                <span class="step-line"></span>
+                <span class="step-active">2</span>
+                <span class="step-line"></span>
+                <span>3</span>
+              </div>
+              <p class="step-question">Combien d'avis avez-vous actuellement sur Google ?</p>
+              <div class="options-grid">
+                <label class="option-card">
+                  <input type="radio" name="reviews" value="0-5" required>
+                  <div class="option-content">
                     <span class="option-emoji">🆕</span>
                     <span class="option-text">0-5 avis</span>
                     <small>Je commence</small>
-                </div>
-            </label>
-            
-            <label class="option-card">
-                <input type="radio" name="reviews" value="6-20">
-                <div class="option-content">
+                  </div>
+                </label>
+                <label class="option-card">
+                  <input type="radio" name="reviews" value="6-20">
+                  <div class="option-content">
                     <span class="option-emoji">📈</span>
                     <span class="option-text">6-20 avis</span>
                     <small>Je veux progresser</small>
-                </div>
-            </label>
-            
-            <label class="option-card">
-                <input type="radio" name="reviews" value="21+">
-                <div class="option-content">
+                  </div>
+                </label>
+                <label class="option-card">
+                  <input type="radio" name="reviews" value="21+">
+                  <div class="option-content">
                     <span class="option-emoji">🏆</span>
                     <span class="option-text">21+ avis</span>
                     <small>Je veux dominer</small>
-                </div>
-            </label>
-        </div>
-        
-        <div class="step-actions">
-            <button type="button" class="btn-prev" data-prev="1">← Retour</button>
-            <button type="button" class="btn-next" data-next="3">Suivant →</button>
-        </div>
-    </div>
-    
-    <!-- Étape 3 : Email -->
-    <div class="form-step" data-step="3">
-        <div class="step-indicator">
-            <span class="step-complete">✓</span>
-            <span class="step-line"></span>
-            <span class="step-complete">✓</span>
-            <span class="step-line"></span>
-            <span class="step-active">3</span>
-        </div>
-        
-        <p class="step-question">Où dois-je envoyer votre analyse personnalisée ?</p>
-        
-        <div class="email-input-group">
-            <input type="email" 
-                   name="email" 
-                   placeholder="votre@email-professionnel.fr" 
-                   required
-                   class="email-input">
-            <button type="submit" class="btn-submit">
-                <span class="btn-icon">⚡</span>
-                Recevoir mon diagnostic gratuit
-            </button>
-        </div>
-        
-        <div class="privacy-note">
-            <span class="privacy-icon">🔒</span>
-            <span class="privacy-text">
-                Zéro spam. Vous recevrez votre PDF + 1 email de suivi dans 7 jours.
-            </span>
-        </div>
-        
-        <div class="step-actions">
-            <button type="button" class="btn-prev" data-prev="2">← Retour</button>
-        </div>
-    </div>
-</form>
+                  </div>
+                </label>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn-prev" data-prev="1">← Retour</button>
+                <button type="button" class="btn-next" data-next="3">Suivant →</button>
+              </div>
+            </div>
+            <div class="form-step" data-step="3">
+              <div class="step-indicator">
+                <span class="step-complete">✓</span>
+                <span class="step-line"></span>
+                <span class="step-complete">✓</span>
+                <span class="step-line"></span>
+                <span class="step-active">3</span>
+              </div>
+              <p class="step-question">Où dois-je envoyer votre analyse personnalisée ?</p>
+              <div class="email-input-group">
+                <input type="email" name="email" placeholder="votre@email-professionnel.fr" required class="email-input">
+                <button type="submit" class="btn-submit">
+                  <span class="btn-icon">⚡</span>
+                  Recevoir mon diagnostic gratuit
+                </button>
+              </div>
+              <div class="privacy-note">
+                <span class="privacy-icon">🔒</span>
+                <span class="privacy-text">Zéro spam. Vous recevrez votre PDF + 1 email de suivi dans 7 jours.</span>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn-prev" data-prev="2">← Retour</button>
+              </div>
+            </div>
+          </form>
           
           <div class="cta-footer">
             <div class="trust-badges">
@@ -287,7 +620,6 @@ h1, h2, h3, h4, h5, h6 {
       <!-- Colonne droite : Visual proof -->
       <div class="hero-visual">
         
-        <!-- Carte "Avant/Après" interactive -->
         <div class="comparison-card glass-effect">
           <div class="comparison-header">
             <h4>Résultats réels en Eure-et-Loir</h4>
@@ -296,9 +628,7 @@ h1, h2, h3, h4, h5, h6 {
               <button data-tab="after">APRÈS</button>
             </div>
           </div>
-          
           <div class="comparison-content">
-            <!-- Avant -->
             <div class="tab-content active" id="before">
               <div class="rating-display rating-low">
                 <span class="rating-stars">★★★☆☆</span>
@@ -306,22 +636,11 @@ h1, h2, h3, h4, h5, h6 {
               </div>
               <div class="review-count">14 avis</div>
               <div class="pain-points">
-                <div class="pain-point">
-                  <span class="pain-icon">❌</span>
-                  <span>1 avis par mois</span>
-                </div>
-                <div class="pain-point">
-                  <span class="pain-icon">❌</span>
-                  <span>Position 5 sur Google</span>
-                </div>
-                <div class="pain-point">
-                  <span class="pain-icon">❌</span>
-                  <span>Clients ne laissent pas d'avis</span>
-                </div>
+                <div class="pain-point"><span class="pain-icon">❌</span><span>1 avis par mois</span></div>
+                <div class="pain-point"><span class="pain-icon">❌</span><span>Position 5 sur Google</span></div>
+                <div class="pain-point"><span class="pain-icon">❌</span><span>Clients ne laissent pas d'avis</span></div>
               </div>
             </div>
-            
-            <!-- Après -->
             <div class="tab-content" id="after">
               <div class="rating-display rating-high">
                 <span class="rating-stars">★★★★★</span>
@@ -329,54 +648,43 @@ h1, h2, h3, h4, h5, h6 {
               </div>
               <div class="review-count">38 avis</div>
               <div class="success-points">
-                <div class="success-point">
-                  <span class="success-icon">✅</span>
-                  <span>10 avis en 10 jours</span>
-                </div>
-                <div class="success-point">
-                  <span class="success-icon">✅</span>
-                  <span>Position 1 sur Google</span>
-                </div>
-                <div class="success-point">
-                  <span class="success-icon">✅</span>
-                  <span>+240% de visibilité</span>
-                </div>
+                <div class="success-point"><span class="success-icon">✅</span><span>10 avis en 10 jours</span></div>
+                <div class="success-point"><span class="success-icon">✅</span><span>Position 1 sur Google</span></div>
+                <div class="success-point"><span class="success-icon">✅</span><span>+240% de visibilité</span></div>
               </div>
             </div>
           </div>
-          
           <div class="comparison-footer">
             <span class="case-study-label">Cas réel : Salon de coiffure à Chartres</span>
           </div>
         </div>
+
+        <!-- ✅ VIDÉO COMPACTE — remplace le placeholder testimonial -->
+        <div class="video-hero-block glass-effect" id="heroVideoBlock">
+          <div class="video-hero-overlay" id="heroVideoOverlay" onclick="heroPlayVideo()">
+            <div class="video-hero-play">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5V19L19 12L8 5Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+          <video
+            id="heroVideo"
+            src="expert-local-video.mp4"
+            poster="video-thumbnail.jpg"
+            preload="none"
+            muted
+            playsinline
+            aria-label="Présentation de la méthode Expert Local — 78 secondes"
+          >
+            <track kind="captions" src="sous-titres.vtt" srclang="fr" label="Français">
+          </video>
+          <div class="video-hero-bar">
+            <span class="video-hero-bar-label">▶ La méthode en 78 secondes</span>
+            <span class="video-hero-bar-hint">Cliquez pour lancer</span>
+          </div>
+        </div>
         
-        <!-- Vidéo testimonial -->
-        <!-- Video testimonial placeholder -->
-            <div class="video-testimonial glass-effect">
-             <div class="video-thumbnail">
-            <div class="play-button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                 <path d="M8 5V19L19 12L8 5Z" fill="white"/>
-                </svg>
-            </div>
-            <div class="thumbnail-placeholder">
-                <span style="font-size: 1.2rem; font-weight: bold; display: block; margin-bottom: 5px;">🎬 Témoignage client</span>
-                <small style="opacity: 0.8;">(Disponible prochainement)</small>
-            </div>
-            </div>
-            <div class="video-info">
-            <div class="client-avatar">
-            <div class="avatar-placeholder">👤</div>
-         </div>
-            <div class="client-info">
-            <h5>Marie, restauratrice à Dreux</h5>
-            <p>"10 avis en 10 jours, méthode géniale !"</p>
-        </div>
-        <div class="video-duration">2:15</div>
-        </div>
-        </div>
-        
-        <!-- Badge "Spécialiste local" -->
         <div class="local-badge">
           <div class="local-icon">📍</div>
           <div class="local-text">
@@ -389,32 +697,112 @@ h1, h2, h3, h4, h5, h6 {
       
     </div>
     
-    <!-- Scroll indicator -->
     <div class="scroll-indicator">
       <span class="scroll-text">Découvrez la méthode 2026</span>
       <div class="scroll-arrow">↓</div>
     </div>
   </header>
 
+  <!-- ════════════════════════════════════════
+       ✅ SECTION VIDÉO PRINCIPALE
+       Entre le hero et la section menace
+  ════════════════════════════════════════ -->
+  <section class="video-section" id="video" aria-label="Présentation vidéo de la méthode Expert Local 2026">
+    <div class="video-section-glow" aria-hidden="true"></div>
+    <div class="container">
+
+      <!-- En-tête -->
+      <div class="video-section-header">
+        <div class="video-section-label">🎬 Méthode en vidéo</div>
+        <h2 class="video-section-title">
+          Regardez comment nos clients passent de<br>
+          <em>invisibles à incontournables</em> sur Google
+        </h2>
+        <p class="video-section-subtitle">
+          78 secondes pour comprendre pourquoi vos concurrents vous devancent — et comment inverser la tendance dès demain.
+        </p>
+      </div>
+
+      <!-- Lecteur vidéo -->
+      <div class="video-main-wrapper" id="mainVideoWrapper">
+        <div class="video-main-glow-border" aria-hidden="true"></div>
+        <div class="video-main-inner">
+
+          <video
+            id="mainVideo"
+            src="expert-local-video.mp4"
+            poster="video-thumbnail.jpg"
+            preload="auto"
+            muted
+            playsinline
+            aria-label="Méthode Expert Local 2026 — 10 avis 5★ en 10 jours"
+          >
+            <track kind="captions" src="sous-titres.vtt" srclang="fr" label="Français">
+            <p>Votre navigateur ne prend pas en charge la vidéo HTML5.
+               <a href="expert-local-video.mp4">Télécharger la vidéo</a>.</p>
+          </video>
+
+          <!-- Overlay cliquable -->
+          <div class="video-main-overlay" id="mainVideoOverlay" onclick="mainPlayVideo()">
+            <div class="video-main-play-ring">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5V19L19 12L8 5Z" fill="white"/>
+              </svg>
+            </div>
+            <div class="video-main-play-label">Voir la méthode 2026</div>
+            <div class="video-main-play-sub">1 min 18 sec · Sous-titres inclus · Sans engagement</div>
+          </div>
+
+          <!-- Contrôles -->
+          <div class="video-controls-bar">
+            <button class="ctrl-sound" id="mainSoundBtn" onclick="mainToggleSound()" title="Activer/couper le son" aria-label="Activer le son">🔇</button>
+            <div class="ctrl-progress" id="mainProgress" onclick="mainSeek(event)" role="slider" aria-label="Progression de la vidéo">
+              <div class="ctrl-progress-fill" id="mainProgressFill"></div>
+            </div>
+            <span class="ctrl-time" id="mainTime" aria-live="off">0:00 / 1:18</span>
+          </div>
+
+        </div>
+      </div><!-- /.video-main-wrapper -->
+
+      <!-- Pastilles de réassurance -->
+      <div class="video-trust-row" aria-label="Caractéristiques de la vidéo">
+        <div class="video-trust-item"><span class="trust-ico">🔇</span><span>Sous-titres inclus</span></div>
+        <div class="video-trust-item"><span class="trust-ico">⏱️</span><span>1 min 18 sec</span></div>
+        <div class="video-trust-item"><span class="trust-ico">📍</span><span>Cas réels Eure-et-Loir</span></div>
+        <div class="video-trust-item"><span class="trust-ico">🔒</span><span>Aucune inscription</span></div>
+      </div>
+
+      <!-- Transcription SEO (visible à la demande, indexée par Google) -->
+      <div class="video-transcript-block">
+        <details>
+          <summary>📄 Lire la transcription complète de la vidéo</summary>
+          <div class="video-transcript-text">
+            <p>Vos concurrents ont 10 avis de plus que vous, en ce moment même.</p>
+            <p>En 2026, Google a changé les règles. Les fiches avec moins de 10 avis récents perdent 67 % de visibilité. Et vous avez 48 heures après chaque prestation pour déclencher un avis 5 étoiles — après, c'est trop tard.</p>
+            <p>Ça paraît abstrait ? Un plombier de Dreux perdait 18 clients par mois sans le savoir. 2 400 euros de manque à gagner, chaque mois.</p>
+            <p>La solution n'est pas technique. Elle est psychologique. Trois principes : le bon moment, les bons mots, et un système automatique. Résultat : 74 % de conversion, contre 4 % pour un simple QR code.</p>
+            <p>Exemple concret : salon de coiffure à Chartres. 14 avis, note 3,2. Après 10 jours de méthode : 38 avis, note 4,7, position 1 sur Google Maps.</p>
+            <p>Commencez par le diagnostic gratuit. Vous recevez un PDF personnalisé en 24 heures. Ou passez directement au Kit Express à 49 € — tout le matériel, prêt à imprimer.</p>
+            <p>expert-local.fr — Votre diagnostic vous attend.</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </section><!-- /.video-section -->
+
   <!-- ========================
        SECTION : MENACE 2026
   ======================== -->
   <section class="threat-section" id="menace">
     <div class="container">
-      
       <div class="section-header">
         <span class="section-label section-label-coral">⚠️ ALERTE 2026</span>
-        <h2 class="section-title">
-          La nouvelle règle Google qui 
-          <span class="text-coral">menace votre commerce</span>
-        </h2>
-        <p class="section-subtitle">
-          En 2026, Google a changé ses algorithmes. Voici ce que vos concurrents savent déjà :
-        </p>
+        <h2 class="section-title">La nouvelle règle Google qui <span class="text-coral">menace votre commerce</span></h2>
+        <p class="section-subtitle">En 2026, Google a changé ses algorithmes. Voici ce que vos concurrents savent déjà :</p>
       </div>
-      
       <div class="threat-grid">
-        
         <div class="threat-card threat-card-critical">
           <div class="threat-icon">📉</div>
           <div class="threat-content">
@@ -426,7 +814,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
           </div>
         </div>
-        
         <div class="threat-card threat-card-warning">
           <div class="threat-icon">⏰</div>
           <div class="threat-content">
@@ -438,7 +825,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
           </div>
         </div>
-        
         <div class="threat-card threat-card-info">
           <div class="threat-icon">🤖</div>
           <div class="threat-content">
@@ -450,10 +836,7 @@ h1, h2, h3, h4, h5, h6 {
             </div>
           </div>
         </div>
-        
       </div>
-      
-      <!-- CTA de menace -->
       <div class="threat-cta glass-effect">
         <div class="threat-cta-content">
           <div class="threat-cta-icon">🚨</div>
@@ -462,12 +845,8 @@ h1, h2, h3, h4, h5, h6 {
             <p>Vérifiez GRATUITEMENT si vous êtes touché par ces nouvelles règles</p>
           </div>
         </div>
-        <a href="#diagnostic" class="threat-cta-button">
-          Analyser ma fiche gratuitement
-          <span class="button-arrow">→</span>
-        </a>
+        <a href="#diagnostic" class="threat-cta-button">Analyser ma fiche gratuitement <span class="button-arrow">→</span></a>
       </div>
-      
     </div>
   </section>
 
@@ -476,21 +855,12 @@ h1, h2, h3, h4, h5, h6 {
   ======================== -->
   <section class="method-section" id="methode">
     <div class="container">
-      
       <div class="section-header">
         <span class="section-label section-label-mint">🧠 PSYCHOLOGIE</span>
-        <h2 class="section-title">
-          La méthode <span class="text-mint">2026</span> qui 
-          <span class="text-mint">débloque les avis</span>
-        </h2>
-        <p class="section-subtitle">
-          Basée sur 3 principes psychologiques prouvés, testés auprès de commerçants d'Eure-et-Loir
-        </p>
+        <h2 class="section-title">La méthode <span class="text-mint">2026</span> qui <span class="text-mint">débloque les avis</span></h2>
+        <p class="section-subtitle">Basée sur 3 principes psychologiques prouvés, testés auprès de commerçants d'Eure-et-Loir</p>
       </div>
-      
       <div class="method-steps">
-        
-        <!-- Étape 1 -->
         <div class="method-step">
           <div class="step-number">01</div>
           <div class="step-content">
@@ -520,8 +890,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
           </div>
         </div>
-        
-        <!-- Étape 2 -->
         <div class="method-step">
           <div class="step-number">02</div>
           <div class="step-content">
@@ -539,17 +907,13 @@ h1, h2, h3, h4, h5, h6 {
             <div class="step-visual">
               <div class="script-example glass-effect">
                 <div class="script-header">
-                  <div class="script-avatar">
-                    <img src="https://expert-local.fr/photo-profil.jpg" alt="Antoine">
-                  </div>
+                  <div class="script-avatar"><img src="https://expert-local.fr/photo-profil.jpg" alt="Antoine"></div>
                   <div class="script-info">
                     <strong>Phrase magique</strong>
                     <small>Pour coiffeurs/restaurateurs</small>
                   </div>
                 </div>
-                <div class="script-text">
-                  "Je vois que vous êtes ravi du résultat ! Si vous avez 30 secondes, un petit clic ici aiderait énormément nos futurs clients à nous trouver."
-                </div>
+                <div class="script-text">"Je vois que vous êtes ravi du résultat ! Si vous avez 30 secondes, un petit clic ici aiderait énormément nos futurs clients à nous trouver."</div>
                 <div class="script-note">
                   <span class="note-icon">💡</span>
                   <span>Ne jamais dire "laissez un avis"</span>
@@ -558,8 +922,6 @@ h1, h2, h3, h4, h5, h6 {
             </div>
           </div>
         </div>
-        
-        <!-- Étape 3 -->
         <div class="method-step">
           <div class="step-number">03</div>
           <div class="step-content">
@@ -576,28 +938,16 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="step-visual">
               <div class="system-flow">
-                <div class="flow-step">
-                  <span class="flow-icon">📱</span>
-                  <span class="flow-text">Client scanne</span>
-                </div>
+                <div class="flow-step"><span class="flow-icon">📱</span><span class="flow-text">Client scanne</span></div>
                 <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                  <span class="flow-icon">⭐</span>
-                  <span class="flow-text">Avis 5★</span>
-                </div>
+                <div class="flow-step"><span class="flow-icon">⭐</span><span class="flow-text">Avis 5★</span></div>
                 <div class="flow-arrow">→</div>
-                <div class="flow-step">
-                  <span class="flow-icon">📨</span>
-                  <span class="flow-text">Merci automatique</span>
-                </div>
+                <div class="flow-step"><span class="flow-icon">📨</span><span class="flow-text">Merci automatique</span></div>
               </div>
             </div>
           </div>
         </div>
-        
       </div>
-      
-      <!-- CTA méthode -->
       <div class="method-cta">
         <div class="method-cta-content">
           <h3>Prêt à appliquer la méthode 2026 ?</h3>
@@ -608,7 +958,6 @@ h1, h2, h3, h4, h5, h6 {
           Obtenir mon plan personnalisé
         </a>
       </div>
-      
     </div>
   </section>
 
@@ -617,24 +966,14 @@ h1, h2, h3, h4, h5, h6 {
   ======================== -->
   <section class="diagnostic-section" id="diagnostic">
     <div class="container">
-      
       <div class="section-header">
         <span class="section-label section-label-midnight">📊 DIAGNOSTIC EXPERT</span>
-        <h2 class="section-title">
-          Votre <span class="text-mint">Diagnostic Réputation 2026</span><br>
-          <span class="title-regular">Personnalisé pour votre commerce</span>
-        </h2>
-        <p class="section-subtitle">
-          Recevez un PDF détaillé avec votre score de risque et votre plan d'action en 24h
-        </p>
+        <h2 class="section-title">Votre <span class="text-mint">Diagnostic Réputation 2026</span><br><span class="title-regular">Personnalisé pour votre commerce</span></h2>
+        <p class="section-subtitle">Recevez un PDF détaillé avec votre score de risque et votre plan d'action en 24h</p>
       </div>
-      
       <div class="diagnostic-wrapper">
-        
-        <!-- Colonne gauche : Ce que vous recevez -->
         <div class="diagnostic-benefits">
           <h3 class="benefits-title">Vous recevez :</h3>
-          
           <div class="benefit-card">
             <div class="benefit-icon">🎯</div>
             <div class="benefit-content">
@@ -642,7 +981,6 @@ h1, h2, h3, h4, h5, h6 {
               <p>Analyse de votre position vs vos 3 principaux concurrents locaux</p>
             </div>
           </div>
-          
           <div class="benefit-card">
             <div class="benefit-icon">📈</div>
             <div class="benefit-content">
@@ -650,7 +988,6 @@ h1, h2, h3, h4, h5, h6 {
               <p>Estimation du nombre d'avis que vous pourriez avoir en 30 jours</p>
             </div>
           </div>
-          
           <div class="benefit-card">
             <div class="benefit-icon">⚡</div>
             <div class="benefit-content">
@@ -658,7 +995,6 @@ h1, h2, h3, h4, h5, h6 {
               <p>Les étapes concrètes pour obtenir vos premiers résultats</p>
             </div>
           </div>
-          
           <div class="benefit-card">
             <div class="benefit-icon">🎁</div>
             <div class="benefit-content">
@@ -666,57 +1002,34 @@ h1, h2, h3, h4, h5, h6 {
               <p>Les phrases exactes adaptées à votre type de commerce</p>
             </div>
           </div>
-          
           <div class="trust-signal">
-            <div class="trust-avatar">
-              <img src="https://expert-local.fr/photo-profil.jpg" alt="Antoine">
-            </div>
+            <div class="trust-avatar"><img src="https://expert-local.fr/photo-profil.jpg" alt="Antoine"></div>
             <div class="trust-text">
               <p><strong>Signé par Antoine Estarellas</strong></p>
               <small>Expert local testé en Eure-et-Loir</small>
             </div>
           </div>
         </div>
-        
-        <!-- Colonne droite : Formulaire complet -->
         <div class="diagnostic-form-complete glass-effect">
-          
           <div class="form-header">
             <h3>Formulaire de Diagnostic</h3>
             <p>Remplissez ce formulaire pour recevoir votre analyse gratuite</p>
           </div>
-          
           <form action="generate-diagnostic.php" method="POST" id="fullDiagnosticForm">
-            
             <div class="form-group">
               <label for="businessName">Nom de votre commerce *</label>
-              <input type="text" 
-                     id="businessName" 
-                     name="business_name" 
-                     placeholder="Ex : Salon Brillance Coiffure" 
-                     required>
+              <input type="text" id="businessName" name="business_name" placeholder="Ex : Salon Brillance Coiffure" required>
             </div>
-            
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">Votre prénom *</label>
-                <input type="text" 
-                       id="firstName" 
-                       name="first_name" 
-                       placeholder="Ex : Sophie" 
-                       required>
+                <input type="text" id="firstName" name="first_name" placeholder="Ex : Sophie" required>
               </div>
-              
               <div class="form-group">
                 <label for="email">Email professionnel *</label>
-                <input type="email" 
-                       id="email" 
-                       name="email" 
-                       placeholder="contact@votrecommerce.fr" 
-                       required>
+                <input type="email" id="email" name="email" placeholder="contact@votrecommerce.fr" required>
               </div>
             </div>
-            
             <div class="form-group">
               <label for="activityType">Type de commerce *</label>
               <select id="activityType" name="activity_type" required>
@@ -730,41 +1043,27 @@ h1, h2, h3, h4, h5, h6 {
                 <option value="autre">Autre</option>
               </select>
             </div>
-            
             <div class="form-group">
               <label for="googleLink">Lien de votre fiche Google (optionnel)</label>
-              <input type="url" 
-                     id="googleLink" 
-                     name="google_link" 
-                     placeholder="https://g.page/votre-commerce">
+              <input type="url" id="googleLink" name="google_link" placeholder="https://g.page/votre-commerce">
               <div class="input-help">
-  <a href="#" id="google-help-link" class="help-link">
-    ❓ Comment trouver ce lien ?
-  </a>
-</div>
+                <a href="#" id="google-help-link" class="help-link">❓ Comment trouver ce lien ?</a>
+              </div>
             </div>
-            
             <div class="form-group">
               <label>Votre défi principal actuel</label>
-              <textarea name="challenge" 
-                        rows="3" 
-                        placeholder="Ex : Mes clients sont satisfaits mais ne laissent pas d'avis..."></textarea>
+              <textarea name="challenge" rows="3" placeholder="Ex : Mes clients sont satisfaits mais ne laissent pas d'avis..."></textarea>
             </div>
-            
             <div class="form-submit">
               <button type="submit" class="submit-button">
                 <span class="submit-icon">📊</span>
                 Générer mon diagnostic gratuit
               </button>
-              
               <div class="privacy-assurance">
                 <span class="privacy-icon">🔒</span>
-                <span class="privacy-text">
-                  Protection des données • Aucun spam • Désinscription à tout moment
-                </span>
+                <span class="privacy-text">Protection des données • Aucun spam • Désinscription à tout moment</span>
               </div>
             </div>
-            
             <div class="form-footer">
               <div class="delivery-info">
                 <span class="delivery-icon">⚡</span>
@@ -775,13 +1074,9 @@ h1, h2, h3, h4, h5, h6 {
                 <span class="guarantee-text">100% gratuit, aucun engagement</span>
               </div>
             </div>
-            
           </form>
-          
         </div>
-        
       </div>
-      
     </div>
   </section>
 
@@ -790,21 +1085,12 @@ h1, h2, h3, h4, h5, h6 {
   ======================== -->
   <section class="offer-section" id="offre">
     <div class="container">
-      
       <div class="section-header">
         <span class="section-label section-label-coral">💎 OFFRE LIMITÉE</span>
-        <h2 class="section-title">
-          Choisissez votre 
-          <span class="text-coral">accélérateur d'avis</span>
-        </h2>
-        <p class="section-subtitle">
-          Après votre diagnostic gratuit, voici comment passer à la vitesse supérieure
-        </p>
+        <h2 class="section-title">Choisissez votre <span class="text-coral">accélérateur d'avis</span></h2>
+        <p class="section-subtitle">Après votre diagnostic gratuit, voici comment passer à la vitesse supérieure</p>
       </div>
-      
       <div class="offer-cards">
-        
-        <!-- Offre 1 : Kit Express -->
         <div class="offer-card">
           <div class="offer-header">
             <h3 class="offer-title">Kit Express 2026</h3>
@@ -814,38 +1100,20 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="offer-badge offer-badge-popular">Le plus choisi</div>
           </div>
-          
           <div class="offer-features">
-            <div class="feature">
-              <span class="feature-icon">✅</span>
-              <span class="feature-text">Tout le matériel à imprimer</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">✅</span>
-              <span class="feature-text">Scripts psychologiques</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">✅</span>
-              <span class="feature-text">Guide "10 avis en 10 jours"</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">✅</span>
-              <span class="feature-text">Support email 48h</span>
-            </div>
+            <div class="feature"><span class="feature-icon">✅</span><span class="feature-text">Tout le matériel à imprimer</span></div>
+            <div class="feature"><span class="feature-icon">✅</span><span class="feature-text">Scripts psychologiques</span></div>
+            <div class="feature"><span class="feature-icon">✅</span><span class="feature-text">Guide "10 avis en 10 jours"</span></div>
+            <div class="feature"><span class="feature-icon">✅</span><span class="feature-text">Support email 48h</span></div>
           </div>
-          
           <div class="offer-cta">
             <form action="creer-session-stripe.php" method="POST">
               <input type="hidden" name="price_id" value="price_1SUetcFMYCzrMVCgTnjb9Q8T">
-              <button type="submit" class="offer-button offer-button-secondary">
-                Choisir cette offre
-              </button>
+              <button type="submit" class="offer-button offer-button-secondary">Choisir cette offre</button>
             </form>
             <p class="offer-note">⚡ Accès immédiat après paiement</p>
           </div>
         </div>
-        
-        <!-- Offre 2 : Pack PRO -->
         <div class="offer-card offer-card-featured">
           <div class="offer-header">
             <h3 class="offer-title">Pack PRO 2026</h3>
@@ -855,46 +1123,22 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="offer-badge offer-badge-featured">Recommandé</div>
           </div>
-          
           <div class="offer-features">
-            <div class="feature">
-              <span class="feature-icon">🚀</span>
-              <span class="feature-text">Tout le Kit Express</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🚀</span>
-              <span class="feature-text">Audit concurrentiel complet</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🚀</span>
-              <span class="feature-text">Optimisation fiche Google</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🚀</span>
-              <span class="feature-text">Réponses aux avis rédigées</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🚀</span>
-              <span class="feature-text">10 photos professionnelles</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🚀</span>
-              <span class="feature-text">Accompagnement 1 mois</span>
-            </div>
+            <div class="feature"><span class="feature-icon">🚀</span><span class="feature-text">Tout le Kit Express</span></div>
+            <div class="feature"><span class="feature-icon">🚀</span><span class="feature-text">Audit concurrentiel complet</span></div>
+            <div class="feature"><span class="feature-icon">🚀</span><span class="feature-text">Optimisation fiche Google</span></div>
+            <div class="feature"><span class="feature-icon">🚀</span><span class="feature-text">Réponses aux avis rédigées</span></div>
+            <div class="feature"><span class="feature-icon">🚀</span><span class="feature-text">10 photos professionnelles</span></div>
+            <div class="feature"><span class="feature-icon">🚀</span><span class="feature-text">Accompagnement 1 mois</span></div>
           </div>
-          
           <div class="offer-cta">
             <form action="creer-session-stripe.php" method="POST">
               <input type="hidden" name="price_id" value="price_1SUeudFMYCzrMVCg3qzWk0LW">
-              <button type="submit" class="offer-button offer-button-primary">
-                Choisir cette offre
-              </button>
+              <button type="submit" class="offer-button offer-button-primary">Choisir cette offre</button>
             </form>
             <p class="offer-note">🎁 + Bonus : Audit SEO local offert</p>
           </div>
         </div>
-        
-        <!-- Offre 3 : Accompagnement -->
         <div class="offer-card">
           <div class="offer-header">
             <h3 class="offer-title">Accompagnement VIP</h3>
@@ -904,40 +1148,19 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div class="offer-badge">Personnalisé</div>
           </div>
-          
           <div class="offer-features">
-            <div class="feature">
-              <span class="feature-icon">👑</span>
-              <span class="feature-text">Tout le Pack PRO</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">👑</span>
-              <span class="feature-text">2 appels stratégie/mois</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">👑</span>
-              <span class="feature-text">Gestion complète des avis</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">👑</span>
-              <span class="feature-text">Reporting détaillé</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">👑</span>
-              <span class="feature-text">Priorité absolue</span>
-            </div>
+            <div class="feature"><span class="feature-icon">👑</span><span class="feature-text">Tout le Pack PRO</span></div>
+            <div class="feature"><span class="feature-icon">👑</span><span class="feature-text">2 appels stratégie/mois</span></div>
+            <div class="feature"><span class="feature-icon">👑</span><span class="feature-text">Gestion complète des avis</span></div>
+            <div class="feature"><span class="feature-icon">👑</span><span class="feature-text">Reporting détaillé</span></div>
+            <div class="feature"><span class="feature-icon">👑</span><span class="feature-text">Priorité absolue</span></div>
           </div>
-          
           <div class="offer-cta">
-            <a href="mailto:contact@expert-local.fr?subject=Accompagnement%20VIP" class="offer-button offer-button-secondary">
-              Nous contacter
-            </a>
+            <a href="mailto:contact@expert-local.fr?subject=Accompagnement%20VIP" class="offer-button offer-button-secondary">Nous contacter</a>
             <p class="offer-note">📅 Engagement 3 mois minimum</p>
           </div>
         </div>
-        
       </div>
-      
       <div class="offer-guarantee">
         <div class="guarantee-card glass-effect">
           <div class="guarantee-icon">✅</div>
@@ -947,7 +1170,6 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div>
       </div>
-      
     </div>
   </section>
 
@@ -956,87 +1178,40 @@ h1, h2, h3, h4, h5, h6 {
   ======================== -->
   <section class="faq-section" id="faq">
     <div class="container">
-      
       <div class="section-header">
         <span class="section-label section-label-mint">❓ QUESTIONS FRÉQUENTES</span>
-        <h2 class="section-title">
-          Tout ce que vous devez savoir sur 
-          <span class="text-mint">la méthode 2026</span>
-        </h2>
+        <h2 class="section-title">Tout ce que vous devez savoir sur <span class="text-mint">la méthode 2026</span></h2>
       </div>
-      
       <div class="faq-grid">
-        
         <div class="faq-column">
-          
           <div class="faq-item">
-            <div class="faq-question">
-              <span class="faq-icon">💡</span>
-              <h4>En quoi est-ce différent d'un simple QR Code ?</h4>
-            </div>
-            <div class="faq-answer">
-              <p>Un QR Code est un outil technique muet. Notre méthode est un <strong>système psychologique complet</strong> qui combine le bon timing, les bons mots et le bon support. C'est la différence entre 4% et 74% de conversion.</p>
-            </div>
+            <div class="faq-question"><span class="faq-icon">💡</span><h4>En quoi est-ce différent d'un simple QR Code ?</h4></div>
+            <div class="faq-answer"><p>Un QR Code est un outil technique muet. Notre méthode est un <strong>système psychologique complet</strong> qui combine le bon timing, les bons mots et le bon support. C'est la différence entre 4% et 74% de conversion.</p></div>
           </div>
-          
           <div class="faq-item">
-            <div class="faq-question">
-              <span class="faq-icon">⏱️</span>
-              <h4>Combien de temps pour voir les premiers résultats ?</h4>
-            </div>
-            <div class="faq-answer">
-              <p>La plupart de nos clients obtiennent leurs <strong>premiers 5★ dans les 48h</strong> suivant l'installation. Le plan "10 avis en 10 jours" est conçu pour des résultats rapides et visibles.</p>
-            </div>
+            <div class="faq-question"><span class="faq-icon">⏱️</span><h4>Combien de temps pour voir les premiers résultats ?</h4></div>
+            <div class="faq-answer"><p>La plupart de nos clients obtiennent leurs <strong>premiers 5★ dans les 48h</strong> suivant l'installation. Le plan "10 avis en 10 jours" est conçu pour des résultats rapides et visibles.</p></div>
           </div>
-          
           <div class="faq-item">
-            <div class="faq-question">
-              <span class="faq-icon">💰</span>
-              <h4>Pourquoi c'est gratuit ? Quelle est l'arnaque ?</h4>
-            </div>
-            <div class="faq-answer">
-              <p><strong>Aucune arnaque.</strong> Le diagnostic est gratuit car il me permet de prouver ma valeur. Seuls 30% des diagnostics débouchent sur une vente, mais ces clients sont ultra-satisfaits et font de super références.</p>
-            </div>
+            <div class="faq-question"><span class="faq-icon">💰</span><h4>Pourquoi c'est gratuit ? Quelle est l'arnaque ?</h4></div>
+            <div class="faq-answer"><p><strong>Aucune arnaque.</strong> Le diagnostic est gratuit car il me permet de prouver ma valeur. Seuls 30% des diagnostics débouchent sur une vente, mais ces clients sont ultra-satisfaits et font de super références.</p></div>
           </div>
-          
         </div>
-        
         <div class="faq-column">
-          
           <div class="faq-item">
-            <div class="faq-question">
-              <span class="faq-icon">🎯</span>
-              <h4>Ça fonctionne pour quel type de commerce ?</h4>
-            </div>
-            <div class="faq-answer">
-              <p>Tous les commerces avec des clients physiques : <strong>coiffeurs, restaurateurs, artisans, garages, boutiques, professions libérales</strong>. Si vous avez des clients satisfaits, vous pouvez obtenir leurs avis.</p>
-            </div>
+            <div class="faq-question"><span class="faq-icon">🎯</span><h4>Ça fonctionne pour quel type de commerce ?</h4></div>
+            <div class="faq-answer"><p>Tous les commerces avec des clients physiques : <strong>coiffeurs, restaurateurs, artisans, garages, boutiques, professions libérales</strong>. Si vous avez des clients satisfaits, vous pouvez obtenir leurs avis.</p></div>
           </div>
-          
           <div class="faq-item">
-            <div class="faq-question">
-              <span class="faq-icon">📱</span>
-              <h4>Je ne suis pas à l'aise avec la technologie...</h4>
-            </div>
-            <div class="faq-answer">
-              <p>La méthode est conçue <strong>zéro technique</strong>. Il suffit d'imprimer et de suivre les instructions. Notre support est là pour répondre à toutes vos questions, même les plus basiques.</p>
-            </div>
+            <div class="faq-question"><span class="faq-icon">📱</span><h4>Je ne suis pas à l'aise avec la technologie...</h4></div>
+            <div class="faq-answer"><p>La méthode est conçue <strong>zéro technique</strong>. Il suffit d'imprimer et de suivre les instructions. Notre support est là pour répondre à toutes vos questions, même les plus basiques.</p></div>
           </div>
-          
           <div class="faq-item">
-            <div class="faq-question">
-              <span class="faq-icon">📍</span>
-              <h4>Vous travaillez seulement en Eure-et-Loir ?</h4>
-            </div>
-            <div class="faq-answer">
-              <p>Je suis <strong>spécialiste de l'Eure-et-Loir</strong> car je connais vos concurrents locaux. Mais les méthodes fonctionnent partout en France. Les clients hors 28 bénéficient des mêmes résultats.</p>
-            </div>
+            <div class="faq-question"><span class="faq-icon">📍</span><h4>Vous travaillez seulement en Eure-et-Loir ?</h4></div>
+            <div class="faq-answer"><p>Je suis <strong>spécialiste de l'Eure-et-Loir</strong> car je connais vos concurrents locaux. Mais les méthodes fonctionnent partout en France. Les clients hors 28 bénéficient des mêmes résultats.</p></div>
           </div>
-          
         </div>
-        
       </div>
-      
       <div class="faq-cta">
         <p>Une autre question ? Contactez-moi directement :</p>
         <a href="mailto:contact@expert-local.fr" class="faq-contact-button">
@@ -1044,7 +1219,6 @@ h1, h2, h3, h4, h5, h6 {
           contact@expert-local.fr
         </a>
       </div>
-      
     </div>
   </section>
 
@@ -1053,34 +1227,19 @@ h1, h2, h3, h4, h5, h6 {
   ======================== -->
   <section class="final-cta-section">
     <div class="container">
-      
       <div class="final-cta-content glass-effect">
-        
         <div class="final-cta-header">
           <h2 class="final-cta-title">
             <span class="title-line">Arrêtez de perdre des avis.</span>
             <span class="title-line">Commencez à en gagner.</span>
           </h2>
-          <p class="final-cta-subtitle">
-            Votre diagnostic gratuit vous attend. Découvrez exactement comment multiplier vos avis 5★.
-          </p>
+          <p class="final-cta-subtitle">Votre diagnostic gratuit vous attend. Découvrez exactement comment multiplier vos avis 5★.</p>
         </div>
-        
         <div class="final-cta-stats">
-          <div class="final-stat">
-            <span class="final-stat-number">10</span>
-            <span class="final-stat-label">avis en 10 jours</span>
-          </div>
-          <div class="final-stat">
-            <span class="final-stat-number">87%</span>
-            <span class="final-stat-label">de réussite</span>
-          </div>
-          <div class="final-stat">
-            <span class="final-stat-number">24h</span>
-            <span class="final-stat-label">pour agir</span>
-          </div>
+          <div class="final-stat"><span class="final-stat-number">10</span><span class="final-stat-label">avis en 10 jours</span></div>
+          <div class="final-stat"><span class="final-stat-number">87%</span><span class="final-stat-label">de réussite</span></div>
+          <div class="final-stat"><span class="final-stat-number">24h</span><span class="final-stat-label">pour agir</span></div>
         </div>
-        
         <div class="final-cta-actions">
           <a href="#diagnostic" class="final-cta-button final-cta-button-primary">
             <span class="button-icon">⚡</span>
@@ -1091,24 +1250,12 @@ h1, h2, h3, h4, h5, h6 {
             Me parler directement
           </a>
         </div>
-        
         <div class="final-cta-footer">
-          <div class="trust-seal">
-            <span class="seal-icon">🔒</span>
-            <span class="seal-text">Données 100% sécurisées</span>
-          </div>
-          <div class="trust-seal">
-            <span class="seal-icon">✅</span>
-            <span class="seal-text">Aucun engagement</span>
-          </div>
-          <div class="trust-seal">
-            <span class="seal-icon">🤝</span>
-            <span class="seal-text">Expert local de confiance</span>
-          </div>
+          <div class="trust-seal"><span class="seal-icon">🔒</span><span class="seal-text">Données 100% sécurisées</span></div>
+          <div class="trust-seal"><span class="seal-icon">✅</span><span class="seal-text">Aucun engagement</span></div>
+          <div class="trust-seal"><span class="seal-icon">🤝</span><span class="seal-text">Expert local de confiance</span></div>
         </div>
-        
       </div>
-      
     </div>
   </section>
 
@@ -1117,9 +1264,7 @@ h1, h2, h3, h4, h5, h6 {
   ======================== -->
   <footer class="footer-2026">
     <div class="container">
-      
       <div class="footer-content">
-        
         <div class="footer-brand">
           <div class="footer-logo">
             <img src="https://expert-local.fr/photo-profil.jpg" alt="Expert Local" class="logo-img">
@@ -1128,15 +1273,12 @@ h1, h2, h3, h4, h5, h6 {
               <p>La réputation Google des commerçants</p>
             </div>
           </div>
-          <p class="footer-tagline">
-            Transformez vos clients satisfaits en ambassadeurs avec notre méthode psychologique 2026.
-          </p>
+          <p class="footer-tagline">Transformez vos clients satisfaits en ambassadeurs avec notre méthode psychologique 2026.</p>
           <div class="footer-social">
             <a href="#" class="social-link">Email</a>
             <a href="#" class="social-link">Téléphone</a>
           </div>
         </div>
-        
         <div class="footer-links">
           <div class="link-column">
             <h4>Méthode</h4>
@@ -1145,7 +1287,6 @@ h1, h2, h3, h4, h5, h6 {
             <a href="#offre">Nos offres</a>
             <a href="#faq">Questions fréquentes</a>
           </div>
-          
           <div class="link-column">
             <h4>Entreprise</h4>
             <a href="mentions.html">Mentions légales</a>
@@ -1153,7 +1294,6 @@ h1, h2, h3, h4, h5, h6 {
             <a href="cgv.html">CGV</a>
             <a href="contact.php">Contact</a>
           </div>
-          
           <div class="link-column">
             <h4>Spécialités</h4>
             <a href="#">Coiffeurs 28</a>
@@ -1162,24 +1302,13 @@ h1, h2, h3, h4, h5, h6 {
             <a href="#">Commerces 28</a>
           </div>
         </div>
-        
         <div class="footer-contact">
           <h4>Contact rapide</h4>
           <div class="contact-info">
-            <div class="contact-item">
-              <span class="contact-icon">📧</span>
-              <a href="mailto:contact@expert-local.fr">contact@expert-local.fr</a>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">📍</span>
-              <span>Spécialiste Eure-et-Loir (28)</span>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">💼</span>
-              <span>SIREN : 994 038 339</span>
-            </div>
+            <div class="contact-item"><span class="contact-icon">📧</span><a href="mailto:contact@expert-local.fr">contact@expert-local.fr</a></div>
+            <div class="contact-item"><span class="contact-icon">📍</span><span>Spécialiste Eure-et-Loir (28)</span></div>
+            <div class="contact-item"><span class="contact-icon">💼</span><span>SIREN : 994 038 339</span></div>
           </div>
-          
           <div class="newsletter">
             <p>Recevez nos conseils avis Google</p>
             <form class="newsletter-form">
@@ -1188,13 +1317,9 @@ h1, h2, h3, h4, h5, h6 {
             </form>
           </div>
         </div>
-        
       </div>
-      
       <div class="footer-bottom">
-        <div class="footer-copyright">
-          © 2025 - 2026 Expert Local. Tous droits réservés.
-        </div>
+        <div class="footer-copyright">© 2025 - 2026 Expert Local. Tous droits réservés.</div>
         <div class="footer-legal">
           <span>Micro-entreprise profession libérale</span>
           <span>•</span>
@@ -1203,11 +1328,144 @@ h1, h2, h3, h4, h5, h6 {
           <span>Hébergé en France</span>
         </div>
       </div>
-      
     </div>
   </footer>
 
- <script src="script-2026.js"></script>
+  <!-- ════════════════════════════════════════
+       ✅ CTA FLOTTANT
+       Apparaît 10 secondes après l'arrivée
+  ════════════════════════════════════════ -->
+  <div class="floating-cta" id="floatingCta" role="complementary" aria-label="Appel à l'action flottant">
+    <div class="floating-cta-close" onclick="this.parentElement.style.display='none'" title="Fermer" role="button" aria-label="Fermer">✕</div>
+    <a href="#diagnostic" class="floating-cta-inner">
+      <div class="floating-cta-dot" aria-hidden="true"></div>
+      Diagnostic gratuit →
+    </a>
+  </div>
+
+  <!-- Script existant -->
+  <script src="script-2026.js"></script>
+
+  <!-- ════════════════════════════════════════
+       SCRIPTS VIDÉO + CTA FLOTTANT
+  ════════════════════════════════════════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ─── Utilitaires ─────────────────────────── */
+    function fmt(s) {
+      if (isNaN(s)) return '0:00';
+      var m = Math.floor(s / 60);
+      var sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    /* ─── Vidéo HERO (compacte) ──────────────── */
+    var heroVid     = document.getElementById('heroVideo');
+    var heroOverlay = document.getElementById('heroVideoOverlay');
+
+    window.heroPlayVideo = function () {
+      if (!heroVid) return;
+      heroVid.muted = false;
+      heroVid.play().catch(function () { heroVid.muted = true; heroVid.play(); });
+      heroOverlay.classList.add('hidden');
+      document.querySelector('.video-hero-bar-hint').textContent = 'En lecture…';
+    };
+
+    if (heroVid) {
+      heroVid.addEventListener('ended', function () {
+        heroOverlay.classList.remove('hidden');
+        document.querySelector('.video-hero-bar-hint').textContent = 'Cliquez pour rejouer';
+      });
+    }
+
+    /* ─── Vidéo PRINCIPALE ────────────────────── */
+    var mainVid     = document.getElementById('mainVideo');
+    var mainOverlay = document.getElementById('mainVideoOverlay');
+    var mainWrapper = document.getElementById('mainVideoWrapper');
+    var mainFill    = document.getElementById('mainProgressFill');
+    var mainTime    = document.getElementById('mainTime');
+    var mainSound   = document.getElementById('mainSoundBtn');
+
+    window.mainPlayVideo = function () {
+      if (!mainVid) return;
+      mainVid.muted = false;
+      mainVid.play().catch(function () { mainVid.muted = true; mainVid.play(); });
+      mainOverlay.classList.add('hidden');
+      mainWrapper.classList.add('is-playing');
+      mainSound.textContent = '🔊';
+      mainSound.setAttribute('aria-label', 'Couper le son');
+    };
+
+    window.mainToggleSound = function () {
+      if (!mainVid) return;
+      mainVid.muted = !mainVid.muted;
+      mainSound.textContent = mainVid.muted ? '🔇' : '🔊';
+      mainSound.setAttribute('aria-label', mainVid.muted ? 'Activer le son' : 'Couper le son');
+    };
+
+    window.mainSeek = function (e) {
+      if (!mainVid || !mainVid.duration) return;
+      var bar  = document.getElementById('mainProgress');
+      var rect = bar.getBoundingClientRect();
+      var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      mainVid.currentTime = ratio * mainVid.duration;
+    };
+
+    if (mainVid) {
+      mainVid.addEventListener('timeupdate', function () {
+        if (!mainVid.duration) return;
+        var pct = (mainVid.currentTime / mainVid.duration) * 100;
+        mainFill.style.width = pct + '%';
+        mainTime.textContent = fmt(mainVid.currentTime) + ' / ' + fmt(mainVid.duration);
+      });
+
+      mainVid.addEventListener('ended', function () {
+        mainOverlay.classList.remove('hidden');
+        mainWrapper.classList.remove('is-playing');
+        mainFill.style.width = '0%';
+      });
+
+      /* Lecture automatique silencieuse à 60% de visibilité */
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && mainVid.paused && mainVid.currentTime === 0) {
+              mainVid.muted = true;
+              mainVid.play().catch(function () {});
+              mainOverlay.classList.add('hidden');
+              mainWrapper.classList.add('is-playing');
+            } else if (!entry.isIntersecting && !mainVid.paused) {
+              mainVid.pause();
+              mainWrapper.classList.remove('is-playing');
+            }
+          });
+        }, { threshold: 0.6 });
+        obs.observe(mainWrapper);
+      }
+    }
+
+    /* ─── Tabs AVANT/APRÈS hero ──────────────── */
+    document.querySelectorAll('[data-tab]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = this.getAttribute('data-tab');
+        document.querySelectorAll('.tab-content').forEach(function (c) { c.classList.remove('active'); });
+        document.querySelectorAll('[data-tab]').forEach(function (b) { b.classList.remove('tab-active'); });
+        var el = document.getElementById(target);
+        if (el) el.classList.add('active');
+        this.classList.add('tab-active');
+      });
+    });
+
+    /* ─── CTA FLOTTANT (après 10 secondes) ──── */
+    setTimeout(function () {
+      var cta = document.getElementById('floatingCta');
+      if (cta) cta.classList.add('show');
+    }, 10000);
+
+  })();
+  </script>
 
 </body>
 </html>
